@@ -1,6 +1,6 @@
 # pangu.skill
 
-[English](README.md) | [繁體中文](README.zh-TW.md)
+[English](README.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
 > Why can't AI just add a space?
 
