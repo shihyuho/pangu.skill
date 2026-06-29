@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pangu.skill — paranoid text spacing for AI agents</title>
+  <meta name="description" content="An agent skill that teaches Claude Code, Codex, Cursor and other AI coding agents to insert a space between CJK and Latin as they write. Rules mirror pangu.js." />
+  <meta property="og:title" content="pangu.skill" />
+  <meta property="og:description" content="Paranoid text spacing (盤古之白) for AI coding agents." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    // mark JS available so reveal-on-scroll content stays visible without JS
+    document.documentElement.classList.add("js");
+    // set theme before paint to avoid flash
+    try {
+      var t = localStorage.getItem("pangu-theme");
+      if (t) document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@7.2.1/dist/browser/pangu.umd.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap">
+      <a class="brand" href="#top" aria-label="pangu.skill home">
+        <svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
+          <rect width="32" height="32" rx="7" fill="currentColor" />
+          <rect x="7" y="9" width="6" height="14" rx="1.5" fill="var(--bg)" />
+          <rect x="19" y="9" width="6" height="14" rx="1.5" fill="var(--bg)" />
+          <rect x="15" y="9" width="2" height="14" rx="1" fill="var(--accent)" />
+        </svg>
+        pangu.skill
+      </a>
+      <nav class="nav-links" aria-label="Sections">
+        <a href="#rules">How it works</a>
+        <a href="#install">Install</a>
+        <a href="#family">Family</a>
+        <a href="https://github.com/shihyuho/pangu.skill">GitHub</a>
+      </nav>
+      <div class="nav-right">
+        <button class="icon-btn" id="theme-toggle" type="button" aria-label="Toggle color theme">
+          <svg class="theme-icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.2" /><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5 5l1.4 1.4M17.6 17.6 19 19M19 5l-1.4 1.4M6.4 17.6 5 19" />
+          </svg>
+          <svg class="theme-icon-dark" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M21 12.8A8.5 8.5 0 0 1 11.2 3a7 7 0 1 0 9.8 9.8z" />
+          </svg>
+        </button>
+        <a class="icon-btn" href="https://github.com/shihyuho/pangu.skill" aria-label="GitHub repository">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.05 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.84c.85 0 1.71.12 2.51.34 1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.92-2.34 4.78-4.57 5.04.36.32.68.94.68 1.9 0 1.37-.01 2.48-.01 2.82 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2z" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-copy">
+          <h1>為什麼 AI 就是不能加個<span class="q">空格</span>呢？</h1>
+          <p class="hero-sub">An agent skill that teaches Claude Code, Codex, Cursor and friends to space CJK and Latin as they type.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#install">Get started</a>
+            <a class="btn btn-ghost" href="https://github.com/shihyuho/pangu.skill">GitHub</a>
+          </div>
+        </div>
+
+        <div class="demo reveal" aria-hidden="false">
+          <div class="demo-row">
+            <div class="demo-label"><span class="dot"></span> You type</div>
+            <textarea class="demo-io" id="demo-in" rows="2" spellcheck="false" aria-label="Type mixed CJK and Latin text">我用Claude Code寫了3個component，修好login的bug</textarea>
+          </div>
+          <div class="demo-row">
+            <div class="demo-label is-out"><span class="dot"></span> pangu writes</div>
+            <div class="demo-out" id="demo-out" aria-live="polite"></div>
+          </div>
+          <div class="demo-foot"><span class="pip"></span> highlight marks each space pangu inserts</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="band" id="rules">
+      <div class="wrap">
+        <div class="band-head reveal">
+          <p class="eyebrow">How it works</p>
+          <h2>One space between CJK and half-width. Nothing where it does not belong.</h2>
+          <p>pangu adds a space wherever a Chinese, Japanese, or Korean character meets a half-width letter, digit, or symbol, and leaves code, paths, and version strings whole.</p>
+        </div>
+
+        <div class="rules reveal">
+          <div class="rule">
+            <div class="rule-k">Letters</div>
+            <div class="rule-v"><span class="from">用Python開發</span><span class="arrow">→</span>用<span class="sp"> </span>Python<span class="sp"> </span>開發</div>
+          </div>
+          <div class="rule">
+            <div class="rule-k">Numbers</div>
+            <div class="rule-v"><span class="from">新台幣100元</span><span class="arrow">→</span>新台幣<span class="sp"> </span>100<span class="sp"> </span>元</div>
+          </div>
+          <div class="rule keep">
+            <div class="rule-k">Paths stay whole</div>
+            <div class="rule-v"><span class="from">見src/index.ts第10行</span><span class="arrow">→</span>見<span class="sp"> </span><span class="to">src/index.ts</span><span class="sp"> </span>第<span class="sp"> </span>10<span class="sp"> </span>行</div>
+          </div>
+          <div class="rule keep">
+            <div class="rule-k">Versions stay whole</div>
+            <div class="rule-v"><span class="from">升級到v2.0了</span><span class="arrow">→</span>升級到<span class="sp"> </span><span class="to">v2.0</span><span class="sp"> </span>了</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSTALL -->
+    <section class="band" id="install">
+      <div class="wrap">
+        <div class="band-head reveal">
+          <h2>Install once. Every reply, doc, and commit gets it right.</h2>
+          <p>Agents with a package manager install in one step. Everything else copies one Markdown file into the rules directory it reads.</p>
+        </div>
+
+        <div class="tier reveal">
+          <div class="tier-h"><h3>Package managers</h3><span>one-step install</span></div>
+          <div class="cmd-grid">
+            <div class="cmd">
+              <div class="cmd-name"><b>Claude Code</b><button class="copy" type="button">copy</button></div>
+              <pre>claude plugin marketplace add shihyuho/pangu.skill
+claude plugin install pangu@pangu</pre>
+            </div>
+            <div class="cmd">
+              <div class="cmd-name"><b>Codex</b><button class="copy" type="button">copy</button></div>
+              <pre>codex plugin marketplace add shihyuho/pangu.skill
+codex plugin add pangu@pangu</pre>
+            </div>
+            <div class="cmd">
+              <div class="cmd-name"><b>Gemini CLI</b><button class="copy" type="button">copy</button></div>
+              <pre>gemini skills install https://github.com/shihyuho/pangu.skill.git --path skills</pre>
+            </div>
+            <div class="cmd">
+              <div class="cmd-name"><b>Antigravity</b><button class="copy" type="button">copy</button></div>
+              <pre>agy plugin install https://github.com/shihyuho/pangu.skill.git</pre>
+            </div>
+            <div class="cmd span2">
+              <div class="cmd-name"><b>skills (npx) · standalone</b><button class="copy" type="button">copy</button></div>
+              <pre>npx skills add shihyuho/pangu.skill --skill pangu</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="tier reveal">
+          <div class="tier-h"><h3>Other agents</h3><span>drop the rules file in place</span></div>
+          <div class="files">
+            <div class="file-row"><b>Cursor</b><code>.cursor/rules/pangu.md</code></div>
+            <div class="file-row"><b>Windsurf</b><code>append to .windsurfrules</code></div>
+            <div class="file-row"><b>GitHub Copilot</b><code>.github/skills/pangu/SKILL.md</code></div>
+            <div class="file-row"><b>Kiro</b><code>.kiro/skills/pangu/SKILL.md</code></div>
+            <div class="file-row"><b>OpenCode</b><code>skills/pangu/SKILL.md + reference it in AGENTS.md</code></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAMILY -->
+    <section class="band" id="family">
+      <div class="wrap">
+        <div class="band-head reveal">
+          <p class="eyebrow">Related projects</p>
+          <h2>One member of the pangu family.</h2>
+        </div>
+        <p class="fam-lead reveal">Paranoid text spacing has a whole family of ports.</p>
+        <div class="fam reveal">
+          <a class="up" href="https://github.com/vinta/pangu.js">pangu.js <span class="lang">upstream</span></a>
+          <a href="https://github.com/vinta/pangu">pangu.go <span class="lang">Go</span></a>
+          <a href="https://github.com/vinta/pangu.java">pangu.java <span class="lang">Java</span></a>
+          <a href="https://github.com/vinta/pangu.py">pangu.py <span class="lang">Python</span></a>
+          <a href="https://github.com/coldnew/pangu.clj">pangu.clj <span class="lang">Clojure</span></a>
+          <a href="https://github.com/SemonCat/pangu.dart">pangu.dart <span class="lang">Dart</span></a>
+          <a href="https://github.com/cataska/pangu.ex">pangu.ex <span class="lang">Elixir</span></a>
+          <a href="https://github.com/Cee/pangu.objective-c">pangu.objective-c <span class="lang">Obj-C</span></a>
+          <a href="https://github.com/Kunr/pangu.php">pangu.php <span class="lang">PHP</span></a>
+          <a href="https://github.com/dlackty/pangu.rb">pangu.rb <span class="lang">Ruby</span></a>
+          <a href="https://github.com/airt/pangu.rs">pangu.rs <span class="lang">Rust</span></a>
+          <a href="https://github.com/X140Yu/pangu.Swift">pangu.swift <span class="lang">Swift</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <a class="brand" href="#top">
+        <svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
+          <rect width="32" height="32" rx="7" fill="currentColor" />
+          <rect x="7" y="9" width="6" height="14" rx="1.5" fill="var(--bg)" />
+          <rect x="19" y="9" width="6" height="14" rx="1.5" fill="var(--bg)" />
+          <rect x="15" y="9" width="2" height="14" rx="1" fill="var(--accent)" />
+        </svg>
+        pangu.skill
+      </a>
+      <nav class="foot-links" aria-label="Footer">
+        <a href="https://github.com/shihyuho/pangu.skill">GitHub</a>
+        <a href="https://github.com/shihyuho/pangu.skill/blob/main/README.zh-TW.md">繁體中文</a>
+        <a href="https://github.com/vinta/pangu.js">pangu.js</a>
+        <a href="https://github.com/shihyuho/pangu.skill/blob/main/LICENSE">MIT License</a>
+      </nav>
+      <p class="foot-meta">Paranoid text spacing (盤古之白) for AI coding agents. MIT © Shihyu Ho.</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "pangu",
+  "description": "Paranoid text spacing (盤古之白) for AI agents",
+  "owner": {
+    "name": "Shihyu Ho",
+    "url": "https://github.com/shihyuho"
+  },
+  "plugins": [
+    {
+      "name": "pangu",
+      "description": "Write CJK text with paranoid text spacing (盤古之白): insert a space between CJK characters and adjacent half-width letters, numbers, and symbols in any prose, docs, comments, or commit messages you generate.",
+      "author": {
+        "name": "Shihyu Ho",
+        "url": "https://github.com/shihyuho"
+      },
+      "homepage": "https://github.com/shihyuho/pangu.skill",
+      "license": "MIT",
+      "source": ".",
+      "category": "Productivity",
+      "keywords": ["pangu", "盤古之白", "spacing", "cjk", "writing", "i18n"],
+      "skills": ["./skills/pangu"]
+    }
+  ]
+}

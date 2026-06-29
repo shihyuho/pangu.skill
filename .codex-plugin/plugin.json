@@ -1,0 +1,24 @@
+{
+  "name": "pangu",
+  "description": "Write CJK text with paranoid text spacing (盤古之白)",
+  "author": {
+    "name": "Shihyu Ho",
+    "url": "https://github.com/shihyuho"
+  },
+  "repository": "https://github.com/shihyuho/pangu.skill",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Pangu",
+    "websiteURL": "https://github.com/shihyuho/pangu.skill",
+    "shortDescription": "Paranoid text spacing (盤古之白) for CJK-mixed writing",
+    "longDescription": "Insert a space between CJK (Chinese / Japanese / Korean) characters and adjacent half-width letters, numbers, and symbols in any prose, documentation, comments, or commit messages the agent writes — mirroring pangu.js's spacingText() while preserving code, URLs, file paths, and compound identifiers.",
+    "developerName": "Shihyu Ho",
+    "category": "Productivity",
+    "capabilities": ["Write"],
+    "defaultPrompt": [
+      "幫我檢查這段中英混排的文字，補上缺少的盤古之白。",
+      "之後產生中文內容時，都套用盤古之白的空格規則。"
+    ]
+  }
+}
