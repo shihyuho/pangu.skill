@@ -6,7 +6,7 @@
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Live demo](https://img.shields.io/badge/live_demo-df372b)](https://shihyuho.github.io/pangu.skill/)
 
-AI 코딩 에이전트에 paranoid text spacing (盤古之白)을 더해 주는 agent skill / plugin입니다. Claude Code, Codex, Cursor, Gemini CLI를 비롯한 여러 AI 에이전트가 문서, 주석, 커밋 메시지 등 어떤 글을 만들어 내든 CJK 문자와 인접한 반각 영문자, 숫자, 기호 사이에 자동으로 공백을 넣어 줍니다.
+AI 코딩 에이전트에 paranoid text spacing (盤古之白)을 더해 주는 agent skill / plugin입니다. Claude Code, Codex, Cursor, Gemini CLI를 비롯한 여러 AI 에이전트가 당신에게 보내는 답변, 문서, 주석, 커밋 메시지 등 어떤 글을 만들어 내든 CJK 문자와 인접한 반각 영문자, 숫자, 기호 사이에 자동으로 공백을 넣어 줍니다.
 
 AI는 글은 잘 쓰지만, CJK와 라틴 문자 사이를 띄우는 것은 자꾸 잊어버립니다. 이 skill은 무엇을 띄우고 무엇을 그대로 둘지, 그 규칙을 AI에게 직접 가르쳐 줍니다. 덕분에 AI는 나중에 고치는 대신 입력하는 바로 그 순간에 제대로 씁니다.
 

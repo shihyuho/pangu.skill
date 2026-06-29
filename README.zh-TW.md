@@ -6,7 +6,7 @@
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Live demo](https://img.shields.io/badge/live_demo-df372b)](https://shihyuho.github.io/pangu.skill/)
 
-把「盤古之白」帶給 AI coding agent 的 agent skill / plugin。讓你的 Claude Code、Codex、Cursor、Gemini CLI 等 AI agent 在生成文件、註解、commit message 或任何中英混排輸出時，自動在 CJK 與半形英文、數字、符號之間補上空白。
+把「盤古之白」帶給 AI coding agent 的 agent skill / plugin。讓你的 Claude Code、Codex、Cursor、Gemini CLI 等 AI agent 在生成給你的回覆、文件、註解、commit message 或任何中英混排輸出時，自動在 CJK 與半形英文、數字、符號之間補上空白。
 
 AI 很會寫，卻常忘記中英之間要留白。這個 skill 把該加、不該加的規則直接教給它，讓它在落筆當下就寫對，而不是事後再修。
 
