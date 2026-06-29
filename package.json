@@ -1,0 +1,19 @@
+{
+  "name": "pangu.skill",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Paranoid text spacing (盤古之白) as an agent skill / plugin for AI coding agents",
+  "license": "MIT",
+  "author": "Shihyu Ho",
+  "homepage": "https://shihyuho.github.io/pangu.skill/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shihyuho/pangu.skill.git"
+  },
+  "scripts": {
+    "check": "node scripts/check-skill.mjs"
+  },
+  "devDependencies": {
+    "pangu": "7.2.1"
+  }
+}

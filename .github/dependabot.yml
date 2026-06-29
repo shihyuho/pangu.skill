@@ -1,0 +1,16 @@
+version: 2
+updates:
+  # Bump pangu so an upstream spacing-behavior change surfaces as a failing
+  # check-skill run on the PR — then reconcile SKILL.md to match.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: chore(deps)
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: chore(ci)
