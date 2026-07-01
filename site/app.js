@@ -76,7 +76,10 @@
       var card = btn.closest(".cmd");
       var pre = card && card.querySelector("pre");
       if (!pre) return;
-      var text = pre.textContent;
+      var lines = pre.querySelectorAll(".ln");
+      var text = lines.length
+        ? Array.prototype.map.call(lines, function (l) { return l.textContent; }).join("\n")
+        : pre.textContent;
       var done = function () {
         var old = btn.textContent;
         btn.textContent = "copied";

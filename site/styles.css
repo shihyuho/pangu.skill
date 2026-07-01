@@ -209,6 +209,7 @@ section { scroll-margin-top: 80px; }
 .cmd-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
 .cmd.span2 { grid-column: 1 / -1; }
 .cmd {
+  min-width: 0;
   background: var(--surface); border: 1px solid var(--border);
   border-radius: var(--radius); padding: 16px 16px 14px;
 }
@@ -217,7 +218,11 @@ section { scroll-margin-top: 80px; }
 .cmd pre {
   margin: 0; font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.6;
   color: var(--text); background: var(--surface-2); border: 1px solid var(--border);
-  border-radius: 8px; padding: 11px 12px; overflow-x: auto; white-space: pre;
+  border-radius: 8px; padding: 11px 12px;
+}
+.cmd .ln {
+  display: block; white-space: pre-wrap; overflow-wrap: anywhere;
+  padding-left: 1.6ch; text-indent: -1.6ch; /* hanging indent keeps wrapped commands readable */
 }
 .copy {
   font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-faint);
