@@ -1,5 +1,0 @@
-{
-  "name": "pangu",
-  "version": "1.0.0",
-  "description": "Paranoid text spacing (盤古之白) for AI agents — insert a space between CJK characters and adjacent half-width letters, numbers, and symbols in any prose, docs, comments, or commit messages the agent writes."
-}
