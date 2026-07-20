@@ -14,6 +14,6 @@
     "check": "node scripts/check-skill.mjs"
   },
   "devDependencies": {
-    "pangu": "7.2.1"
+    "pangu": "8.0.0"
   }
 }
