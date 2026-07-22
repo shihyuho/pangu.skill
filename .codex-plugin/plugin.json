@@ -10,6 +10,7 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Pangu",
+    "logo": "./assets/image.png",
     "websiteURL": "https://github.com/shihyuho/pangu.skill",
     "shortDescription": "Paranoid text spacing (盤古之白) for CJK-mixed writing",
     "longDescription": "Insert a space between CJK (Chinese / Japanese / Korean) characters and adjacent half-width letters, numbers, and symbols in any prose, documentation, comments, or commit messages the agent writes — mirroring pangu.js's spacingText() while preserving code, URLs, file paths, and compound identifiers.",

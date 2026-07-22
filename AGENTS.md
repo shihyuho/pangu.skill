@@ -36,9 +36,13 @@ CJK-mixed text (README*.md, SKILL.md wording, commit messages):
 ## Keep every surface in sync
 
 The same content lives in several places. When you change install steps, the
-rules, the family list, or any user-facing wording, update ALL of them together
-— a change that lands in one place but not the others is drift:
+rules, the family list, the brand mark, or any user-facing wording, update ALL
+of them together — a change that lands in one place but not the others is drift:
 
 - the four READMEs — `README.md` (English, source of truth), `README.zh-TW.md`,
   `README.ja.md`, `README.ko.md`
 - the landing page — `site/index.html` (hero, How it works, Install, Family)
+- the plugin logo — `.codex-plugin/plugin.json`'s `interface.logo` points at
+  `assets/image.png`, a raster of `site/favicon.svg` (the site's brand mark).
+  After changing that mark, regenerate the PNG so it doesn't drift:
+  `rsvg-convert -w 1024 -h 1024 site/favicon.svg -o assets/image.png`.
