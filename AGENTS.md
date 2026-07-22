@@ -6,10 +6,9 @@ skill's rules must stay faithful to pangu.js, and its own docs must not drift.
 ## The skill must match pangu.js
 
 `skills/pangu/SKILL.md` documents the spacing rules as `before → after`
-examples. Those examples are pinned to pangu's real behavior: `npm run check`
-(`scripts/check-skill.mjs`) extracts every example — from the fenced blocks and
-the tables — and asserts `pangu.spacingText(before) === after` against the
-pinned `pangu` devDependency.
+examples, pinned to pangu's real behavior: `npm run check` asserts every
+example — and a generated behavior snapshot — against the pinned `pangu`
+devDependency (the scripts under `scripts/` document their own mechanics).
 
 - Run `npm run check` after editing any example or rule in SKILL.md.
 - CI runs it on every push / PR; Dependabot bumps `pangu`, so an upstream
@@ -20,24 +19,9 @@ pinned `pangu` devDependency.
 
 ## Upgrading pangu
 
-`npm run check` also asserts the pinned `pangu` version against every place that
-names it, so a bump can't leave a stale number behind:
-
-- the version stamp under SKILL.md's Quick reference (`pangu **X.Y.Z**`)
-- the site's live-demo CDN pin in `site/index.html` (`pangu@X.Y.Z`)
-
-A Dependabot `pangu` bump PR only edits `package.json` and the lockfile, so the
-two stamps above still name the old version and the check opens red on every
-bump — even a behavior-free patch. Clear the mechanical part first: set both
-stamps to the new version, push, and let CI rerun. What the check says then is
-the real signal: green means the new pangu is behavior-compatible with what
-SKILL.md teaches — safe to merge; red means behavior drifted — fix the drifted
-`before → after` examples and rule wording until green. The READMEs' version
-badge reads `package.json` live, so it never needs a manual bump. One caveat the
-check can't cover: a pangu bump (not only a major — 6.1.0 revised the spacing
-algorithm) may also *add* rules. Skim its changelog and document anything new;
-pangu publishes no GitHub Releases, the changelog is
-[HISTORY.md](https://github.com/vinta/pangu.js/blob/master/HISTORY.md).
+Handling a `pangu` bump PR (Dependabot; the check opens red on every bump)?
+That first red is mechanical until the version stamps are fixed — follow
+[docs/upgrading-pangu.md](docs/upgrading-pangu.md).
 
 ## Writing CJK-mixed prose here
 
