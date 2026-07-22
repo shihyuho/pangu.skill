@@ -93,7 +93,7 @@ if (skipped.length) {
 }
 if (failed || stampFailed) {
   if (failed) console.error(`\n✗ ${failed} example(s) drift from pangu.js — fix SKILL.md so the check passes.`);
-  if (stampFailed) console.error(`✗ ${stampFailed} version stamp(s) out of date — set them to pangu ${pangu.version}.`);
+  if (stampFailed) console.error(`✗ ${stampFailed} version stamp(s) out of date — run \`npm run fix-stamps\`.`);
   process.exit(1);
 }
 console.log(`✓ every SKILL example matches pangu.js, and all version stamps read ${pangu.version}`);
