@@ -4,7 +4,7 @@
 
 > 為什麼 AI 就是不能加個空格呢？
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Live demo](https://img.shields.io/badge/live_demo-df372b)](https://shihyuho.github.io/pangu.skill/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Live demo](https://img.shields.io/badge/live_demo-df372b)](https://shihyuho.github.io/pangu.skill/) [![pangu](https://img.shields.io/github/package-json/dependency-version/shihyuho/pangu.skill/dev/pangu?label=pangu&color=df372b)](https://github.com/vinta/pangu.js/blob/master/HISTORY.md)
 
 把「盤古之白」帶給 AI coding agent 的 agent skill / plugin。讓你的 Claude Code、Codex、Cursor、Gemini CLI 等 AI agent 在生成給你的回覆、文件、註解、commit message 或任何中英混排輸出時，自動在 CJK 與半形英文、數字、符號之間補上空白。
 

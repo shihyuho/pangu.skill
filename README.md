@@ -4,7 +4,7 @@
 
 > Why can't AI just add a space?
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Live demo](https://img.shields.io/badge/live_demo-df372b)](https://shihyuho.github.io/pangu.skill/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Live demo](https://img.shields.io/badge/live_demo-df372b)](https://shihyuho.github.io/pangu.skill/) [![pangu](https://img.shields.io/github/package-json/dependency-version/shihyuho/pangu.skill/dev/pangu?label=pangu&color=df372b)](https://github.com/vinta/pangu.js/blob/master/HISTORY.md)
 
 An agent skill / plugin that brings paranoid text spacing (盤古之白) to AI coding agents. It makes your Claude Code, Codex, Cursor, Gemini CLI, and other AI agents automatically insert a space between CJK characters and adjacent half-width letters, numbers, and symbols in everything they write — the replies they send you, docs, comments, and commit messages alike.
 

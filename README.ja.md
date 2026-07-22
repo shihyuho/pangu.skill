@@ -4,7 +4,7 @@
 
 > どうして AI はスペースひとつ入れてくれないのだろう？
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Live demo](https://img.shields.io/badge/live_demo-df372b)](https://shihyuho.github.io/pangu.skill/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Live demo](https://img.shields.io/badge/live_demo-df372b)](https://shihyuho.github.io/pangu.skill/) [![pangu](https://img.shields.io/github/package-json/dependency-version/shihyuho/pangu.skill/dev/pangu?label=pangu&color=df372b)](https://github.com/vinta/pangu.js/blob/master/HISTORY.md)
 
 paranoid text spacing（盤古之白）を AI コーディングエージェントにもたらす agent skill / plugin です。Claude Code、Codex、Cursor、Gemini CLI をはじめとする AI エージェントが、生成するあなたへの返信・ドキュメント・コメント・コミットメッセージなどあらゆる出力で、CJK 文字と隣り合う半角の英字・数字・記号の間に自動でスペースを挿入します。
 

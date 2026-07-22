@@ -18,6 +18,27 @@ pinned `pangu` devDependency.
   or the example until the check passes. The check, not your eyeballs, is the
   source of truth for what pangu does.
 
+## Upgrading pangu
+
+`npm run check` also asserts the pinned `pangu` version against every place that
+names it, so a bump can't leave a stale number behind:
+
+- the version stamp under SKILL.md's Quick reference (`pangu **X.Y.Z**`)
+- the site's live-demo CDN pin in `site/index.html` (`pangu@X.Y.Z`)
+
+A Dependabot `pangu` bump PR only edits `package.json` and the lockfile, so the
+two stamps above still name the old version and the check opens red on every
+bump — even a behavior-free patch. Clear the mechanical part first: set both
+stamps to the new version, push, and let CI rerun. What the check says then is
+the real signal: green means the new pangu is behavior-compatible with what
+SKILL.md teaches — safe to merge; red means behavior drifted — fix the drifted
+`before → after` examples and rule wording until green. The READMEs' version
+badge reads `package.json` live, so it never needs a manual bump. One caveat the
+check can't cover: a pangu bump (not only a major — 6.1.0 revised the spacing
+algorithm) may also *add* rules. Skim its changelog and document anything new;
+pangu publishes no GitHub Releases, the changelog is
+[HISTORY.md](https://github.com/vinta/pangu.js/blob/master/HISTORY.md).
+
 ## Writing CJK-mixed prose here
 
 This is a spacing project; its own prose must model the rules. When editing
