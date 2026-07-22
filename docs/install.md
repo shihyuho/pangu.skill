@@ -40,6 +40,8 @@ You can also install it standalone with [skills](https://github.com/vercel-labs/
 npx skills add shihyuho/pangu.skill --skill pangu
 ```
 
+Or browse the listing on [skills.sh](https://www.skills.sh/shihyuho/pangu.skill/pangu).
+
 ## Other agents (copy the rules file)
 
 Cursor, Windsurf, GitHub Copilot, Kiro, and OpenCode have no plugin installer — put `skills/pangu/SKILL.md` where each one reads it. No need to clone the whole repo; grab the raw file directly:
