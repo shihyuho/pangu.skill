@@ -8,7 +8,9 @@
 import fs from "node:fs";
 import pangu from "pangu";
 
-const FILE = process.argv[2] || "skills/pangu/SKILL.md";
+const args = process.argv.slice(2);
+const FIX_STAMPS = args.includes("--fix-stamps");
+const FILE = args.find((a) => !a.startsWith("--")) || "skills/pangu/SKILL.md";
 const lines = fs.readFileSync(FILE, "utf8").split("\n");
 
 const cases = [];   // { n, before, after }
@@ -66,13 +68,21 @@ const STAMPS = [
 ];
 let stampFailed = 0;
 for (const s of STAMPS) {
-  const found = fs.readFileSync(s.file, "utf8").match(s.re);
+  const text = fs.readFileSync(s.file, "utf8");
+  const found = text.match(s.re);
   if (!found) {
     stampFailed++;
     console.error(`${s.file}: no pangu version stamp (${s.what}); expected pangu ${pangu.version}`);
   } else if (found[1] !== pangu.version) {
-    stampFailed++;
-    console.error(`${s.file}: ${s.what} says pangu ${found[1]}, but the pinned pangu is ${pangu.version}`);
+    if (FIX_STAMPS) {
+      // Rewrite the stamp in place — same regex the guard matches on, so the
+      // fixer and the guard can never disagree about what counts as a stamp.
+      fs.writeFileSync(s.file, text.replace(s.re, (m) => m.replace(found[1], pangu.version)));
+      console.log(`${s.file}: ${s.what} rewritten ${found[1]} → ${pangu.version}`);
+    } else {
+      stampFailed++;
+      console.error(`${s.file}: ${s.what} says pangu ${found[1]}, but the pinned pangu is ${pangu.version}`);
+    }
   }
 }
 

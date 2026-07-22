@@ -9,7 +9,8 @@ skill's rules must stay faithful to pangu.js, and its own docs must not drift.
 examples. Those examples are pinned to pangu's real behavior: `npm run check`
 (`scripts/check-skill.mjs`) extracts every example — from the fenced blocks and
 the tables — and asserts `pangu.spacingText(before) === after` against the
-pinned `pangu` devDependency.
+pinned `pangu` devDependency, then verifies pangu's wider text-level behavior
+against a generated probe snapshot (`scripts/check-snapshot.mjs`).
 
 - Run `npm run check` after editing any example or rule in SKILL.md.
 - CI runs it on every push / PR; Dependabot bumps `pangu`, so an upstream
@@ -20,24 +21,42 @@ pinned `pangu` devDependency.
 
 ## Upgrading pangu
 
-`npm run check` also asserts the pinned `pangu` version against every place that
-names it, so a bump can't leave a stale number behind:
+Three guards pin this repo to the exact pangu it verifies, all run by `npm run
+check`:
 
-- the version stamp under SKILL.md's Quick reference (`pangu **X.Y.Z**`)
-- the site's live-demo CDN pin in `site/index.html` (`pangu@X.Y.Z`)
+- every SKILL.md `before → after` example matches the pinned pangu;
+- the version stamps match it — the stamp under SKILL.md's Quick reference
+  (`pangu **X.Y.Z**`) and the site's live-demo CDN pin in `site/index.html`;
+- pangu's text-level behavior matches `scripts/pangu-snapshot.jsonl` — ~900
+  generated probes (every printable ASCII character across the adjacency
+  contexts that decide spacing, plus curated multi-char patterns), so a
+  behavior change reds even where no curated example covers it.
 
-A Dependabot `pangu` bump PR only edits `package.json` and the lockfile, so the
-two stamps above still name the old version and the check opens red on every
-bump — even a behavior-free patch. Clear the mechanical part first: set both
-stamps to the new version, push, and let CI rerun. What the check says then is
-the real signal: green means the new pangu is behavior-compatible with what
-SKILL.md teaches — safe to merge; red means behavior drifted — fix the drifted
-`before → after` examples and rule wording until green. The READMEs' version
-badge reads `package.json` live, so it never needs a manual bump. One caveat the
-check can't cover: a pangu bump (not only a major — 6.1.0 revised the spacing
-algorithm) may also *add* rules. Skim its changelog and document anything new;
-pangu publishes no GitHub Releases, the changelog is
-[HISTORY.md](https://github.com/vinta/pangu.js/blob/master/HISTORY.md).
+A Dependabot bump PR only edits `package.json` and the lockfile, so it opens
+red at the stamps on every bump — even a behavior-free patch. The flow:
+
+1. `npm run fix-stamps` — rewrites both stamps to the pinned version.
+2. `npm run check` — now the result is the real signal:
+   - **green** means behavior-identical across examples and snapshot — safe to
+     merge at any semver level (pangu ships behavior changes outside majors —
+     6.1.0 revised the spacing algorithm — so trust the snapshot, not semver).
+   - **snapshot red** means pangu's behavior changed: reconcile SKILL.md — rule
+     wording AND examples for the changed characters (the check prints which
+     ones lack examples) — then `npm run update-snapshot` and rerun until
+     green. Never run `update-snapshot` to silence a red you haven't
+     reconciled into SKILL.md; and rule-prose diffs must pass human eyes,
+     because the check verifies examples, not prose, and agents build their
+     mental model from the prose.
+3. Skim the changelog for *added* rules the probes may not reach — pangu
+   publishes no GitHub Releases; the changelog is
+   [HISTORY.md](https://github.com/vinta/pangu.js/blob/master/HISTORY.md).
+   DOM-only changes never show in the snapshot.
+
+Dependabot-branch hygiene: a stamp-only fix may be pushed straight onto the
+Dependabot branch; anything touching SKILL.md belongs on your own branch / PR —
+Dependabot supersedes or recreates its branches and discards foreign commits
+(never comment `@dependabot recreate` on a PR carrying manual work). The
+READMEs' version badge reads `package.json` live and never needs a bump.
 
 ## Writing CJK-mixed prose here
 
