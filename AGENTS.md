@@ -42,6 +42,9 @@ of them together — a change that lands in one place but not the others is drif
 - the four READMEs — `README.md` (English, source of truth), `README.zh-TW.md`,
   `README.ja.md`, `README.ko.md`
 - the landing page — `site/index.html` (hero, How it works, Install, Family)
+- the full install guide — `docs/install.md` (English). The four READMEs keep only
+  the Claude Code and Codex quick-starts inline and link here for every other agent,
+  so install commands must match `docs/install.md` and `site/index.html`.
 - the plugin logo — `.codex-plugin/plugin.json`'s `interface.logo` points at
   `assets/image.png`, a raster of `site/favicon.svg` (the site's brand mark).
   After changing that mark, regenerate the PNG so it doesn't drift:
