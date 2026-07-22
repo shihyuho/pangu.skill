@@ -57,13 +57,33 @@ for (const c of cases) {
   }
 }
 
+// Version stamps: every place that pins pangu — the skill's own footer and the
+// site's live-demo CDN — must name the installed pangu, so a bump can't leave a
+// stale number teaching the wrong version. Guarded here so CI catches it too.
+const STAMPS = [
+  { file: "skills/pangu/SKILL.md", re: /pangu \*\*(\d+\.\d+\.\d+)\*\*/, what: "SKILL.md rules stamp" },
+  { file: "site/index.html", re: /pangu@(\d+\.\d+\.\d+)/, what: "site live-demo CDN pin" },
+];
+let stampFailed = 0;
+for (const s of STAMPS) {
+  const found = fs.readFileSync(s.file, "utf8").match(s.re);
+  if (!found) {
+    stampFailed++;
+    console.error(`${s.file}: no pangu version stamp (${s.what}); expected pangu ${pangu.version}`);
+  } else if (found[1] !== pangu.version) {
+    stampFailed++;
+    console.error(`${s.file}: ${s.what} says pangu ${found[1]}, but the pinned pangu is ${pangu.version}`);
+  }
+}
+
 console.log(`checked ${cases.length} examples against pangu ${pangu.version}`);
 if (skipped.length) {
   console.log(`skipped ${skipped.length} non-pair row(s) (rule descriptions, not before/after):`);
   skipped.forEach((s) => console.log(`  ${FILE}:${s.n}  ${s.raw}`));
 }
-if (failed) {
-  console.error(`\n✗ ${failed} example(s) drift from pangu.js — fix SKILL.md so the check passes.`);
+if (failed || stampFailed) {
+  if (failed) console.error(`\n✗ ${failed} example(s) drift from pangu.js — fix SKILL.md so the check passes.`);
+  if (stampFailed) console.error(`✗ ${stampFailed} version stamp(s) out of date — set them to pangu ${pangu.version}.`);
   process.exit(1);
 }
-console.log("✓ every SKILL example matches pangu.js");
+console.log(`✓ every SKILL example matches pangu.js, and all version stamps read ${pangu.version}`);

@@ -69,6 +69,18 @@
     window.addEventListener("load", render);
   }
 
+  /* ---------- show the running pangu version ---------- */
+  // Read the version off the loaded library so the label can never disagree
+  // with the pangu that actually spaced the demo above.
+  var verEl = document.getElementById("pangu-ver");
+  function showVersion() {
+    if (verEl && window.pangu && window.pangu.version) {
+      verEl.textContent = " · v" + window.pangu.version;
+    }
+  }
+  showVersion();
+  window.addEventListener("load", showVersion);
+
   /* ---------- copy buttons ---------- */
   var copies = document.querySelectorAll(".copy");
   Array.prototype.forEach.call(copies, function (btn) {

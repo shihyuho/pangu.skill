@@ -200,3 +200,7 @@ the sentence from the syntax around it.
 | `@user` `#tag` `$100` `95%` `C++` `GPT-5` `v1.2.3` path / URL | space the boundary, keep the token whole |
 | full-width punctuation `，。！？` | no |
 | a run of text with no CJK at all | leave entirely unchanged |
+
+---
+
+_Rules verified against pangu **8.0.0** — `npm run check` fails if this stamp or any example drifts._

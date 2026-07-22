@@ -18,6 +18,22 @@ pinned `pangu` devDependency.
   or the example until the check passes. The check, not your eyeballs, is the
   source of truth for what pangu does.
 
+## Upgrading pangu
+
+`npm run check` also asserts the pinned `pangu` version against every place that
+names it, so a bump can't leave a stale number behind:
+
+- the version stamp under SKILL.md's Quick reference (`pangu **X.Y.Z**`)
+- the site's live-demo CDN pin in `site/index.html` (`pangu@X.Y.Z`)
+
+When Dependabot opens a `pangu` bump PR, CI runs the check. Green means the new
+pangu is behavior-compatible with what SKILL.md teaches — safe to merge. Red is
+the signal to reconcile on that same PR: fix any drifted `before → after`
+example and rule wording, bump both version stamps above, then rerun `npm run
+check` until green. The READMEs' version badge reads `package.json` live, so it
+never needs a manual bump. One caveat the check can't cover: a major pangu bump
+may also *add* rules — skim its changelog and document anything new.
+
 ## Writing CJK-mixed prose here
 
 This is a spacing project; its own prose must model the rules. When editing
