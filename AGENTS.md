@@ -26,13 +26,18 @@ names it, so a bump can't leave a stale number behind:
 - the version stamp under SKILL.md's Quick reference (`pangu **X.Y.Z**`)
 - the site's live-demo CDN pin in `site/index.html` (`pangu@X.Y.Z`)
 
-When Dependabot opens a `pangu` bump PR, CI runs the check. Green means the new
-pangu is behavior-compatible with what SKILL.md teaches — safe to merge. Red is
-the signal to reconcile on that same PR: fix any drifted `before → after`
-example and rule wording, bump both version stamps above, then rerun `npm run
-check` until green. The READMEs' version badge reads `package.json` live, so it
-never needs a manual bump. One caveat the check can't cover: a major pangu bump
-may also *add* rules — skim its changelog and document anything new.
+A Dependabot `pangu` bump PR only edits `package.json` and the lockfile, so the
+two stamps above still name the old version and the check opens red on every
+bump — even a behavior-free patch. Clear the mechanical part first: set both
+stamps to the new version, push, and let CI rerun. What the check says then is
+the real signal: green means the new pangu is behavior-compatible with what
+SKILL.md teaches — safe to merge; red means behavior drifted — fix the drifted
+`before → after` examples and rule wording until green. The READMEs' version
+badge reads `package.json` live, so it never needs a manual bump. One caveat the
+check can't cover: a pangu bump (not only a major — 6.1.0 revised the spacing
+algorithm) may also *add* rules. Skim its changelog and document anything new;
+pangu publishes no GitHub Releases, the changelog is
+[HISTORY.md](https://github.com/vinta/pangu.js/blob/master/HISTORY.md).
 
 ## Writing CJK-mixed prose here
 

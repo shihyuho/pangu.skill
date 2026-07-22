@@ -62,7 +62,7 @@ for (const c of cases) {
 // stale number teaching the wrong version. Guarded here so CI catches it too.
 const STAMPS = [
   { file: "skills/pangu/SKILL.md", re: /pangu \*\*(\d+\.\d+\.\d+)\*\*/, what: "SKILL.md rules stamp" },
-  { file: "site/index.html", re: /pangu@(\d+\.\d+\.\d+)/, what: "site live-demo CDN pin" },
+  { file: "site/index.html", re: /cdn\.jsdelivr\.net\/npm\/pangu@(\d+\.\d+\.\d+)/, what: "site live-demo CDN pin" },
 ];
 let stampFailed = 0;
 for (const s of STAMPS) {

@@ -88,6 +88,7 @@ side. Two or more slashes are a path and keep their structure.
 前面/後面            →   前面 / 後面             (CJK on a side: operator)
 陳上進/貓咪/Mollie   →   陳上進/貓咪/Mollie       (2+ slashes: a path, untouched)
 得到一個R&D的部門     →   得到一個 R&D 的部門      (`&` glues half-width the same way)
+陳上進&Mollie        →   陳上進 & Mollie          (CJK on a side: operator too)
 ```
 
 ### Punctuation — right space, kept half-width (one colon exception)

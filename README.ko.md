@@ -4,7 +4,7 @@
 
 > AI는 왜 그냥 공백 하나를 못 넣을까?
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Live demo](https://img.shields.io/badge/live_demo-df372b)](https://shihyuho.github.io/pangu.skill/) [![pangu](https://img.shields.io/github/package-json/dependency-version/shihyuho/pangu.skill/dev/pangu?label=pangu&color=df372b)](https://github.com/vinta/pangu.js/releases)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Live demo](https://img.shields.io/badge/live_demo-df372b)](https://shihyuho.github.io/pangu.skill/) [![pangu](https://img.shields.io/github/package-json/dependency-version/shihyuho/pangu.skill/dev/pangu?label=pangu&color=df372b)](https://github.com/vinta/pangu.js/blob/master/HISTORY.md)
 
 AI 코딩 에이전트에 paranoid text spacing (盤古之白)을 더해 주는 agent skill / plugin입니다. Claude Code, Codex, Cursor, Gemini CLI를 비롯한 여러 AI 에이전트가 당신에게 보내는 답변, 문서, 주석, 커밋 메시지 등 어떤 글을 만들어 내든 CJK 문자와 인접한 반각 영문자, 숫자, 기호 사이에 자동으로 공백을 넣어 줍니다.
 
