@@ -57,13 +57,12 @@ needs **no** surrounding space — note `…著 bug，bug 也…` has no space a
 
 ### Operators — always spaced (when CJK is in the line)
 
-`+  -  *  =  &  ^  <  >  \` and a **single** `/` take a space on **both** sides.
+`+  -  *  =  ^  <  >  \` take a space on **both** sides. (`/` and `&` are
+special — they glue two half-width characters; see below.)
 
 ```
 前面+後面        →   前面 + 後面
 得到一個A-B的結果 →   得到一個 A - B 的結果
-前面/後面        →   前面 / 後面        (single slash = operator)
-Mollie/陳上進     →   Mollie / 陳上進
 前面\後面        →   前面 \ 後面
 前面~=後面       →   前面 ~= 後面
 ```
@@ -77,14 +76,18 @@ Mollie/陳上進     →   Mollie / 陳上進
 Mollie_陳上進     →   Mollie_陳上進
 ```
 
-### Slash is dual-behavior
+### Slash & ampersand — a joiner between half-width, an operator next to CJK
 
-One `/` reads as an operator (spaced); two or more read as a path and keep their
-structure (no spaces). The count, not the context, decides.
+A single `/` or `&` **glues** two half-width characters into one token (`A/B`,
+`R&D`) — no space inside; the whole token then spaces off any adjacent CJK. It
+only reads as a spaced operator when a **CJK** character sits on at least one
+side. Two or more slashes are a path and keep their structure.
 
 ```
-得到一個A/B的結果     →   得到一個 A / B 的結果    (one slash: operator)
-陳上進/貓咪/Mollie   →   陳上進/貓咪/Mollie      (2+ slashes: a path, untouched)
+得到一個A/B的結果     →   得到一個 A/B 的結果      (half-width both sides: glued)
+前面/後面            →   前面 / 後面             (CJK on a side: operator)
+陳上進/貓咪/Mollie   →   陳上進/貓咪/Mollie       (2+ slashes: a path, untouched)
+得到一個R&D的部門     →   得到一個 R&D 的部門      (`&` glues half-width the same way)
 ```
 
 ### Punctuation — right space, kept half-width (one colon exception)
@@ -189,7 +192,8 @@ the sentence from the syntax around it.
 | Between CJK and… | Space? |
 |---|---|
 | letter / number | yes |
-| operator `+ - * = & ^ < > \` or single `/` | yes (both sides) |
+| operator `+ - * = ^ < > \` | yes (both sides) |
+| single `/` or `&` | glued between half-width (`A/B`, `R&D`); spaced only if CJK adjacent |
 | separator `_` `\|`, or 2+ `/` (a path) | no |
 | `. , : ; ! ? ~` | space **after** (right) only |
 | opening / closing bracket or quote | yes outside, no just-inside |
