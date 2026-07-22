@@ -1,78 +1,65 @@
-# pangu.skill
+<p align="center">
+  <a href="https://shihyuho.github.io/pangu.skill/">
+    <img src="assets/image.png" alt="pangu.skill" width="120" />
+  </a>
+</p>
 
-[English](README.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
+<h1 align="center">pangu.skill</h1>
 
-> どうして AI はスペースひとつ入れてくれないのだろう？
+<p align="center"><strong>どうして AI はスペースひとつ入れてくれないのだろう？</strong></p>
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Live demo](https://img.shields.io/badge/live_demo-df372b)](https://shihyuho.github.io/pangu.skill/) [![pangu](https://img.shields.io/github/package-json/dependency-version/shihyuho/pangu.skill/dev/pangu?label=pangu&color=df372b)](https://github.com/vinta/pangu.js/blob/master/HISTORY.md)
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a>
+  <a href="https://shihyuho.github.io/pangu.skill/"><img src="https://img.shields.io/badge/live_demo-df372b" alt="Live demo"></a>
+  <a href="https://github.com/vinta/pangu.js/blob/master/HISTORY.md"><img src="https://img.shields.io/github/package-json/dependency-version/shihyuho/pangu.skill/dev/pangu?label=pangu&color=df372b" alt="pangu"></a>
+</p>
+
+<p align="center">
+  <a href="README.md">English</a> ·
+  <a href="README.zh-TW.md">繁體中文</a> ·
+  <b>日本語</b> ·
+  <a href="README.ko.md">한국어</a>
+</p>
 
 paranoid text spacing（盤古之白）を AI コーディングエージェントにもたらす agent skill / plugin です。Claude Code、Codex、Cursor、Gemini CLI をはじめとする AI エージェントが、生成するあなたへの返信・ドキュメント・コメント・コミットメッセージなどあらゆる出力で、CJK 文字と隣り合う半角の英字・数字・記号の間に自動でスペースを挿入します。
 
 AI は文章を書くのが得意ですが、CJK と Latin の間にスペースを入れることをつい忘れてしまいます。この skill は、どこにスペースを入れ、どこはそのままにしておくかというルールを直接 AI に教え込むので、後から直すのではなく、書いたその瞬間に正しく書けるようになります。
 
-## Installation
+## See it in action
 
-方法は 2 通りです。パッケージマネージャーを備えたエージェントはワンステップでインストールでき、それ以外は、エージェントが読み込むルールディレクトリに [`skills/pangu/SKILL.md`](skills/pangu/SKILL.md) をコピーするだけです。
+**You type**
 
-### パッケージマネージャー（ワンステップでインストール）
+> 我用Claude Code寫了3個component，修好login的bug
 
-#### Claude Code
+**pangu writes**
+
+> 我用 Claude Code 寫了 3 個 component，修好 login 的 bug
+
+その他の例は[ライブデモ](https://shihyuho.github.io/pangu.skill/)で。
+
+## Install
+
+<details>
+<summary><strong>Claude Code</strong></summary>
 
 ```bash
 claude plugin marketplace add shihyuho/pangu.skill
 claude plugin install pangu@pangu
 ```
 
-#### Codex
+</details>
+
+<details>
+<summary><strong>Codex</strong></summary>
 
 ```bash
 codex plugin marketplace add shihyuho/pangu.skill
 codex plugin add pangu@pangu
 ```
 
-#### Gemini CLI
+</details>
 
-```bash
-gemini skills install https://github.com/shihyuho/pangu.skill.git --path skills
-```
-
-`/skills list` で `pangu` が利用可能になっているか確認してください。
-
-#### Antigravity
-
-```bash
-agy plugin install https://github.com/shihyuho/pangu.skill.git
-```
-
-#### skills (npx)
-
-[skills](https://github.com/vercel-labs/skills) を使って単独でインストールすることもできます：
-
-```bash
-npx skills add shihyuho/pangu.skill --skill pangu
-```
-
-### その他のエージェント（ルールファイルをコピー）
-
-Cursor、Windsurf、GitHub Copilot、Kiro、OpenCode には plugin インストーラーがないため、`skills/pangu/SKILL.md` をそれぞれが読み込む場所に置きます。リポジトリ全体を clone する必要はなく、raw ファイルを直接取得すれば十分です：
-
-| Agent | 配置先 |
-| --- | --- |
-| Cursor | `.cursor/rules/pangu.md` |
-| Windsurf | `.windsurfrules` に追記 |
-| GitHub Copilot | `.github/skills/pangu/SKILL.md` |
-| Kiro | `.kiro/skills/pangu/SKILL.md` |
-| OpenCode | `skills/pangu/SKILL.md` にコピーし、`AGENTS.md` で組み込みの `skill` ツールを介してそれを読み込んで従うようエージェントに指示する |
-
-たとえば Cursor の場合：
-
-```bash
-mkdir -p .cursor/rules
-curl -sL https://raw.githubusercontent.com/shihyuho/pangu.skill/main/skills/pangu/SKILL.md \
-  -o .cursor/rules/pangu.md
-```
-
-他のプラットフォームでは、コピー先のパスを変えるだけです（Windsurf は `>> .windsurfrules` で追記します）。
+Gemini CLI、Antigravity、Cursor、Windsurf、GitHub Copilot、Kiro、OpenCode をお使いですか？[詳しいインストール手順](docs/install.md)ですべて解説しています。
 
 ## Related Projects
 

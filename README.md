@@ -1,78 +1,65 @@
-# pangu.skill
+<p align="center">
+  <a href="https://shihyuho.github.io/pangu.skill/">
+    <img src="assets/image.png" alt="pangu.skill" width="120" />
+  </a>
+</p>
 
-[English](README.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
+<h1 align="center">pangu.skill</h1>
 
-> Why can't AI just add a space?
+<p align="center"><strong>Why can't AI just add a space?</strong></p>
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Live demo](https://img.shields.io/badge/live_demo-df372b)](https://shihyuho.github.io/pangu.skill/) [![pangu](https://img.shields.io/github/package-json/dependency-version/shihyuho/pangu.skill/dev/pangu?label=pangu&color=df372b)](https://github.com/vinta/pangu.js/blob/master/HISTORY.md)
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a>
+  <a href="https://shihyuho.github.io/pangu.skill/"><img src="https://img.shields.io/badge/live_demo-df372b" alt="Live demo"></a>
+  <a href="https://github.com/vinta/pangu.js/blob/master/HISTORY.md"><img src="https://img.shields.io/github/package-json/dependency-version/shihyuho/pangu.skill/dev/pangu?label=pangu&color=df372b" alt="pangu"></a>
+</p>
+
+<p align="center">
+  <b>English</b> ·
+  <a href="README.zh-TW.md">繁體中文</a> ·
+  <a href="README.ja.md">日本語</a> ·
+  <a href="README.ko.md">한국어</a>
+</p>
 
 An agent skill / plugin that brings paranoid text spacing (盤古之白) to AI coding agents. It makes your Claude Code, Codex, Cursor, Gemini CLI, and other AI agents automatically insert a space between CJK characters and adjacent half-width letters, numbers, and symbols in everything they write — the replies they send you, docs, comments, and commit messages alike.
 
 AI writes well, but it keeps forgetting to leave room between CJK and Latin. This skill teaches it the rules — what to space and what to leave alone — so it gets it right the moment it types, instead of fixing it afterward.
 
-## Installation
+## See it in action
 
-Two paths: agents with a package manager install in one step; everything else just copies [`skills/pangu/SKILL.md`](skills/pangu/SKILL.md) into the rules directory it reads.
+**You type**
 
-### Package managers (one-step install)
+> 我用Claude Code寫了3個component，修好login的bug
 
-#### Claude Code
+**pangu writes**
+
+> 我用 Claude Code 寫了 3 個 component，修好 login 的 bug
+
+More examples in the [live demo](https://shihyuho.github.io/pangu.skill/).
+
+## Install
+
+<details>
+<summary><strong>Claude Code</strong></summary>
 
 ```bash
 claude plugin marketplace add shihyuho/pangu.skill
 claude plugin install pangu@pangu
 ```
 
-#### Codex
+</details>
+
+<details>
+<summary><strong>Codex</strong></summary>
 
 ```bash
 codex plugin marketplace add shihyuho/pangu.skill
 codex plugin add pangu@pangu
 ```
 
-#### Gemini CLI
+</details>
 
-```bash
-gemini skills install https://github.com/shihyuho/pangu.skill.git --path skills
-```
-
-Verify with `/skills list` that `pangu` is ready.
-
-#### Antigravity
-
-```bash
-agy plugin install https://github.com/shihyuho/pangu.skill.git
-```
-
-#### skills (npx)
-
-You can also install it standalone with [skills](https://github.com/vercel-labs/skills):
-
-```bash
-npx skills add shihyuho/pangu.skill --skill pangu
-```
-
-### Other agents (copy the rules file)
-
-Cursor, Windsurf, GitHub Copilot, Kiro, and OpenCode have no plugin installer — put `skills/pangu/SKILL.md` where each one reads it. No need to clone the whole repo; grab the raw file directly:
-
-| Agent | Put it here |
-| --- | --- |
-| Cursor | `.cursor/rules/pangu.md` |
-| Windsurf | append to `.windsurfrules` |
-| GitHub Copilot | `.github/skills/pangu/SKILL.md` |
-| Kiro | `.kiro/skills/pangu/SKILL.md` |
-| OpenCode | copy to `skills/pangu/SKILL.md`, then in `AGENTS.md` tell the agent to load and follow it via the built-in `skill` tool |
-
-For Cursor, for example:
-
-```bash
-mkdir -p .cursor/rules
-curl -sL https://raw.githubusercontent.com/shihyuho/pangu.skill/main/skills/pangu/SKILL.md \
-  -o .cursor/rules/pangu.md
-```
-
-For the other platforms, just change the destination path (Windsurf uses `>> .windsurfrules` to append).
+Using Gemini CLI, Antigravity, Cursor, Windsurf, GitHub Copilot, Kiro, or OpenCode? The [full install guide](docs/install.md) covers them all.
 
 ## Related Projects
 
