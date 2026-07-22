@@ -204,4 +204,4 @@ the sentence from the syntax around it.
 
 ---
 
-_Rules verified against pangu **8.0.0** — `npm run check` fails if this stamp or any example drifts._
+_Rules verified against pangu **8.0.0**._
