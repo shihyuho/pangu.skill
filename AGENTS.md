@@ -50,7 +50,10 @@ red at the stamps on every bump — even a behavior-free patch. The flow:
 3. Skim the changelog for *added* rules the probes may not reach — pangu
    publishes no GitHub Releases; the changelog is
    [HISTORY.md](https://github.com/vinta/pangu.js/blob/master/HISTORY.md).
-   DOM-only changes never show in the snapshot.
+   DOM-only changes never show in the snapshot. On a red or major bump, post
+   the bumped versions' HISTORY.md entries as a PR comment, each with a
+   one-line takeaway — the skim leaves a visible artifact a reviewer can
+   check happened.
 
 Dependabot-branch hygiene: a stamp-only fix may be pushed straight onto the
 Dependabot branch; anything touching SKILL.md belongs on your own branch / PR —
