@@ -55,25 +55,40 @@ needs **no** surrounding space — note `…著 bug，bug 也…` has no space a
 
 ## Symbol rules
 
-### Operators — always spaced (when CJK is in the line)
+### Operators — space CJK boundaries, not a half-width word
 
-`+  -  *  =  ^  <  >  \` take a space on **both** sides. (`/` and `&` are
-special — they glue two half-width characters; see below.)
-
-```
-前面+後面        →   前面 + 後面
-得到一個A-B的結果 →   得到一個 A - B 的結果
-前面\後面        →   前面 \ 後面
-前面~=後面       →   前面 ~= 後面
-```
-
-### Separators — never spaced
-
-`_` and `|` are always separators — never add spaces, in any context.
+`+  -  *  =  ^  <  >  \` space off adjacent CJK, but do **not** split a
+half-width word such as `A-B` or `A*B`. (`/` and `&` are special — they glue
+two half-width characters; see below.)
 
 ```
-前面|後面        →   前面|後面
+前面+後面             →   前面 + 後面
+得到一個A-B的結果     →   得到一個 A-B 的結果
+得到一個A*B的結果     →   得到一個 A*B 的結果
+比較A<B和A>B的結果    →   比較 A<B 和 A>B 的結果
+比較A=B與A^B的結果    →   比較 A=B 與 A^B 的結果
+前面\後面             →   前面 \ 後面
+前面~=後面            →   前面 ~= 後面
+```
+
+### Underscore — never spaced
+
+`_` is always a separator — never add spaces, in any context.
+
+```
+前_後            →   前_後
 Mollie_陳上進     →   Mollie_陳上進
+```
+
+### Pipe — a line separator when it touches CJK
+
+When a `|` directly touches CJK, pangu treats every `|` on that line as a
+separator and spaces it on both sides. A pipe between half-width characters
+stays glued, even if the line contains CJK elsewhere.
+
+```
+前|A|B           →   前 | A | B
+前 A|B 後        →   前 A|B 後
 ```
 
 ### Slash & ampersand — a joiner between half-width, an operator next to CJK
@@ -193,9 +208,10 @@ the sentence from the syntax around it.
 | Between CJK and… | Space? |
 |---|---|
 | letter / number | yes |
-| operator `+ - * = ^ < > \` | yes (both sides) |
+| operator `+ - * = ^ < > \` | space CJK boundaries; keep a half-width word whole |
 | single `/` or `&` | glued between half-width (`A/B`, `R&D`); spaced only if CJK adjacent |
-| separator `_` `\|`, or 2+ `/` (a path) | no |
+| underscore `_`, or 2+ `/` (a path) | no |
+| pipe `\|` | space every pipe on its line if one directly touches CJK; otherwise keep half-width `A|B` glued |
 | `. , : ; ! ? ~` | space **after** (right) only |
 | opening / closing bracket or quote | yes outside, no just-inside |
 | `@user` `#tag` `$100` `95%` `C++` `GPT-5` `v1.2.3` path / URL | space the boundary, keep the token whole |
@@ -204,4 +220,4 @@ the sentence from the syntax around it.
 
 ---
 
-_Rules verified against pangu **8.0.0**._
+_Rules verified against pangu **8.2.0**._
