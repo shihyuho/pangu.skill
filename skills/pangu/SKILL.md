@@ -220,4 +220,4 @@ the sentence from the syntax around it.
 
 ---
 
-_Rules verified against pangu **8.2.0**._
+_Rules verified against pangu **9.0.0**._
