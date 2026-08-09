@@ -1,3 +1,3 @@
 interface:
-  display_name: "Pangu"
+  display_name: "pangu"
   short_description: "Paranoid text spacing (盤古之白) for CJK-mixed writing"

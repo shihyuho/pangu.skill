@@ -6,7 +6,6 @@
   "plugins": [
     {
       "name": "pangu",
-      "displayName": "Pangu",
       "description": "Write CJK text with paranoid text spacing (盤古之白)",
       "source": {
         "source": "local",

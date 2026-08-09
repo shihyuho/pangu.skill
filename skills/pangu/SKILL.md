@@ -10,7 +10,9 @@ description: >-
   paths, version strings, and compound identifiers unsplit.
 ---
 
-# Paranoid Text Spacing (盤古之白)
+# pangu
+
+*Paranoid Text Spacing (盤古之白)*
 
 Text that jams CJK characters against half-width letters, numbers, or symbols
 reads cramped. A single space at each boundary lets it breathe. Make this part
