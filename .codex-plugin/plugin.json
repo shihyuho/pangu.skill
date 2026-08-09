@@ -9,7 +9,7 @@
   "license": "MIT",
   "skills": "./skills/",
   "interface": {
-    "displayName": "Pangu",
+    "displayName": "pangu",
     "logo": "./assets/image.png",
     "websiteURL": "https://github.com/shihyuho/pangu.skill",
     "shortDescription": "Paranoid text spacing (盤古之白) for CJK-mixed writing",

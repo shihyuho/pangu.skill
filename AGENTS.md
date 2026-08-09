@@ -3,6 +3,14 @@
 This repo packages paranoid text spacing (盤古之白) as an agent skill, so the
 skill's rules must stay faithful to pangu.js, and its own docs must not drift.
 
+## Keep the skill name canonical
+
+The SKILL frontmatter `name` is the source of truth for this repository's
+skill/plugin identity. Keep the first H1 and every agent-facing skill/plugin
+name or display field exactly equal to it. Marketplace-level identity and UI
+titles — and the `pangu.skill` product brand — stay independent. `npm run check`
+enforces this contract.
+
 ## The skill must match pangu.js
 
 `skills/pangu/SKILL.md` documents the spacing rules as `before → after`
