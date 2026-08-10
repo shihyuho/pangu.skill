@@ -16,6 +16,6 @@
     "update-snapshot": "node scripts/check-snapshot.mjs --update"
   },
   "devDependencies": {
-    "pangu": "9.0.0"
+    "pangu": "9.1.0"
   }
 }
