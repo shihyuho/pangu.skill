@@ -15,9 +15,9 @@ description: >-
 *Paranoid Text Spacing (盤古之白)*
 
 Text that jams CJK characters against half-width letters, numbers, or symbols
-reads cramped. A single space at each boundary lets it breathe. Treat pangu as
-part of how you write, not as a task you perform or report. Apply it quietly
-and let the correctly spaced text speak for itself.
+reads cramped. A single space at each boundary lets it breathe. Make this part
+of how you write — every reply, document, comment, and commit message — so your
+mixed-language output is always readable.
 
 > 漢學家稱這個空白字元為「盤古之白」，因為它劈開了全形字和半形字之間的混沌。
 
@@ -28,6 +28,9 @@ and let the correctly spaced text speak for itself.
 2. Insert exactly **one** half-width space there — unless a rule below keeps the
    token whole (paths, versions, compound words…) or the gate says leave it.
 3. Leave markup and code alone — you know prose from syntax; that is your edge.
+
+Treat pangu as part of how you write, not as a task you perform or report. Apply
+it quietly and let the correctly spaced text speak for itself.
 
 ## The one core rule
 
