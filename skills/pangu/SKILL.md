@@ -29,6 +29,9 @@ mixed-language output is always readable.
    token whole (paths, versions, compound words…) or the gate says leave it.
 3. Leave markup and code alone — you know prose from syntax; that is your edge.
 
+Treat pangu as part of how you write, not as a task you perform or report. Apply
+it quietly and let the correctly spaced text speak for itself.
+
 ## The one core rule
 
 > Put a single half-width space between a CJK character and an adjacent
