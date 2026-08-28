@@ -1,7 +1,7 @@
 ---
 name: pangu
 description: >-
-  Apply paranoid text spacing (盤古之白) to the text you write — put a single
+  Quietly apply paranoid text spacing to the text you write — put a single
   space wherever a CJK (Chinese / Japanese / Korean) character meets a half-width
   letter, digit, or symbol, so your mixed-language output reads cleanly. Do this
   in everything you write or edit (chat replies, docs, README, code comments,
