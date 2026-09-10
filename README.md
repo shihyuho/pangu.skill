@@ -21,7 +21,7 @@
   <a href="README.ko.md">한국어</a>
 </p>
 
-An agent skill / plugin for Claude Code, Codex, Cursor, Gemini CLI, and other AI coding agents. It applies paranoid text spacing (盤古之白) as the agent writes CJK-mixed replies, docs, comments, and commit messages.
+An agent skill / plugin for Claude Code, Codex, Antigravity, Cursor, Gemini CLI, and other AI coding agents. It applies paranoid text spacing (盤古之白) as the agent writes CJK-mixed replies, docs, comments, and commit messages.
 
 It spaces the prose created or edited for your task while preserving code, markup, URLs, paths, and exact quotations. Your requested format and editing scope take priority; existing text outside that scope stays as received.
 
@@ -61,7 +61,16 @@ codex plugin add pangu@pangu
 
 </details>
 
-Using Gemini CLI, Antigravity, Cursor, Windsurf, GitHub Copilot, Kiro, or OpenCode? The [full install guide](docs/install.md) covers them all.
+<details>
+<summary><strong>Antigravity</strong></summary>
+
+```bash
+agy plugin install https://github.com/shihyuho/pangu.skill.git
+```
+
+</details>
+
+Using Gemini CLI, Cursor, Windsurf, GitHub Copilot, Kiro, or OpenCode? The [full install guide](docs/install.md) covers them all.
 
 ## Related Projects
 

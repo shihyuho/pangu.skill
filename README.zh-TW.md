@@ -21,7 +21,7 @@
   <a href="README.ko.md">한국어</a>
 </p>
 
-適用於 Claude Code、Codex、Cursor、Gemini CLI 等 AI coding agent 的 skill / plugin。讓 agent 在撰寫 CJK 混排的回覆、文件、註解與 commit message 時，自動套用「盤古之白」。
+適用於 Claude Code、Codex、Antigravity、Cursor、Gemini CLI 等 AI coding agent 的 skill / plugin。讓 agent 在撰寫 CJK 混排的回覆、文件、註解與 commit message 時，自動套用「盤古之白」。
 
 只處理本次任務新增或修改的自然語言，保留程式碼、標記語法、URL、路徑與精確引文。使用者指定的格式和編輯範圍優先，範圍外的既有文字維持原樣。
 
@@ -61,7 +61,16 @@ codex plugin add pangu@pangu
 
 </details>
 
-用 Gemini CLI、Antigravity、Cursor、Windsurf、GitHub Copilot、Kiro 或 OpenCode？[完整安裝說明](docs/install.md)全都涵蓋。
+<details>
+<summary><strong>Antigravity</strong></summary>
+
+```bash
+agy plugin install https://github.com/shihyuho/pangu.skill.git
+```
+
+</details>
+
+用 Gemini CLI、Cursor、Windsurf、GitHub Copilot、Kiro 或 OpenCode？[完整安裝說明](docs/install.md)全都涵蓋。
 
 ## Related Projects
 

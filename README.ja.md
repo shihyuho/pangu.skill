@@ -21,7 +21,7 @@
   <a href="README.ko.md">한국어</a>
 </p>
 
-Claude Code、Codex、Cursor、Gemini CLI などの AI コーディングエージェント向けの skill / plugin です。CJK 混在の返信、ドキュメント、コメント、コミットメッセージを書く際に、paranoid text spacing（盤古之白）を自動で適用します。
+Claude Code、Codex、Antigravity、Cursor、Gemini CLI などの AI コーディングエージェント向けの skill / plugin です。CJK 混在の返信、ドキュメント、コメント、コミットメッセージを書く際に、paranoid text spacing（盤古之白）を自動で適用します。
 
 今回の依頼で新規作成・編集する自然言語を整え、コード、マークアップ、URL、パス、正確な引用は保持します。ユーザー指定の形式と編集範囲を優先し、範囲外の既存テキストはそのまま残します。
 
@@ -61,7 +61,16 @@ codex plugin add pangu@pangu
 
 </details>
 
-Gemini CLI、Antigravity、Cursor、Windsurf、GitHub Copilot、Kiro、OpenCode をお使いですか？[詳しいインストール手順](docs/install.md)ですべて解説しています。
+<details>
+<summary><strong>Antigravity</strong></summary>
+
+```bash
+agy plugin install https://github.com/shihyuho/pangu.skill.git
+```
+
+</details>
+
+Gemini CLI、Cursor、Windsurf、GitHub Copilot、Kiro、OpenCode をお使いですか？[詳しいインストール手順](docs/install.md)ですべて解説しています。
 
 ## Related Projects
 

@@ -28,6 +28,8 @@ Verify with `/skills list` that `pangu` is ready.
 
 ### Antigravity
 
+Install the `pangu` plugin directly from the repository URL:
+
 ```bash
 agy plugin install https://github.com/shihyuho/pangu.skill.git
 ```
