@@ -1,52 +1,73 @@
 # Upgrading pangu
 
-How to handle a Dependabot `pangu` bump PR. The check opens red on every bump —
-even a behavior-free patch — because Dependabot only edits `package.json` and
-the lockfile, while the version stamps still name the old version. That first
-red is mechanical, not a signal.
+A Dependabot `pangu` bump initially fails the version-stamp check: Dependabot
+updates `package.json` and the lockfile, while SKILL.md and the demo still name
+the old version. This is an intentional review gate, including on patch bumps.
+Repairing the stamps starts the behavior review; it does not complete it.
 
-Three guards pin this repo to the exact pangu it verifies, all run by `npm run
-check`:
+## What the checks cover
 
-- every SKILL.md `before → after` example matches the pinned pangu
-  (`scripts/check-skill.mjs`);
-- the version stamps match it — the stamp under SKILL.md's Quick reference
-  (`pangu **X.Y.Z**`) and the site's live-demo CDN pin in `site/index.html`;
-- pangu's text-level behavior matches `scripts/pangu-snapshot.jsonl` — ~900
-  generated probes (every printable ASCII character across the adjacency
-  contexts that decide spacing, plus curated multi-char patterns), so a
-  behavior change reds even where no curated example covers it
-  (`scripts/check-snapshot.mjs`).
+`npm run check` runs the script tests and canonical-name checks, then verifies:
+
+- every SKILL.md `before → after` example against the installed pangu;
+- the version in SKILL.md's verification footer (`pangu **X.Y.Z**`) and the
+  demo's CDN pin in `site/index.html` against the pinned dependency;
+- text behavior against `scripts/pangu-snapshot.jsonl`: printable ASCII across
+  adjacency contexts, plus curated multi-character patterns in
+  `scripts/check-snapshot.mjs`;
+- the authored prose fixtures in `evals/evals.json`, including protected text
+  and cases that declare pangu as their plain-text oracle.
+
+A green result covers those examples and probes. It does not prove that all
+upstream behavior is unchanged, that rule prose is accurate, or that a model
+follows the skill. DOM, CLI, and browser packaging also need separate review
+when the changelog identifies changes relevant to this repo.
 
 ## The flow
 
-1. `npm run fix-stamps` — rewrites both stamps to the pinned version.
-2. `npm run check` — now the result is the real signal:
-   - **green** means behavior-identical across examples and snapshot — safe to
-     merge at any semver level (pangu ships behavior changes outside majors —
-     6.1.0 revised the spacing algorithm — so trust the snapshot, not semver).
-   - **snapshot red** means pangu's behavior changed: reconcile SKILL.md — rule
-     wording AND examples for the changed characters (the check prints which
-     ones lack examples) — then `npm run update-snapshot` and rerun until
-     green. Never run `update-snapshot` to silence a red you haven't
-     reconciled into SKILL.md; and rule-prose diffs must pass human eyes,
-     because the check verifies examples, not prose, and agents build their
-     mental model from the prose.
-3. Skim the changelog for *added* rules the probes may not reach — pangu
-   publishes no GitHub Releases; the changelog is
-   [HISTORY.md](https://github.com/vinta/pangu.js/blob/master/HISTORY.md).
-   DOM-only changes never show in the snapshot. On a red or major bump, post
-   the bumped versions' HISTORY.md entries as a PR comment, each with a
-   one-line takeaway — the skim leaves a visible artifact a reviewer can
-   check happened.
+1. Install the bumped lockfile with `npm ci`. Run `npm run check` before
+   repairing anything and inspect the reported failures. Stale version stamps
+   are expected; record any example, snapshot, or fixture failures too. The
+   command stops at the first failing checker, so rerun after resolving it.
+2. Read every intervening release entry at the target version's upstream tag.
+   Current tags use `CHANGELOG.md`; older tags may use `HISTORY.md`. Use the
+   file from that tag rather than the default branch. Identify text-rule
+   changes, new pattern classes, and relevant non-text changes regardless of
+   the semver level or current check result.
+3. Run `npm run fix-stamps`, then `npm run check` again. The stamp command
+   updates only SKILL.md's footer and the demo CDN pin; it does not accept
+   behavior changes or rewrite the snapshot.
+4. Reconcile each text change with SKILL.md's wording **and** examples. Add
+   probes to `CURATED` when the changelog names a context the generated corpus
+   does not exercise. Inspect the installed version's outputs before accepting
+   them. For example, [9.1.1's changelog](https://github.com/vinta/pangu.js/blob/v9.1.1/CHANGELOG.md)
+   changed closing-bracket/operator/CJK and CJK/hyphen/digit sequences; the
+   original 882 probes stayed green, so this repo added those contexts.
+5. Once the rules and probe outputs have been reviewed, run
+   `npm run update-snapshot` if needed. Inspect the entire snapshot diff and
+   rerun `npm run check`. Keep unrelated probes intact. Have a reviewer read
+   the rule prose: the script verifies the examples, not the explanation an
+   agent will follow. Synchronize README and site wording if it is affected.
+6. Leave a reviewable record in the PR: old/new versions, the version-tagged
+   changelog, each relevant change and its disposition, the reconciled rules
+   and probes, and the final check result. Record relevant demo/CLI checks
+   separately. State whether model trials were run; fixture validation alone
+   is not model evidence. See [Prose evaluation](prose-evaluation.md) for the
+   scope fixtures and the Astra medium/high comparison protocol.
+
+Do not change an example to an output pangu does not produce, regenerate a
+snapshot simply to clear CI, or remove the stamp check to make bump PRs open
+green. If the library's new behavior conflicts with the intended prose
+contract, explain the conflict and resolve the upgrade decision first.
 
 ## Dependabot-branch hygiene
 
-A stamp-only fix may be pushed straight onto the Dependabot branch; anything
-touching SKILL.md belongs on your own branch / PR — Dependabot supersedes or
-recreates its branches and discards foreign commits (never comment
-`@dependabot recreate` on a PR carrying manual work). Merge reconciled bumps
-promptly: pangu's pattern is a patch/minor burst right after each major, and a
-superseding PR discards the branch.
+A stamp-only fix, including the SKILL.md footer, may be pushed directly onto
+the Dependabot branch. Changes to rule prose, examples, probes, or fixtures
+belong on your own branch and PR based on the bump. Link both PRs. When behavior
+needs reconciliation, land the bumped dependency and reviewed rule/probe
+changes together; the owned PR can carry both. Dependabot can supersede or
+recreate its branch, so keep substantive manual work on the owned branch.
+Avoid requesting `@dependabot recreate` on a PR carrying manual work.
 
-The READMEs' version badge reads `package.json` live and never needs a bump.
+The READMEs' version badge reads `package.json` live and needs no manual bump.

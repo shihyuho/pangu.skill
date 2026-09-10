@@ -1,6 +1,6 @@
 # Install
 
-pangu.skill ships as an agent skill / plugin. Agents with a package manager install it in one step; everything else just copies [`skills/pangu/SKILL.md`](../skills/pangu/SKILL.md) into the rules directory it reads.
+pangu.skill ships as an agent skill / plugin. It applies spacing to prose created or edited for your task, preserving literal content and your requested format and editing scope. All runtime rules are self-contained in [`skills/pangu/SKILL.md`](../skills/pangu/SKILL.md); no reference files or formatter installation are needed. Agents with a package manager install the plugin; other agents copy this single file into the rules directory they read.
 
 ## Package managers (one-step install)
 

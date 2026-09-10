@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "pangu",
-      "description": "Write CJK text with paranoid text spacing (盤古之白): insert a space between CJK characters and adjacent half-width letters, numbers, and symbols in any prose, docs, comments, or commit messages you generate.",
+      "description": "Apply pangu spacing to prose created or edited for your task, preserving code, exact text, and the requested editing scope.",
       "author": {
         "name": "Shihyu Ho",
         "url": "https://github.com/shihyuho"

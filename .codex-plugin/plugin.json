@@ -1,6 +1,6 @@
 {
   "name": "pangu",
-  "description": "Write CJK text with paranoid text spacing (盤古之白)",
+  "description": "Apply pangu spacing to prose created or edited for your task, preserving code, exact text, and the requested editing scope.",
   "author": {
     "name": "Shihyu Ho",
     "url": "https://github.com/shihyuho"
@@ -12,8 +12,8 @@
     "displayName": "pangu",
     "logo": "./assets/image.png",
     "websiteURL": "https://github.com/shihyuho/pangu.skill",
-    "shortDescription": "Paranoid text spacing (盤古之白) for CJK-mixed writing",
-    "longDescription": "Insert a space between CJK (Chinese / Japanese / Korean) characters and adjacent half-width letters, numbers, and symbols in any prose, documentation, comments, or commit messages the agent writes — mirroring pangu.js's spacingText() while preserving code, URLs, file paths, and compound identifiers.",
+    "shortDescription": "CJK prose spacing with code and exact text preserved",
+    "longDescription": "Apply pangu.js text rules as you write CJK-mixed replies, docs, comments, and commit messages. Space only the prose created or edited for the task, preserving code, markup, URLs, paths, and exact quotations. Follow the requested format and editing scope. All runtime rules are in one SKILL.md; Han, Japanese kana, and bopomofo are covered, while Hangul is unchanged.",
     "developerName": "Shihyu Ho",
     "category": "Productivity",
     "capabilities": ["Write"],

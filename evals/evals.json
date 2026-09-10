@@ -1,0 +1,180 @@
+{
+  "skill_name": "pangu",
+  "evals": [
+    {
+      "id": 1,
+      "category": "plain-prose",
+      "prompt": "只調整下列文字的混排空白，保留措辭與標點。",
+      "input": "用Python處理3個欄位，確認API回覆。",
+      "expected_output": "用 Python 處理 3 個欄位，確認 API 回覆。",
+      "preserve": [],
+      "oracle": "pangu",
+      "files": []
+    },
+    {
+      "id": 2,
+      "category": "markdown-link",
+      "prompt": "整理 Markdown 文字的混排空白。連結網址包含中文，請保留完整 destination。",
+      "input": "請看[API文件](https://example.com/中文API?q=中文API#用法)並修好bug。",
+      "expected_output": "請看 [API 文件](https://example.com/中文API?q=中文API#用法) 並修好 bug。",
+      "preserve": [
+        "https://example.com/中文API?q=中文API#用法"
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "category": "inline-code",
+      "prompt": "調整這段說明的混排空白，inline code 內容維持原樣。",
+      "input": "用`中文API()`呼叫SDK，保留`狀態=未啟用`原文。",
+      "expected_output": "用 `中文API()` 呼叫 SDK，保留 `狀態=未啟用` 原文。",
+      "preserve": [
+        "`中文API()`",
+        "`狀態=未啟用`"
+      ],
+      "files": []
+    },
+    {
+      "id": 4,
+      "category": "fenced-code",
+      "prompt": "調整 Markdown 說明的混排空白，保留程式區塊的每個字元與換行。",
+      "input": "使用API範例如下：\n\n```js\nconst msg = \"中文API\";\n// 原始註解API不改\n```\n\n確認2個欄位。\n",
+      "expected_output": "使用 API 範例如下：\n\n```js\nconst msg = \"中文API\";\n// 原始註解API不改\n```\n\n確認 2 個欄位。\n",
+      "preserve": [
+        "```js\nconst msg = \"中文API\";\n// 原始註解API不改\n```"
+      ],
+      "files": []
+    },
+    {
+      "id": 5,
+      "category": "verbatim-log",
+      "prompt": "整理說明的混排空白。第二行是要拿去搜尋的精確日誌，請原封不動保留，並維持目前格式。",
+      "input": "錯誤原文如下：\nError中文123\n請確認API設定。\n",
+      "expected_output": "錯誤原文如下：\nError中文123\n請確認 API 設定。\n",
+      "preserve": [
+        "Error中文123"
+      ],
+      "files": []
+    },
+    {
+      "id": 6,
+      "category": "cjk-paths",
+      "prompt": "補上說明的混排空白。src/中文API.ts 與 C:\\專案\\中文API.txt 是完整檔案路徑。",
+      "input": "檢查src/中文API.ts與C:\\專案\\中文API.txt是否存在。",
+      "expected_output": "檢查 src/中文API.ts 與 C:\\專案\\中文API.txt 是否存在。",
+      "preserve": [
+        "src/中文API.ts",
+        "C:\\專案\\中文API.txt"
+      ],
+      "files": []
+    },
+    {
+      "id": 7,
+      "category": "already-spaced",
+      "prompt": "檢查混排空白；已經正確的內容保持原樣。",
+      "input": "使用 API v1.2.3，確認 2 個欄位。\n",
+      "expected_output": "使用 API v1.2.3，確認 2 個欄位。\n",
+      "preserve": [
+        "使用 API v1.2.3，確認 2 個欄位。\n"
+      ],
+      "oracle": "pangu",
+      "files": []
+    },
+    {
+      "id": 8,
+      "category": "ascii-hangul",
+      "prompt": "只套用 pangu 的混排空白規則，保留其他排版。",
+      "input": "한국어test와API\nVinta/Mollie + A|B\nreally?yes 25%OFF\n",
+      "expected_output": "한국어test와API\nVinta/Mollie + A|B\nreally?yes 25%OFF\n",
+      "preserve": [
+        "한국어test와API\nVinta/Mollie + A|B\nreally?yes 25%OFF\n"
+      ],
+      "oracle": "pangu",
+      "files": []
+    },
+    {
+      "id": 9,
+      "category": "partial-edit",
+      "prompt": "只整理「本次修改」這一行的混排空白；輸出完整文件，其他行逐字保留。",
+      "input": "既有API文件\n\n本次修改：用Python處理3個欄位。\n\n範例路徑：src/中文API.ts\n",
+      "expected_output": "既有API文件\n\n本次修改：用 Python 處理 3 個欄位。\n\n範例路徑：src/中文API.ts\n",
+      "preserve": [
+        "既有API文件\n\n",
+        "範例路徑：src/中文API.ts\n"
+      ],
+      "files": []
+    },
+    {
+      "id": 10,
+      "category": "explicit-verbatim",
+      "prompt": "請逐字複製下列文字，保留所有空白與換行。",
+      "input": "中文API  2字元\n",
+      "expected_output": "中文API  2字元\n",
+      "preserve": [
+        "中文API  2字元\n"
+      ],
+      "files": []
+    },
+    {
+      "id": 11,
+      "category": "structured-output",
+      "prompt": "回傳下列 JSON 的原始內容，讓呼叫端能精確比對。",
+      "input": "{\"message\":\"中文API\",\"path\":\"src/中文API.ts\"}",
+      "expected_output": "{\"message\":\"中文API\",\"path\":\"src/中文API.ts\"}",
+      "preserve": [
+        "{\"message\":\"中文API\",\"path\":\"src/中文API.ts\"}"
+      ],
+      "files": []
+    },
+    {
+      "id": 12,
+      "category": "punctuation",
+      "prompt": "依 pangu 的文字規則整理混排，包含標點正規化。",
+      "input": "喬治·R·R·馬丁讀C#與R&D，記住:(東西)。",
+      "expected_output": "喬治・R・R・馬丁讀 C# 與 R&D，記住：(東西)。",
+      "preserve": [],
+      "oracle": "pangu",
+      "files": []
+    },
+    {
+      "id": 13,
+      "category": "kana-bopomofo",
+      "prompt": "套用 pangu 文字規則，保留日文與注音文字。",
+      "input": "あtestア，ㄅtestㄆ。",
+      "expected_output": "あ test ア，ㄅ test ㄆ。",
+      "preserve": [],
+      "oracle": "pangu",
+      "files": []
+    },
+    {
+      "id": 14,
+      "category": "source-comment",
+      "prompt": "這是原始碼檔的一行。只調整行尾註解的混排空白，程式碼本體及字串維持原樣。",
+      "input": "const msg = \"中文API\"; // 使用API查詢2次\n",
+      "expected_output": "const msg = \"中文API\"; // 使用 API 查詢 2 次\n",
+      "preserve": [
+        "const msg = \"中文API\"; // "
+      ],
+      "files": []
+    },
+    {
+      "id": 15,
+      "category": "markdown-emphasis",
+      "prompt": "調整 Markdown 文字的混排空白，保留粗體語法與標記的配對。",
+      "input": "請用**API工具**修好bug。",
+      "expected_output": "請用 **API 工具** 修好 bug。",
+      "preserve": ["**"],
+      "files": []
+    },
+    {
+      "id": 16,
+      "category": "operator-contexts",
+      "prompt": "依 pangu 的文字規則整理混排，保留原來的措辭。",
+      "input": "步驟(中文)-下一步，中文-123度。",
+      "expected_output": "步驟 (中文) - 下一步，中文 - 123 度。",
+      "preserve": [],
+      "oracle": "pangu",
+      "files": []
+    }
+  ]
+}

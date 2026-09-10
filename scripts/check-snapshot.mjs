@@ -7,10 +7,10 @@
 // plus a curated tail of multi-char patterns) pinned to the exact output of
 // the pinned pangu. On a bump, a diff here means pangu's text-level behavior
 // changed — whether or not any curated example happened to cover it, and
-// whatever the semver level claims. Red ⟺ behavior change.
+// whatever the semver level claims. Green covers only the tested corpus.
 //
 // Known blind spots: DOM-layer behavior (spacingElement and friends) and
-// contexts no probe exercises. Grow CURATED when pangu's HISTORY.md names a
+// contexts no probe exercises. Grow CURATED when pangu's changelog names a
 // pattern class the cross-product can't reach.
 //
 // Usage: node scripts/check-snapshot.mjs [--update]
@@ -64,6 +64,23 @@ const CURATED = [
   'ひらがな"test"カタカナ',
   "日本語の'quote'テスト",
   "한국어test",
+  // pangu 9.1.1: closing bracket + operator + CJK, and CJK + hyphen + digits.
+  // These multi-char contexts were absent from the original 882 probes.
+  "(中文)-下一步",
+  "[中文]-下一步",
+  "{中文}-下一步",
+  "(中文)*下一步",
+  "[中文]*下一步",
+  "{中文}*下一步",
+  "(中文)=下一步",
+  "[中文]=下一步",
+  "{中文}=下一步",
+  "(中文)&下一步",
+  "[中文]&下一步",
+  "{中文}&下一步",
+  "中文-123",
+  "中文-123度",
+  "氣溫 -5°C",
 ];
 
 // One probe set per printable ASCII character: every adjacency that decides
@@ -124,7 +141,7 @@ const changed = [...current].filter(([input, out]) => pinned.has(input) && pinne
 console.log(`snapshotted ${current.size} probes against pangu ${pangu.version}`);
 if (missing.length || stale.length) {
   console.error(
-    `✗ probe corpus drifted from the fixture (${missing.length} new, ${stale.length} gone) — run \`npm run update-snapshot\` and commit it.`,
+    `✗ probe corpus drifted from the fixture (${missing.length} new, ${stale.length} gone) — review the probe changes, then run \`npm run update-snapshot\` and commit it.`,
   );
 }
 if (changed.length) {

@@ -6,7 +6,7 @@
   "plugins": [
     {
       "name": "pangu",
-      "description": "Write CJK text with paranoid text spacing (盤古之白)",
+      "description": "Apply pangu spacing to prose created or edited for your task, preserving code, exact text, and the requested editing scope.",
       "source": {
         "source": "local",
         "path": "."

@@ -21,11 +21,11 @@
   <b>한국어</b>
 </p>
 
-AI 코딩 에이전트에 paranoid text spacing (盤古之白)을 더해 주는 agent skill / plugin입니다. Claude Code, Codex, Cursor, Gemini CLI를 비롯한 여러 AI 에이전트가 당신에게 보내는 답변, 문서, 주석, 커밋 메시지 등 어떤 글을 만들어 내든 CJK 문자와 인접한 반각 영문자, 숫자, 기호 사이에 자동으로 공백을 넣어 줍니다.
+Claude Code, Codex, Cursor, Gemini CLI 등 AI 코딩 에이전트를 위한 skill / plugin입니다. 에이전트가 CJK 혼합 답변, 문서, 주석, 커밋 메시지를 작성할 때 paranoid text spacing (盤古之白)을 자동으로 적용합니다.
 
-AI는 글은 잘 쓰지만, CJK와 라틴 문자 사이를 띄우는 것은 자꾸 잊어버립니다. 이 skill은 무엇을 띄우고 무엇을 그대로 둘지, 그 규칙을 AI에게 직접 가르쳐 줍니다. 덕분에 AI는 나중에 고치는 대신 입력하는 바로 그 순간에 제대로 씁니다.
+이번 작업에서 새로 쓰거나 수정하는 자연어만 정리하고 코드, 마크업, URL, 경로, 정확한 인용문은 보존합니다. 사용자가 지정한 형식과 편집 범위를 우선하며 범위 밖의 기존 텍스트는 그대로 둡니다.
 
-> **참고**: pangu는 한자(漢字)를 CJK 문자로 취급해 라틴 문자와의 경계에 공백을 넣지만, **한글에는 적용되지 않습니다**. 그래서 순수 한글 텍스트에는 거의 영향이 없고, 한자나 중국어, 일본어가 영문이나 숫자와 섞일 때 효과가 나타납니다.
+문자 규칙은 pangu.js를 따르며 한자, 일본어 가나, 주음을 대상으로 합니다. **한글은 변경하지 않습니다**. 실행에 필요한 모든 규칙은 하나의 `SKILL.md`에 들어 있습니다.
 
 ## See it in action
 
@@ -33,11 +33,11 @@ AI는 글은 잘 쓰지만, CJK와 라틴 문자 사이를 띄우는 것은 자�
 
 > 我用Claude Code寫了3個component，修好login的bug
 
-**pangu writes**
+**적용 후**
 
 > 我用 Claude Code 寫了 3 個 component，修好 login 的 bug
 
-더 많은 예시는 [라이브 데모](https://shihyuho.github.io/pangu.skill/)에서 확인하세요.
+[라이브 데모](https://shihyuho.github.io/pangu.skill/)는 pangu.js의 일반 텍스트 처리 결과를 보여 줍니다. 에이전트는 자연어의 범위를 판단하고, 데모는 라이브러리를 직접 적용합니다.
 
 ## Install
 
