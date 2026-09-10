@@ -11,9 +11,10 @@
     "url": "https://github.com/shihyuho/pangu.skill.git"
   },
   "scripts": {
-    "check": "node --test scripts/check-names.test.mjs && node scripts/check-names.mjs && node scripts/check-skill.mjs && node scripts/check-snapshot.mjs",
+    "check": "node --test scripts/*.test.mjs && node scripts/check-names.mjs && node scripts/check-skill.mjs && node scripts/check-snapshot.mjs && node scripts/check-prose-evals.mjs",
     "fix-stamps": "node scripts/check-skill.mjs --fix-stamps",
-    "update-snapshot": "node scripts/check-snapshot.mjs --update"
+    "update-snapshot": "node scripts/check-snapshot.mjs --update",
+    "grade:prose": "node scripts/check-prose-evals.mjs"
   },
   "devDependencies": {
     "pangu": "9.1.1"

@@ -21,9 +21,11 @@
   <a href="README.ko.md">한국어</a>
 </p>
 
-paranoid text spacing（盤古之白）を AI コーディングエージェントにもたらす agent skill / plugin です。Claude Code、Codex、Cursor、Gemini CLI をはじめとする AI エージェントが、生成するあなたへの返信・ドキュメント・コメント・コミットメッセージなどあらゆる出力で、CJK 文字と隣り合う半角の英字・数字・記号の間に自動でスペースを挿入します。
+Claude Code、Codex、Cursor、Gemini CLI などの AI コーディングエージェント向けの skill / plugin です。CJK 混在の返信、ドキュメント、コメント、コミットメッセージを書く際に、paranoid text spacing（盤古之白）を自動で適用します。
 
-AI は文章を書くのが得意ですが、CJK と Latin の間にスペースを入れることをつい忘れてしまいます。この skill は、どこにスペースを入れ、どこはそのままにしておくかというルールを直接 AI に教え込むので、後から直すのではなく、書いたその瞬間に正しく書けるようになります。
+今回の依頼で新規作成・編集する自然言語を整え、コード、マークアップ、URL、パス、正確な引用は保持します。ユーザー指定の形式と編集範囲を優先し、範囲外の既存テキストはそのまま残します。
+
+文字規則は pangu.js に従い、漢字、仮名、注音を対象とします。ハングルは変更しません。実行時に必要な規則は、一つの `SKILL.md` にすべて含まれています。
 
 ## See it in action
 
@@ -31,11 +33,11 @@ AI は文章を書くのが得意ですが、CJK と Latin の間にスペース
 
 > 我用Claude Code寫了3個component，修好login的bug
 
-**pangu writes**
+**適用後**
 
 > 我用 Claude Code 寫了 3 個 component，修好 login 的 bug
 
-その他の例は[ライブデモ](https://shihyuho.github.io/pangu.skill/)で。
+[ライブデモ](https://shihyuho.github.io/pangu.skill/) では pangu.js のプレーンテキスト処理を確認できます。エージェントは自然言語の範囲を判断しますが、デモはライブラリを直接適用します。
 
 ## Install
 

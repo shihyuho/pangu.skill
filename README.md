@@ -21,9 +21,11 @@
   <a href="README.ko.md">한국어</a>
 </p>
 
-An agent skill / plugin that brings paranoid text spacing (盤古之白) to AI coding agents. It makes your Claude Code, Codex, Cursor, Gemini CLI, and other AI agents automatically insert a space between CJK characters and adjacent half-width letters, numbers, and symbols in everything they write — the replies they send you, docs, comments, and commit messages alike.
+An agent skill / plugin for Claude Code, Codex, Cursor, Gemini CLI, and other AI coding agents. It applies paranoid text spacing (盤古之白) as the agent writes CJK-mixed replies, docs, comments, and commit messages.
 
-AI writes well, but it keeps forgetting to leave room between CJK and Latin. This skill teaches it the rules — what to space and what to leave alone — so it gets it right the moment it types, instead of fixing it afterward.
+It spaces the prose created or edited for your task while preserving code, markup, URLs, paths, and exact quotations. Your requested format and editing scope take priority; existing text outside that scope stays as received.
+
+The text rules follow pangu.js for Han ideographs, Japanese kana, and bopomofo; Hangul is unchanged. All runtime rules fit in one `SKILL.md`.
 
 ## See it in action
 
@@ -31,11 +33,11 @@ AI writes well, but it keeps forgetting to leave room between CJK and Latin. Thi
 
 > 我用Claude Code寫了3個component，修好login的bug
 
-**pangu writes**
+**With spacing**
 
 > 我用 Claude Code 寫了 3 個 component，修好 login 的 bug
 
-More examples in the [live demo](https://shihyuho.github.io/pangu.skill/).
+The [live demo](https://shihyuho.github.io/pangu.skill/) shows pangu.js on plain text. The agent handles prose boundaries; the demo applies the library directly.
 
 ## Install
 

@@ -47,6 +47,11 @@ lines.forEach((raw, idx) => {
   }
 });
 
+if (!cases.length) {
+  console.error(`${FILE}: no before/after examples found — check the example format before accepting the rules.`);
+  process.exit(1);
+}
+
 let failed = 0;
 for (const c of cases) {
   const actual = pangu.spacingText(c.before);

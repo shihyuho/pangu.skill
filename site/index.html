@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>pangu.skill — paranoid text spacing for AI agents</title>
-  <meta name="description" content="An agent skill that teaches Claude Code, Codex, Cursor and other AI coding agents to insert a space between CJK and Latin as they write. Rules mirror pangu.js." />
+  <meta name="description" content="Pangu spacing for CJK prose created or edited by AI agents, with code, exact text, and your editing scope preserved." />
   <meta property="og:title" content="pangu.skill" />
   <meta property="og:description" content="Paranoid text spacing (盤古之白) for AI coding agents." />
   <meta property="og:type" content="website" />
@@ -64,7 +64,7 @@
       <div class="wrap">
         <div class="hero-copy">
           <h1>為什麼 AI 就是不能加個<span class="q">空格</span>呢？</h1>
-          <p class="hero-sub">An agent skill that teaches Claude Code, Codex, Cursor and friends to space CJK and Latin as they type.</p>
+          <p class="hero-sub">Pangu spacing for the prose your AI agent writes, with code and exact text preserved.</p>
           <div class="hero-cta">
             <a class="btn btn-primary" href="#install">Get started</a>
             <a class="btn btn-ghost" href="https://github.com/shihyuho/pangu.skill">GitHub</a>
@@ -77,10 +77,10 @@
             <textarea class="demo-io" id="demo-in" rows="2" spellcheck="false" aria-label="Type mixed CJK and Latin text">我用Claude Code寫了3個component，修好login的bug</textarea>
           </div>
           <div class="demo-row">
-            <div class="demo-label is-out"><span class="dot"></span> pangu writes</div>
+            <div class="demo-label is-out"><span class="dot"></span> <span id="demo-mode">Plain-text demo</span></div>
             <div class="demo-out" id="demo-out" aria-live="polite"></div>
           </div>
-          <div class="demo-foot"><span class="pip"></span> highlight marks each space pangu inserts</div>
+          <div class="demo-foot"><span class="pip"></span> Library demo on plain text; highlighted spaces are additions.</div>
         </div>
       </div>
     </section>
@@ -90,8 +90,8 @@
       <div class="wrap">
         <div class="band-head reveal">
           <p class="eyebrow">How it works</p>
-          <h2>One space between CJK and half-width. Nothing where it does not belong.</h2>
-          <p>pangu adds a space wherever a Chinese or Japanese character — or a Han character used in Korean — meets a half-width letter, digit, or symbol, and leaves code, paths, and version strings whole.</p>
+          <h2>Space the prose. Preserve the exact text.</h2>
+          <p>The skill follows pangu.js text rules for Han ideographs, Japanese kana, and bopomofo; Hangul stays unchanged. It spaces prose created or edited for your task, preserving code, markup, URLs, paths, and exact quotations. Your requested format and editing scope take priority.</p>
         </div>
 
         <div class="rules reveal">
@@ -119,8 +119,8 @@
     <section class="band" id="install">
       <div class="wrap">
         <div class="band-head reveal">
-          <h2>Install once. Every reply, doc, and commit gets it right.</h2>
-          <p>Agents with a package manager install in one step. Everything else copies one Markdown file into the rules directory it reads.</p>
+          <h2>Install once. Keep spacing part of writing.</h2>
+          <p>The agent applies spacing as it writes replies, docs, comments, and commit messages. All runtime rules are in one Markdown file, ready for plugin installation or copying into your agent’s rules directory.</p>
         </div>
 
         <div class="tier reveal">

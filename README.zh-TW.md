@@ -21,9 +21,11 @@
   <a href="README.ko.md">한국어</a>
 </p>
 
-把「盤古之白」帶給 AI coding agent 的 agent skill / plugin。讓你的 Claude Code、Codex、Cursor、Gemini CLI 等 AI agent 在生成給你的回覆、文件、註解、commit message 或任何中英混排輸出時，自動在 CJK 與半形英文、數字、符號之間補上空白。
+適用於 Claude Code、Codex、Cursor、Gemini CLI 等 AI coding agent 的 skill / plugin。讓 agent 在撰寫 CJK 混排的回覆、文件、註解與 commit message 時，自動套用「盤古之白」。
 
-AI 很會寫，卻常忘記中英之間要留白。這個 skill 把該加、不該加的規則直接教給它，讓它在落筆當下就寫對，而不是事後再修。
+只處理本次任務新增或修改的自然語言，保留程式碼、標記語法、URL、路徑與精確引文。使用者指定的格式和編輯範圍優先，範圍外的既有文字維持原樣。
+
+文字規則依照 pangu.js，適用於漢字、日文假名與注音；Hangul 維持原樣。所有執行規則都包含在一份 `SKILL.md` 中。
 
 ## See it in action
 
@@ -31,11 +33,11 @@ AI 很會寫，卻常忘記中英之間要留白。這個 skill 把該加、不�
 
 > 我用Claude Code寫了3個component，修好login的bug
 
-**pangu writes**
+**套用空白後**
 
 > 我用 Claude Code 寫了 3 個 component，修好 login 的 bug
 
-更多範例看[線上示範](https://shihyuho.github.io/pangu.skill/)。
+[線上示範](https://shihyuho.github.io/pangu.skill/) 展示 pangu.js 的純文字處理結果。Agent 會判斷自然語言的範圍，示範則直接套用函式庫。
 
 ## Install
 

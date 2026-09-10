@@ -1,228 +1,134 @@
 ---
 name: pangu
 description: >-
-  Quietly apply paranoid text spacing to the text you write — put a single
-  space wherever a CJK (Chinese / Japanese / Korean) character meets a half-width
-  letter, digit, or symbol, so your mixed-language output reads cleanly. Do this
-  in everything you write or edit (chat replies, docs, README, code comments,
-  commit messages), even when the user does not ask; and do it when the user asks
-  to add spacing or mentions pangu, 盤古之白, or 加空格. Leave code, URLs, file
-  paths, version strings, and compound identifiers unsplit.
+  Quietly apply pangu spacing whenever you write or edit CJK-mixed prose,
+  including replies, docs, code comments, and commit messages, even without
+  a spacing request. Also use when asked for pangu, 盤古之白, or spacing fixes.
+  Preserve code, exact quotes, syntax, and token interiors.
 ---
 
 # pangu
 
 *Paranoid Text Spacing (盤古之白)*
 
-Text that jams CJK characters against half-width letters, numbers, or symbols
-reads cramped. A single space at each boundary lets it breathe. Make this part
-of how you write — every reply, document, comment, and commit message — so your
-mixed-language output is always readable.
+## Scope first
 
-> 漢學家稱這個空白字元為「盤古之白」，因為它劈開了全形字和半形字之間的混沌。
+1. Follow the user's requested format and editing scope. Space the prose you
+   create or modify for the task; format an entire document when that is the
+   requested task. Keep unrelated text as received.
+2. Preserve literal content byte-for-byte: code, inline code, fenced or indented
+   code blocks, exact quotations, command output, and logs, even outside code
+   spans. Change a literal only when the user's task explicitly calls for it.
+3. Apply spacing to natural-language wording, including headings, link labels,
+   and code comments. Preserve Markdown markers, link destinations, and other
+   structural syntax, plus the interiors of URLs, paths, email addresses,
+   versions, and compound identifiers. A Chinese character inside a token is
+   still part of that token.
+4. Deliver the requested work with spacing already applied.
 
-## How to apply
+For example, space a Markdown link's visible label while keeping its URL
+exact. When quoting a log for searching, preserve the log and space only your
+own explanation. These boundaries take precedence over the text rules below.
 
-1. Scan what you write for each boundary where a **CJK** character meets a
-   **half-width** letter / digit / symbol (either order).
-2. Insert exactly **one** half-width space there — unless a rule below keeps the
-   token whole (paths, versions, compound words…) or the gate says leave it.
-3. Leave markup and code alone — you know prose from syntax; that is your edge.
+## Text rules
 
-Treat pangu as part of how you write, not as a task you perform or report. Apply
-it quietly and let the correctly spaced text speak for itself.
-
-## The one core rule
-
-> Put a single half-width space between a CJK character and an adjacent
-> half-width alphabet / number / symbol.
-
-```
-當你凝視著bug，bug也凝視著你   →   當你凝視著 bug，bug 也凝視著你
-與PM戰鬥的人                    →   與 PM 戰鬥的人
-這是2025年的事                  →   這是 2025 年的事
-```
-
-CJK = Chinese characters, Japanese kana, and bopomofo, plus the Han ideographs
-used in Korean — but **not** Korean Hangul 諺文 (`한국어test` stays `한국어test`,
-since pangu does not treat 한글 as CJK). Half-width =
-`A-Za-z`, `0-9`, ASCII symbols. **Full-width** CJK punctuation (`，。！？「」`)
-needs **no** surrounding space — note `…著 bug，bug 也…` has no space around `，`.
-
-## When NOT to add a space
-
-- **No CJK in the run of text** → leave it 100% unchanged: `Vinta/Mollie`,
-  `Vinta+Mollie`, `state-of-the-art`, `\n`, `25%OFF` stay as-is. Spacing happens
-  only where CJK actually meets a half-width character — so pure code or English
-  is never mangled.
-- **Already correctly spaced** → never add a second space, never reflow.
-- Use a **single half-width space**, never a full-width one.
-
-## Symbol rules
-
-### Operators — space CJK boundaries, not a half-width word
-
-`+  -  *  =  ^  <  >  \` space off adjacent CJK, but do **not** split a
-half-width word such as `A-B` or `A*B`. (`/` and `&` are special — they glue
-two half-width characters; see below.)
+Insert one half-width space where CJK meets half-width letters or numbers;
+use the symbol rules below for punctuation and operators. CJK includes Han
+ideographs, Japanese kana, and bopomofo, including Han used in Korean.
+Hangul is outside this definition: `한국어test` stays unchanged.
+Full-width punctuation (`，。！？「」`) needs no surrounding space.
+For spacing, leave runs without CJK and already-correct whitespace unchanged.
 
 ```
-前面+後面             →   前面 + 後面
-得到一個A-B的結果     →   得到一個 A-B 的結果
-得到一個A*B的結果     →   得到一個 A*B 的結果
-比較A<B和A>B的結果    →   比較 A<B 和 A>B 的結果
-比較A=B與A^B的結果    →   比較 A=B 與 A^B 的結果
-前面\後面             →   前面 \ 後面
-前面~=後面            →   前面 ~= 後面
+當你凝視著bug，bug也凝視著你 → 當你凝視著 bug，bug 也凝視著你
+與PM戰鬥的人 → 與 PM 戰鬥的人
+這是2025年的事 → 這是 2025 年的事
 ```
 
-### Underscore — never spaced
+### Operators and separators
 
-`_` is always a separator — never add spaces, in any context.
-
-```
-前_後            →   前_後
-Mollie_陳上進     →   Mollie_陳上進
-```
-
-### Pipe — a line separator when it touches CJK
-
-When a `|` directly touches CJK, pangu treats every `|` on that line as a
-separator and spaces it on both sides. A pipe between half-width characters
-stays glued, even if the line contains CJK elsewhere.
+- `+ - * = ^ < > \`: space CJK boundaries, keeping half-width words whole.
+  Before CJK, also separate `- * = &` from a preceding `) ] }`. A hyphen
+  directly between CJK and digits is a separator; an already-spaced negative
+  number stays attached to its sign.
+- `_`: keep attached in every context.
+- `|`: if one pipe touches CJK, space every pipe on that line; otherwise
+  preserve half-width `A|B`.
+- Single `/` and `&`: keep half-width joiners (`A/B`, `R&D`) whole; space
+  them when CJK is adjacent. Two or more slashes keep their path structure.
 
 ```
-前|A|B           →   前 | A | B
-前 A|B 後        →   前 A|B 後
+前面+後面 → 前面 + 後面
+得到一個A-B的結果 → 得到一個 A-B 的結果
+得到一個A*B的結果 → 得到一個 A*B 的結果
+比較A<B和A>B的結果 → 比較 A<B 和 A>B 的結果
+比較A=B與A^B的結果 → 比較 A=B 與 A^B 的結果
+前面\後面 → 前面 \ 後面
+前面~=後面 → 前面 ~= 後面
+(中文)-下一步 → (中文) - 下一步
+[中文]*下一步 → [中文] * 下一步
+{中文}=下一步 → {中文} = 下一步
+(中文)&下一步 → (中文) & 下一步
+中文-123度 → 中文 - 123 度
+氣溫 -5°C → 氣溫 -5°C
+前_後 → 前_後
+Mollie_陳上進 → Mollie_陳上進
+前|A|B → 前 | A | B
+前 A|B 後 → 前 A|B 後
+得到一個A/B的結果 → 得到一個 A/B 的結果
+前面/後面 → 前面 / 後面
+陳上進/貓咪/Mollie → 陳上進/貓咪/Mollie
+得到一個R&D的部門 → 得到一個 R&D 的部門
+陳上進&Mollie → 陳上進 & Mollie
 ```
 
-### Slash & ampersand — a joiner between half-width, an operator next to CJK
+### Punctuation, quotes, and attached tokens
 
-A single `/` or `&` **glues** two half-width characters into one token (`A/B`,
-`R&D`) — no space inside; the whole token then spaces off any adjacent CJK. It
-only reads as a spaced operator when a **CJK** character sits on at least one
-side. Two or more slashes are a path and keep their structure.
-
-```
-得到一個A/B的結果     →   得到一個 A/B 的結果      (half-width both sides: glued)
-前面/後面            →   前面 / 後面             (CJK on a side: operator)
-陳上進/貓咪/Mollie   →   陳上進/貓咪/Mollie       (2+ slashes: a path, untouched)
-得到一個R&D的部門     →   得到一個 R&D 的部門      (`&` glues half-width the same way)
-陳上進&Mollie        →   陳上進 & Mollie          (CJK on a side: operator too)
-```
-
-### Punctuation — right space, kept half-width (one colon exception)
-
-`. , : ; ! ? ~` take a space **after** them when the next character is a CJK,
-letter, or digit — but, as everywhere, only when the line has CJK somewhere; a
-run with no CJK is never touched (`really?yes` stays `really?yes`). No left
-space, not at the end of the text, and not inside file extensions or version
-numbers.
-
-These marks stay half-width, with **one exception**: a half-width `:` pressed
-directly against a bracket is the single spot pangu makes full-width —
-`記住:(東西)` → `記住：(東西)`.
+- On a line containing CJK, `. , : ; ! ? ~` take a space after them when
+  followed by CJK, a letter, or a digit. Preserve their half-width form,
+  file extensions, and version numbers. The colon touching a bracket in
+  `記住:(東西)` is an exception: it becomes full-width.
+- `"`, `'`, backticks, and `( ) [ ] { } < >`: space outside against CJK,
+  keeping the inside edges tight. Possessive `'s` stays attached.
+- Keep `@user`, `#tag`, `C#`, `$100`, and `95%` together.
+- Middle dots `· • ‧` between names become `・` with no surrounding spaces.
 
 ```
-前面,後面     →   前面, 後面
-電話:123456789 →   電話: 123456789
-前面?後面     →   前面? 後面
-前面…後面     →   前面… 後面        (ellipsis keeps its dots, space after)
+前面,後面 → 前面, 後面
+電話:123456789 → 電話: 123456789
+前面?後面 → 前面? 後面
+前面…後面 → 前面… 後面
+記住:(東西) → 記住：(東西)
+前面(中文123漢字)後面 → 前面 (中文 123 漢字) 後面
+前面"中文123漢字"後面 → 前面 "中文 123 漢字" 後面
+我看过的电影(1404) → 我看过的电影 (1404)
+function(123) → function(123)
+陳上進 likes 林依諾's status. → 陳上進 likes 林依諾's status.
+請@vinta吃大便 → 請 @vinta 吃大便
+前面#H2G2後面 → 前面 #H2G2 後面
+前面C#後面 → 前面 C# 後面
+前面$100後面 → 前面 $100 後面
+新八的構造成分有95%是眼鏡 → 新八的構造成分有 95% 是眼鏡
+喬治·R·R·馬丁 → 喬治・R・R・馬丁
 ```
 
-### `@` `#` `$` `%` — the attached token stays one unit
+### Whole tokens
+
+Space between a token and surrounding prose, preserving its interior.
 
 ```
-請@vinta吃大便   →   請 @vinta 吃大便     (@username is one unit)
-前面#H2G2後面    →   前面 #H2G2 後面      (#tag is one unit)
-前面C#後面       →   前面 C# 後面         (C# = one unit, spaced from CJK)
-前面$100後面     →   前面 $100 後面       ($100 = one unit)
-新八的構造成分有95%是眼鏡 → 新八的構造成分有 95% 是眼鏡   (95% = one unit)
+OpenAI的gpt-4o模型 → OpenAI 的 gpt-4o 模型
+Anthropic的claude-4-opus模型 → Anthropic 的 claude-4-opus 模型
+OpenAI的GPT-5模型 → OpenAI 的 GPT-5 模型
+state-of-the-art → state-of-the-art
+pangu.js v1.2.3橫空出世 → pangu.js v1.2.3 橫空出世
+這是C++跟C#的差別 → 這是 C++ 跟 C# 的差別
+得到一個A+的結果 → 得到一個 A+ 的結果
+檢查src/main.py文件 → 檢查 src/main.py 文件
+在/home目錄 → 在 /home 目錄
+檔案在C:\Users\name\ → 檔案在 C:\Users\name\
+請看https://example.com/path頁面 → 請看 https://example.com/path 頁面
 ```
 
-### Quotes & brackets — space outside, never just-inside
-
-For `"`  `` ` ``  `'`  `( )`  `[ ]`  `{ }`  `< >`: space between CJK and the
-bracket / quote, but **no** space right after an opening or right before a
-closing bracket.
-
-```
-前面(中文123漢字)後面   →   前面 (中文 123 漢字) 後面
-前面"中文123漢字"後面   →   前面 "中文 123 漢字" 後面
-我看过的电影(1404)      →   我看过的电影 (1404)
-function(123)          →   function(123)        (identifier+(: no space)
-陳上進 likes 林依諾's status. → 陳上進 likes 林依諾's status.  (possessive 's attaches)
-```
-
-### Middle dot — normalized, not spaced
-
-`·` `•` `‧` between names become a full-width `・` with **no** surrounding space.
-
-```
-喬治·R·R·馬丁   →   喬治・R・R・馬丁
-```
-
-## Keep these units whole (do **not** split internally)
-
-Space the boundary between CJK and the token, but never insert a space *inside*
-the token.
-
-| Kind | Example in | Example out |
-|------|-----------|-------------|
-| Compound words / product names | `OpenAI的gpt-4o模型` | `OpenAI 的 gpt-4o 模型` |
-| Model / version with hyphen | `Anthropic的claude-4-opus模型` | `Anthropic 的 claude-4-opus 模型` |
-| Letter+number names | `OpenAI的GPT-5模型` | `OpenAI 的 GPT-5 模型` |
-| Hyphen phrases | `state-of-the-art` | `state-of-the-art` |
-| Version numbers | `pangu.js v1.2.3橫空出世` | `pangu.js v1.2.3 橫空出世` |
-| Programming terms | `這是C++跟C#的差別` | `這是 C++ 跟 C# 的差別` |
-| Single-letter grades | `得到一個A+的結果` | `得到一個 A+ 的結果` |
-| Unix paths | `檢查src/main.py文件` | `檢查 src/main.py 文件` |
-| Unix absolute paths | `在/home目錄` | `在 /home 目錄` |
-| Windows paths | `檔案在C:\Users\name\` | `檔案在 C:\Users\name\` |
-| URLs | `請看https://example.com/path頁面` | `請看 https://example.com/path 頁面` |
-| Escape seq. / pure ASCII | `\n`, `Vinta-Mollie` | unchanged |
-
-Rule of thumb: hyphenated identifiers, file paths, URLs, version strings, and
-programming tokens are **units** — push them away from neighbouring CJK, never
-split them down the middle.
-
-## Scope — write spacing into prose, not into code or markup
-
-Apply the spacing to the natural-language text you produce — paragraphs, heading
-wording, comment text, commit-message bodies, chat replies. Leave the rest exactly
-as it is:
-
-- Inside fenced / indented **code blocks** and inline code spans (`` `...` ``).
-- **Verbatim command output, logs, or any string you quote for exact matching** —
-  leave it byte-for-byte even when it is *not* wrapped in code, because adding a
-  space misreports what was actually printed and breaks copy-paste / search.
-  Prefer wrapping such quotes in code; if they land in prose, still don't touch
-  them.
-- Inside **URLs, file paths, email addresses, version strings**, and compound
-  identifiers.
-- In **structural syntax**. When writing Markdown, space the *wording* but not
-  the markers — write `## 標題 Heading`, never `##標題Heading`, and never put a
-  space inside the `##` marker. Don't blanket-space a whole Markdown or code
-  file; space the prose within it.
-
-This is why the judgment is yours and not a blind find-and-replace: you can tell
-the sentence from the syntax around it.
-
-## Quick reference
-
-| Between CJK and… | Space? |
-|---|---|
-| letter / number | yes |
-| operator `+ - * = ^ < > \` | space CJK boundaries; keep a half-width word whole |
-| single `/` or `&` | glued between half-width (`A/B`, `R&D`); spaced only if CJK adjacent |
-| underscore `_`, or 2+ `/` (a path) | no |
-| pipe `\|` | space every pipe on its line if one directly touches CJK; otherwise keep half-width `A|B` glued |
-| `. , : ; ! ? ~` | space **after** (right) only |
-| opening / closing bracket or quote | yes outside, no just-inside |
-| `@user` `#tag` `$100` `95%` `C++` `GPT-5` `v1.2.3` path / URL | space the boundary, keep the token whole |
-| full-width punctuation `，。！？` | no |
-| a run of text with no CJK at all | leave entirely unchanged |
-
----
-
-_Rules verified against pangu **9.1.1**._
+_Text-rule examples verified against pangu **9.1.1**; prose scope requires the
+judgment described above._

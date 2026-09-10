@@ -20,6 +20,7 @@
   /* ---------- live spacing demo ---------- */
   var input = document.getElementById("demo-in");
   var output = document.getElementById("demo-out");
+  var mode = document.getElementById("demo-mode");
 
   function escapeHtml(s) {
     return s.replace(/[&<>]/g, function (c) {
@@ -38,21 +39,27 @@
 
   function space(s) {
     if (window.pangu && typeof window.pangu.spacingText === "function") {
-      try { return window.pangu.spacingText(s); } catch (e) {}
+      try {
+        var result = window.pangu.spacingText(s);
+        if (mode) mode.textContent = "pangu.js · v" + window.pangu.version;
+        return result;
+      } catch (e) {}
     }
+    if (mode) mode.textContent = "Approximate fallback";
     return fallbackSpace(s);
   }
 
-  // pangu only inserts spaces, so align spaced against raw and mark the inserts.
+  // Highlight pure space insertions. Punctuation replacement or whitespace
+  // removal breaks this alignment; show the exact output without highlights.
   function highlight(raw, spaced) {
     var out = "", i = 0;
     for (var j = 0; j < spaced.length; j++) {
       var c = spaced[j];
       if (i < raw.length && c === raw[i]) { out += escapeHtml(c); i++; }
       else if (c === " ") { out += '<span class="sp"> </span>'; }
-      else { out += escapeHtml(c); }
+      else { return escapeHtml(spaced); }
     }
-    return out;
+    return i === raw.length ? out : escapeHtml(spaced);
   }
 
   function render() {

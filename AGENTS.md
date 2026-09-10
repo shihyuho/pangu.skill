@@ -28,7 +28,8 @@ devDependency (the scripts under `scripts/` document their own mechanics).
 ## Upgrading pangu
 
 Handling a `pangu` bump PR (Dependabot; the check opens red on every bump)?
-That first red is mechanical until the version stamps are fixed — follow
+That first red is an intentional review gate, initially triggered by the
+version stamps. Fixing the stamps starts the behavior review — follow
 [docs/upgrading-pangu.md](docs/upgrading-pangu.md).
 
 ## Writing CJK-mixed prose here
