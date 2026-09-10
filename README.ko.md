@@ -21,7 +21,7 @@
   <b>한국어</b>
 </p>
 
-Claude Code, Codex, Cursor, Gemini CLI 등 AI 코딩 에이전트를 위한 skill / plugin입니다. 에이전트가 CJK 혼합 답변, 문서, 주석, 커밋 메시지를 작성할 때 paranoid text spacing (盤古之白)을 자동으로 적용합니다.
+Claude Code, Codex, Antigravity, Cursor, Gemini CLI 등 AI 코딩 에이전트를 위한 skill / plugin입니다. 에이전트가 CJK 혼합 답변, 문서, 주석, 커밋 메시지를 작성할 때 paranoid text spacing (盤古之白)을 자동으로 적용합니다.
 
 이번 작업에서 새로 쓰거나 수정하는 자연어만 정리하고 코드, 마크업, URL, 경로, 정확한 인용문은 보존합니다. 사용자가 지정한 형식과 편집 범위를 우선하며 범위 밖의 기존 텍스트는 그대로 둡니다.
 
@@ -61,7 +61,16 @@ codex plugin add pangu@pangu
 
 </details>
 
-Gemini CLI, Antigravity, Cursor, Windsurf, GitHub Copilot, Kiro, OpenCode를 쓰시나요? [전체 설치 가이드](docs/install.md)에서 모두 다룹니다.
+<details>
+<summary><strong>Antigravity</strong></summary>
+
+```bash
+agy plugin install https://github.com/shihyuho/pangu.skill.git
+```
+
+</details>
+
+Gemini CLI, Cursor, Windsurf, GitHub Copilot, Kiro, OpenCode를 쓰시나요? [전체 설치 가이드](docs/install.md)에서 모두 다룹니다.
 
 ## Related Projects
 

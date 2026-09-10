@@ -31,6 +31,7 @@ description: Test fixture
     name: "pangu",
     interface: { displayName: "pangu" },
   }));
+  write(root, "plugin.json", JSON.stringify({ name: "pangu" }));
   write(root, ".agents/plugins/marketplace.json", JSON.stringify({
     name: "catalog-name",
     interface: { displayName: "Catalog Name" },
@@ -54,6 +55,7 @@ function rewriteContractName(root, name) {
     "skills/pangu/SKILL.md",
     "skills/pangu/agents/openai.yaml",
     ".codex-plugin/plugin.json",
+    "plugin.json",
     ".agents/plugins/marketplace.json",
     ".claude-plugin/marketplace.json",
   ];
@@ -77,6 +79,26 @@ test("valid canonical skill and plugin names pass", (t) => {
 
   assert.equal(result.status, 0, result.stderr);
   assert.match(result.stdout, /name contract: pangu/);
+});
+
+test("Antigravity plugin names must match the canonical name", (t) => {
+  const root = validFixture(t);
+  write(root, "plugin.json", JSON.stringify({ name: "Pangu" }));
+
+  const result = runChecker(root);
+
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /plugin\.json name: expected "pangu", got "Pangu"/);
+});
+
+test("Antigravity plugin names are required", (t) => {
+  const root = validFixture(t);
+  write(root, "plugin.json", JSON.stringify({}));
+
+  const result = runChecker(root);
+
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /plugin\.json name: missing required field/);
 });
 
 test("case differences fail with the source field and expected value", (t) => {

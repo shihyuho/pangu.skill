@@ -98,6 +98,7 @@ const openaiName = mappingScalar(
   "skills/pangu/agents/openai.yaml interface.display_name",
 );
 const codexPlugin = JSON.parse(fs.readFileSync(path.join(root, ".codex-plugin/plugin.json"), "utf8"));
+const antigravityPlugin = JSON.parse(fs.readFileSync(path.join(root, "plugin.json"), "utf8"));
 const agentsMarketplace = JSON.parse(
   fs.readFileSync(path.join(root, ".agents/plugins/marketplace.json"), "utf8"),
 );
@@ -119,6 +120,7 @@ agentsMarketplace.plugins.forEach((plugin, index) => {
 });
 
 const surfaces = [
+  ["plugin.json name", requiredString(antigravityPlugin.name, "plugin.json name")],
   ["skills/pangu/SKILL.md first H1", firstH1],
   ["skills/pangu/agents/openai.yaml interface.display_name", openaiName],
   [".codex-plugin/plugin.json name", codexPluginName],
