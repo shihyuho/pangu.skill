@@ -233,6 +233,55 @@
         "符號★測試"
       ],
       "files": []
+    },
+    {
+      "id": 22,
+      "category": "v10-slashes-and-paths",
+      "prompt": "依 pangu 的文字規則整理混排，保留原有空白與措辭。",
+      "input": "前面/後面，前面 / 後面，檢查/src/index.ts檔案。",
+      "expected_output": "前面/後面，前面 / 後面，檢查 /src/index.ts 檔案。",
+      "preserve": ["前面/後面", "前面 / 後面", "/src/index.ts"],
+      "oracle": "pangu",
+      "files": []
+    },
+    {
+      "id": 23,
+      "category": "v10-bare-url",
+      "prompt": "依 pangu 的文字規則整理混排。保留完整網址，含網址右側緊接的中文字。",
+      "input": "請看https://example.com/path頁面，參考https://example.com/中文API?q=中文#用法。",
+      "expected_output": "請看 https://example.com/path頁面，參考 https://example.com/中文API?q=中文#用法。",
+      "preserve": ["https://example.com/path頁面", "https://example.com/中文API?q=中文#用法"],
+      "oracle": "pangu",
+      "files": []
+    },
+    {
+      "id": 24,
+      "category": "v10-plus-contexts",
+      "prompt": "依 pangu 的文字規則整理混排，維持三行格式。",
+      "input": "前+A+B，Switch+健身環。\n前 A+B 後，Disney+的節目，有100+的選擇。\n前+A+「方案」，(中文)+「方案」。",
+      "expected_output": "前 + A + B，Switch + 健身環。\n前 A + B 後，Disney+ 的節目，有 100+ 的選擇。\n前 + A+「方案」，(中文) +「方案」。",
+      "preserve": ["Disney+", "100+"],
+      "oracle": "pangu",
+      "files": []
+    },
+    {
+      "id": 25,
+      "category": "v10-superscripts-and-symbols",
+      "prompt": "依 pangu 的文字規則整理混排，保留所有符號。",
+      "input": "商標™產品，品牌®商品，中文⁺註記，面積m²大小，溫度℃變化，編號№123項，©2026版權。",
+      "expected_output": "商標™ 產品，品牌® 商品，中文⁺ 註記，面積 m² 大小，溫度 ℃ 變化，編號 №123 項，© 2026 版權。",
+      "preserve": ["商標™", "品牌®", "中文⁺", "m²", "№123"],
+      "oracle": "pangu",
+      "files": []
+    },
+    {
+      "id": 26,
+      "category": "v10-protected-prose-boundaries",
+      "prompt": "整理 Markdown 說明的混排空白。Inline code、連結網址與「精確引文」那一行逐字保留，維持原有格式。",
+      "input": "比較Switch+健身環與`Switch+健身環`，商標™產品。\n請看[API文件](https://example.com/中文API?q=中文#用法)並確認2項。\n精確引文：前面/後面與©2026版權",
+      "expected_output": "比較 Switch + 健身環與 `Switch+健身環`，商標™ 產品。\n請看 [API 文件](https://example.com/中文API?q=中文#用法) 並確認 2 項。\n精確引文：前面/後面與©2026版權",
+      "preserve": ["`Switch+健身環`", "https://example.com/中文API?q=中文#用法", "精確引文：前面/後面與©2026版權"],
+      "files": []
     }
   ]
 }

@@ -7,7 +7,7 @@ and logs, paths containing CJK, partial edits, explicit verbatim output,
 structured output, and the scripts and punctuation pangu handles.
 
 Only fixtures marked `"oracle": "pangu"` compare their whole input with
-`pangu.spacingText()`. The others specify the agent's editing boundaries:
+`pangu.spaceText()`. The others specify the agent's editing boundaries:
 their expected outputs preserve literal text and syntax that a raw string
 formatter can alter. Review those expectations as part of the prose contract.
 The `preserve` list identifies exact substrings that must remain unchanged;
@@ -50,8 +50,9 @@ Until measured, the same skill remains applicable at both effort levels.
 Cases 17–21 cover the Issue #24 list conversion, characters absent from the
 skill's examples, and Unicode inside inline code, fenced code, and an exact
 quotation. The list tasks ask only for Markdown conversion, exercising the
-skill alongside an ordinary formatting task. Their expected list contents match pangu 9.1.1;
-the literal-preservation cases follow the prose contract.
+skill alongside an ordinary formatting task. Their expected list contents
+were verified against pangu 9.1.1; the literal-preservation cases follow the
+prose contract.
 
 For this change, run the previous and revised skills with `gpt-6-sol` at
 `high` effort. Use a fresh context for every case, skill version, and trial,
@@ -67,6 +68,13 @@ model/effort, skill and fixture hashes, and per-run verdicts. These are loaded-s
 regression trials, not evidence about automatic skill selection or other models.
 
 ## During an upstream upgrade
+
+Cases 22–26 cover pangu v10 slash/path boundaries, uninterrupted HTTP URLs,
+per-line plus separators and attached suffixes, superscripts and Letterlike
+Symbols, and these rules alongside protected code, link destinations, and an
+exact quotation. Plain-text cases use the pinned library as their oracle;
+the Markdown case retains the agent's prose boundaries. These fixtures are
+separate from the historical Issue #24 model results above.
 
 Follow [Upgrading pangu](upgrading-pangu.md) first. Inspect failures in fixtures
 with a pangu oracle alongside the examples and snapshot. Review other fixtures

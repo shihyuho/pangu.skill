@@ -9,7 +9,7 @@
 // changed — whether or not any curated example happened to cover it, and
 // whatever the semver level claims. Green covers only the tested corpus.
 //
-// Known blind spots: DOM-layer behavior (spacingElement and friends) and
+// Known blind spots: DOM-layer behavior (spaceNode and friends) and
 // contexts no probe exercises. Grow CURATED when pangu's changelog names a
 // pattern class the cross-product can't reach.
 //
@@ -98,6 +98,50 @@ const CURATED = [
   "前e\u0301後",
   "前é\u0301後",
   "前✓\ufe0f後",
+  // pangu 10: joined slashes, protected URLs, per-line plus separators,
+  // attached superscripts, Letterlike Symbols, and copyright + digits.
+  "前面/後面",
+  "前面 / 後面",
+  "中文/src/index.ts檔案",
+  "目錄/usr/bin/包含執行檔",
+  "參考https://example.com/中文API?q=中文#用法，謝謝",
+  "參考http://example.com/中文API?q=中文#用法，謝謝",
+  "https://example.com/中文API?q=中文#用法",
+  "請看https://example.com/path 頁面",
+  '請看https://example.com/path(中文)，再看API',
+  '前<a href="https://example.com/中文API">中文API</a>後',
+  "Switch+健身環",
+  "前+A+B",
+  "前 A+B 後",
+  "前+A+B\n後 A+B",
+  "Switch+中文 A+B",
+  "前+A+「方案」",
+  "前 +A+B",
+  "(中文)+「方案」",
+  "前+A(中文)+「方案」",
+  "有100+的選擇",
+  "打+886這個號碼",
+  "Disney+的節目 A+B",
+  "C++的程式 A+B",
+  "A+的等級 A+B",
+  "100+的選擇 A+B",
+  "前+886 A+B",
+  "Apple TV+的節目",
+  "公視+的節目",
+  "AA+的等級",
+  "AB+的血型",
+  "面積m²大小",
+  "中文⁺註記",
+  "商標™產品",
+  "品牌®商品",
+  "中文⁽後",
+  "溫度℃變化",
+  "溫度℉變化",
+  "編號№123項",
+  "©2026版權",
+  "版權©2026",
+  "©2026",
+  "版權© 2026",
 ];
 
 // Keep these ranges explicit so an upstream boundary change cannot silently
@@ -105,13 +149,14 @@ const CURATED = [
 const EXTENDED_RANGES = [
   [0x00a1, 0x00ff],
   [0x0370, 0x03ff],
+  [0x2100, 0x214f],
   [0x2150, 0x218f],
   [0x2700, 0x27bf],
 ];
 const CODE_POINTS = new Set([
   ...Array.from({ length: 0x7e - 0x21 + 1 }, (_, i) => 0x21 + i),
   ...EXTENDED_RANGES.flatMap(([first, last]) => [first - 1, first, first + 1, last - 1, last, last + 1]),
-  ...Array.from("é±βⅫ✓★ΩñⅧ✗☆·", (ch) => ch.codePointAt(0)),
+  ...Array.from("é±βⅫ✓★ΩñⅧ✗☆·℃℉№©®⁰¹²³⁴⁵⁶⁷⁸⁹ⁱⁿ⁺⁻⁼⁽⁾℠™", (ch) => ch.codePointAt(0)),
 ]);
 
 // One probe set per selected code point: every adjacency that decides
@@ -144,7 +189,7 @@ function corpus() {
 
 const probes = corpus();
 const current = new Map(); // input → pangu's output now
-for (const input of probes.keys()) current.set(input, pangu.spacingText(input));
+for (const input of probes.keys()) current.set(input, pangu.spaceText(input));
 
 if (UPDATE) {
   const out = [...current].map((pair) => JSON.stringify(pair)).join("\n") + "\n";

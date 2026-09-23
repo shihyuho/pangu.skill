@@ -38,9 +38,9 @@
   }
 
   function space(s) {
-    if (window.pangu && typeof window.pangu.spacingText === "function") {
+    if (window.pangu && typeof window.pangu.spaceText === "function") {
       try {
-        var result = window.pangu.spacingText(s);
+        var result = window.pangu.spaceText(s);
         if (mode) mode.textContent = "pangu.js · v" + window.pangu.version;
         return result;
       } catch (e) {}

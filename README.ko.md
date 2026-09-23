@@ -11,7 +11,7 @@
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a>
   <a href="https://shihyuho.github.io/pangu.skill/"><img src="https://img.shields.io/badge/live_demo-df372b" alt="Live demo"></a>
-  <a href="https://github.com/vinta/pangu.js/blob/master/HISTORY.md"><img src="https://img.shields.io/github/package-json/dependency-version/shihyuho/pangu.skill/dev/pangu?label=pangu&color=df372b" alt="pangu"></a>
+  <a href="https://github.com/vinta/pangu.js/blob/master/CHANGELOG.md"><img src="https://img.shields.io/github/package-json/dependency-version/shihyuho/pangu.skill/dev/pangu?label=pangu&color=df372b" alt="pangu"></a>
 </p>
 
 <p align="center">
@@ -25,7 +25,7 @@ Claude Code, Codex, Antigravity, Cursor, Gemini CLI 등 AI 코딩 에이전트�
 
 이번 작업에서 새로 쓰거나 수정하는 자연어만 정리하고 코드, 마크업, URL, 경로, 정확한 인용문은 보존합니다. 사용자가 지정한 형식과 편집 범위를 우선하며 범위 밖의 기존 텍스트는 그대로 둡니다.
 
-문자 규칙은 pangu.js를 따르며 한자, 일본어 가나, 주음을 대상으로 합니다. **한글은 변경하지 않습니다**. `é`, `β`, `Ⅻ`, `✓` 등 특정 Unicode 범위의 문자가 CJK와 맞닿을 때도 공백을 넣습니다. 실행에 필요한 모든 규칙은 하나의 `SKILL.md`에 들어 있습니다.
+문자 규칙은 pangu.js를 따르며 한자, 일본어 가나, 주음을 대상으로 합니다. **한글은 변경하지 않습니다**. `é`, `β`, `Ⅻ`, `✓`, `℃` 등 특정 Unicode 범위의 문자가 CJK와 맞닿을 때도 공백을 넣습니다. 슬래시로 이어진 텍스트는 그대로 두고 `²`, `™` 같은 위 첨자 접미사는 앞의 텍스트에 붙여 둡니다. 실행에 필요한 모든 규칙은 하나의 `SKILL.md`에 들어 있습니다.
 
 ## See it in action
 
