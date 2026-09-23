@@ -11,7 +11,7 @@
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a>
   <a href="https://shihyuho.github.io/pangu.skill/"><img src="https://img.shields.io/badge/live_demo-df372b" alt="Live demo"></a>
-  <a href="https://github.com/vinta/pangu.js/blob/master/HISTORY.md"><img src="https://img.shields.io/github/package-json/dependency-version/shihyuho/pangu.skill/dev/pangu?label=pangu&color=df372b" alt="pangu"></a>
+  <a href="https://github.com/vinta/pangu.js/blob/master/CHANGELOG.md"><img src="https://img.shields.io/github/package-json/dependency-version/shihyuho/pangu.skill/dev/pangu?label=pangu&color=df372b" alt="pangu"></a>
 </p>
 
 <p align="center">
@@ -25,7 +25,7 @@ Claude Code、Codex、Antigravity、Cursor、Gemini CLI などの AI コーデ�
 
 今回の依頼で新規作成・編集する自然言語を整え、コード、マークアップ、URL、パス、正確な引用は保持します。ユーザー指定の形式と編集範囲を優先し、範囲外の既存テキストはそのまま残します。
 
-文字規則は pangu.js に従い、漢字、仮名、注音を対象とします。ハングルは変更しません。`é`、`β`、`Ⅻ`、`✓` など、特定の Unicode 範囲の文字が CJK に接する場合も空白を挿入します。実行時に必要な規則は、一つの `SKILL.md` にすべて含まれています。
+文字規則は pangu.js に従い、漢字、仮名、注音を対象とします。ハングルは変更しません。`é`、`β`、`Ⅻ`、`✓`、`℃` など、特定の Unicode 範囲の文字が CJK に接する場合も空白を挿入します。スラッシュでつながる文字列は保持し、`²` や `™` などの上付き接尾辞は直前の文字に付けたままにします。実行時に必要な規則は、一つの `SKILL.md` にすべて含まれています。
 
 ## See it in action
 

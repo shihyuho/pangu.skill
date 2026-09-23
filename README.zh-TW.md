@@ -11,7 +11,7 @@
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a>
   <a href="https://shihyuho.github.io/pangu.skill/"><img src="https://img.shields.io/badge/live_demo-df372b" alt="Live demo"></a>
-  <a href="https://github.com/vinta/pangu.js/blob/master/HISTORY.md"><img src="https://img.shields.io/github/package-json/dependency-version/shihyuho/pangu.skill/dev/pangu?label=pangu&color=df372b" alt="pangu"></a>
+  <a href="https://github.com/vinta/pangu.js/blob/master/CHANGELOG.md"><img src="https://img.shields.io/github/package-json/dependency-version/shihyuho/pangu.skill/dev/pangu?label=pangu&color=df372b" alt="pangu"></a>
 </p>
 
 <p align="center">
@@ -25,7 +25,7 @@
 
 只處理本次任務新增或修改的自然語言，保留程式碼、標記語法、URL、路徑與精確引文。使用者指定的格式和編輯範圍優先，範圍外的既有文字維持原樣。
 
-文字規則依照 pangu.js，適用於漢字、日文假名與注音；Hangul 維持原樣。特定 Unicode 範圍的字元，例如 `é`、`β`、`Ⅻ` 與 `✓`，和 CJK 相接時也會加上空格。所有執行規則都包含在一份 `SKILL.md` 中。
+文字規則依照 pangu.js，適用於漢字、日文假名與注音；Hangul 維持原樣。特定 Unicode 範圍的字元，例如 `é`、`β`、`Ⅻ`、`✓` 與 `℃`，和 CJK 相接時也會加上空格。斜線連接的文字保持相連，`²`、`™` 等上標後綴則緊接前面的文字。所有執行規則都包含在一份 `SKILL.md` 中。
 
 ## See it in action
 

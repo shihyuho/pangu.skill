@@ -3,7 +3,9 @@
 pangu.skill ships as an agent skill / plugin. It applies spacing to prose created or edited for your task, preserving literal content and your requested format and editing scope. All runtime rules are self-contained in [`skills/pangu/SKILL.md`](../skills/pangu/SKILL.md); no reference files or formatter installation are needed. Agents with a package manager install the plugin; other agents copy this single file into the rules directory they read.
 
 Spacing follows pangu.js at CJK boundaries, including characters from specific
-Unicode ranges such as `é`, `β`, `Ⅻ`, and `✓`. The skill lists the exact ranges and examples.
+Unicode ranges such as `é`, `β`, `Ⅻ`, `✓`, and `℃`. Joined slashes stay intact;
+superscript suffixes such as `²` and `™` stay attached to the preceding text.
+The skill lists the exact ranges, token boundaries, and examples.
 
 ## Package managers (one-step install)
 

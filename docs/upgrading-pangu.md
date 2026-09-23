@@ -1,8 +1,9 @@
 # Upgrading pangu
 
-A Dependabot `pangu` bump initially fails the version-stamp check: Dependabot
-updates `package.json` and the lockfile, while SKILL.md and the demo still name
-the old version. This is an intentional review gate, including on patch bumps.
+A Dependabot `pangu` bump leaves stale version stamps: Dependabot updates
+`package.json` and the lockfile, while SKILL.md and the demo still name the old
+version. This is an intentional review gate, including on patch bumps. Removed
+APIs can fail earlier checks before the stamp check is reached.
 Repairing the stamps starts the behavior review; it does not complete it.
 
 ## What the checks cover
@@ -16,7 +17,9 @@ Repairing the stamps starts the behavior review; it does not complete it.
   adjacency contexts, plus curated multi-character patterns in
   `scripts/check-snapshot.mjs`;
 - the authored prose fixtures in `evals/evals.json`, including protected text
-  and cases that declare pangu as their plain-text oracle.
+  and cases that declare pangu as their plain-text oracle;
+- the demo's initial render and input updates against the pinned browser UMD
+  asset, using a minimal DOM shell, plus its labeled CDN-unavailable fallback.
 
 A green result covers those examples and probes. It does not prove that all
 upstream behavior is unchanged, that rule prose is accurate, or that a model
@@ -29,6 +32,9 @@ when the changelog identifies changes relevant to this repo.
    repairing anything and inspect the reported failures. Stale version stamps
    are expected; record any example, snapshot, or fixture failures too. The
    command stops at the first failing checker, so rerun after resolving it.
+   Migrate removed APIs in the checks and demo first, then inspect the behavior
+   failures they reveal. Tests about the library's old limitations also need
+   review; keep the underlying prose-protection assertions.
 2. Read every intervening release entry at the target version's upstream tag.
    Current tags use `CHANGELOG.md`; older tags may use `HISTORY.md`. Use the
    file from that tag rather than the default branch. Identify text-rule

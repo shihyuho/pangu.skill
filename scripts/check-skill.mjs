@@ -2,7 +2,7 @@
 //
 // skills/pangu/SKILL.md teaches the spacing rules as `before → after` examples
 // (in fenced blocks and in tables). This extracts every example and asserts
-// `pangu.spacingText(before) === after` against the pinned `pangu` dependency,
+// `pangu.spaceText(before) === after` against the pinned `pangu` dependency,
 // so a hand-edited example — or an upstream behavior change after a version
 // bump — fails loudly instead of silently teaching agents the wrong rule.
 import fs from "node:fs";
@@ -54,7 +54,7 @@ if (!cases.length) {
 
 let failed = 0;
 for (const c of cases) {
-  const actual = pangu.spacingText(c.before);
+  const actual = pangu.spaceText(c.before);
   if (actual !== c.after) {
     failed++;
     console.error(`${FILE}:${c.n}`);
