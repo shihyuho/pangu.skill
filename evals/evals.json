@@ -282,6 +282,16 @@
       "expected_output": "比較 Switch + 健身環與 `Switch+健身環`，商標™ 產品。\n請看 [API 文件](https://example.com/中文API?q=中文#用法) 並確認 2 項。\n精確引文：前面/後面與©2026版權",
       "preserve": ["`Switch+健身環`", "https://example.com/中文API?q=中文#用法", "精確引文：前面/後面與©2026版權"],
       "files": []
+    },
+    {
+      "id": 27,
+      "category": "v10-2-name-suffix",
+      "prompt": "依 pangu 的文字規則整理混排，維持三行格式。",
+      "input": "mo店+免運無限次\nmo 店+ 免運無限次\nmo 店+的優惠 A+B",
+      "expected_output": "mo 店+ 免運無限次\nmo 店+ 免運無限次\nmo 店+ 的優惠 A + B",
+      "preserve": [],
+      "oracle": "pangu",
+      "files": []
     }
   ]
 }

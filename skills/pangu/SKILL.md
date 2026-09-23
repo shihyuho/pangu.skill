@@ -102,8 +102,8 @@ a mark between an eligible character and CJK interrupts that direct boundary.
   spacing their outer CJK boundaries first. A plus still touching CJK then
   makes the remaining tight single pluses on that line separators, including
   those between half-width words. Doubled pluses (`C++`) and name suffixes
-  such as `Disney+`, `Apple TV+`, `公視+`, `AA+`, and `AB+` stay attached but
-  still activate the line's other separators. Preserve `A+B` when no plus
+  such as `Disney+`, `Apple TV+`, `mo 店+`, `公視+`, `AA+`, and `AB+` stay
+  attached but still activate the line's other separators. Preserve `A+B` when no plus
   touches CJK. Existing space-adjacent pluses keep their spacing except at a
   direct CJK boundary. Common full-width punctuation
   stays tight on its side of a plus; after `) ] }` and before `（「『【《`,
@@ -119,6 +119,8 @@ Switch+健身環 → Switch + 健身環
 有100+的選擇 → 有 100+ 的選擇
 Disney+的節目 → Disney+ 的節目
 Disney+的節目 A+B → Disney+ 的節目 A + B
+mo店+免運無限次 → mo 店+ 免運無限次
+mo 店+ 免運無限次 → mo 店+ 免運無限次
 C++的程式 A+B → C++ 的程式 A + B
 A+的等級 A+B → A+ 的等級 A+B
 得到一個A-B的結果 → 得到一個 A-B 的結果
@@ -198,5 +200,5 @@ pangu.js v1.2.3橫空出世 → pangu.js v1.2.3 橫空出世
 參考https://example.com/中文API?q=中文#用法，謝謝 → 參考 https://example.com/中文API?q=中文#用法，謝謝
 ```
 
-_Text-rule examples verified against pangu **10.1.1**; prose scope requires the
+_Text-rule examples verified against pangu **10.2.0**; prose scope requires the
 judgment described above._
