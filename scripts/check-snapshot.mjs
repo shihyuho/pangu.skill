@@ -3,9 +3,9 @@
 //
 // SKILL.md's before → after examples are pedagogy — a small, curated teaching
 // set. This snapshot is coverage: a generated probe corpus (every printable
-// ASCII character crossed with the adjacency contexts that decide spacing,
-// plus a curated tail of multi-char patterns) pinned to the exact output of
-// the pinned pangu. On a bump, a diff here means pangu's text-level behavior
+// ASCII character and extended-Unicode boundary/representative probes crossed
+// with adjacency contexts, plus a curated tail of multi-char patterns) pinned
+// to the exact output of the pinned pangu. On a bump, a diff here means its text-level behavior
 // changed — whether or not any curated example happened to cover it, and
 // whatever the semver level claims. Green covers only the tested corpus.
 //
@@ -81,15 +81,46 @@ const CURATED = [
   "中文-123",
   "中文-123度",
   "氣溫 -5°C",
+  // Extended Unicode: Issue #24, attached signs, middle dots, existing NBSP,
+  // and marks that interrupt direct code-point adjacency (no normalization).
+  "狀態✓完成",
+  "版本β測試",
+  "溫度±5度",
+  "章節Ⅻ內容",
+  "符號★測試",
+  "結果é完成",
+  "前±後",
+  "前±5後",
+  "前α+β後",
+  "前·後",
+  "前\u00a0後",
+  "前\u00a0é\u00a0後",
+  "前e\u0301後",
+  "前é\u0301後",
+  "前✓\ufe0f後",
 ];
 
-// One probe set per printable ASCII character: every adjacency that decides
+// Keep these ranges explicit so an upstream boundary change cannot silently
+// redefine the corpus. Sample both ends and their immediate outside neighbors.
+const EXTENDED_RANGES = [
+  [0x00a1, 0x00ff],
+  [0x0370, 0x03ff],
+  [0x2150, 0x218f],
+  [0x2700, 0x27bf],
+];
+const CODE_POINTS = new Set([
+  ...Array.from({ length: 0x7e - 0x21 + 1 }, (_, i) => 0x21 + i),
+  ...EXTENDED_RANGES.flatMap(([first, last]) => [first - 1, first, first + 1, last - 1, last, last + 1]),
+  ...Array.from("é±βⅫ✓★ΩñⅧ✗☆·", (ch) => ch.codePointAt(0)),
+]);
+
+// One probe set per selected code point: every adjacency that decides
 // spacing (CJK-adjacent, sandwiched between alphanumerics with CJK elsewhere —
 // the context pangu 8 turned into a joiner — doubled like a path, no CJK at
 // all, and non-Han scripts). Deduped by input; deterministic by construction.
 function corpus() {
   const probes = new Map(); // input → char under test ("" for curated)
-  for (let c = 0x21; c <= 0x7e; c++) {
+  for (const c of CODE_POINTS) {
     const s = String.fromCharCode(c);
     for (const input of [
       `前${s}後`, // CJK on both sides

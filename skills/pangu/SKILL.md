@@ -32,8 +32,9 @@ own explanation. These boundaries take precedence over the text rules below.
 
 ## Text rules
 
-Insert one half-width space where CJK meets half-width letters or numbers;
-use the symbol rules below for punctuation and operators. CJK includes Han
+Insert one half-width space where CJK directly meets ASCII letters or digits,
+or a character in the extended ranges below. Use the symbol rules below for
+punctuation and operators. CJK includes Han
 ideographs, Japanese kana, and bopomofo, including Han used in Korean.
 Hangul is outside this definition: `한국어test` stays unchanged.
 Full-width punctuation (`，。！？「」`) needs no surrounding space.
@@ -43,6 +44,30 @@ For spacing, leave runs without CJK and already-correct whitespace unchanged.
 當你凝視著bug，bug也凝視著你 → 當你凝視著 bug，bug 也凝視著你
 與PM戰鬥的人 → 與 PM 戰鬥的人
 這是2025年的事 → 這是 2025 年的事
+```
+
+### Extended characters
+
+Apply CJK-boundary spacing to these exact Unicode code-point ranges:
+
+- Latin-1 Supplement after NBSP: U+00A1–U+00FF.
+- Greek and Coptic: U+0370–U+03FF.
+- Number Forms: U+2150–U+218F.
+- Dingbats: U+2700–U+27BF.
+
+Space only direct CJK contact, keeping adjacent non-CJK characters together
+(such as `±5`). Other non-ASCII characters keep their existing spacing unless
+another text rule applies: `★` is outside these ranges. The middle-dot rule below
+still handles `·`. Preserve combining marks and variation selectors as written;
+a mark between an eligible character and CJK interrupts that direct boundary.
+
+```
+狀態✓完成 → 狀態 ✓ 完成
+版本β測試 → 版本 β 測試
+溫度±5度 → 溫度 ±5 度
+章節Ⅻ內容 → 章節 Ⅻ 內容
+符號★測試 → 符號★測試
+結果é完成 → 結果 é 完成
 ```
 
 ### Operators and separators

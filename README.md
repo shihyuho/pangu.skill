@@ -25,7 +25,7 @@ An agent skill / plugin for Claude Code, Codex, Antigravity, Cursor, Gemini CLI,
 
 It spaces the prose created or edited for your task while preserving code, markup, URLs, paths, and exact quotations. Your requested format and editing scope take priority; existing text outside that scope stays as received.
 
-The text rules follow pangu.js for Han ideographs, Japanese kana, and bopomofo; Hangul is unchanged. All runtime rules fit in one `SKILL.md`.
+The text rules follow pangu.js for Han ideographs, Japanese kana, and bopomofo; Hangul is unchanged. Spacing also covers specific Unicode ranges, including `é`, `β`, `Ⅻ`, and `✓`, at CJK boundaries. All runtime rules fit in one `SKILL.md`.
 
 ## See it in action
 
