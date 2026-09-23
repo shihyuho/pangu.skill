@@ -11,7 +11,7 @@
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a>
   <a href="https://shihyuho.github.io/pangu.skill/"><img src="https://img.shields.io/badge/live_demo-df372b" alt="Live demo"></a>
-  <a href="https://github.com/vinta/pangu.js/blob/master/HISTORY.md"><img src="https://img.shields.io/github/package-json/dependency-version/shihyuho/pangu.skill/dev/pangu?label=pangu&color=df372b" alt="pangu"></a>
+  <a href="https://github.com/vinta/pangu.js/blob/master/CHANGELOG.md"><img src="https://img.shields.io/github/package-json/dependency-version/shihyuho/pangu.skill/dev/pangu?label=pangu&color=df372b" alt="pangu"></a>
 </p>
 
 <p align="center">
@@ -25,7 +25,7 @@ An agent skill / plugin for Claude Code, Codex, Antigravity, Cursor, Gemini CLI,
 
 It spaces the prose created or edited for your task while preserving code, markup, URLs, paths, and exact quotations. Your requested format and editing scope take priority; existing text outside that scope stays as received.
 
-The text rules follow pangu.js for Han ideographs, Japanese kana, and bopomofo; Hangul is unchanged. Spacing also covers specific Unicode ranges, including `é`, `β`, `Ⅻ`, and `✓`, at CJK boundaries. All runtime rules fit in one `SKILL.md`.
+The text rules follow pangu.js for Han ideographs, Japanese kana, and bopomofo; Hangul is unchanged. Spacing also covers specific Unicode ranges, including `é`, `β`, `Ⅻ`, `✓`, and `℃`, at CJK boundaries. Joined slashes stay intact; superscript suffixes such as `²` and `™` stay attached to the preceding text. All runtime rules fit in one `SKILL.md`.
 
 ## See it in action
 

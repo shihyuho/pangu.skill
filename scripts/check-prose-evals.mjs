@@ -32,7 +32,7 @@ export function validateSuite(suite) {
     if (item.oracle !== undefined && item.oracle !== "pangu") {
       throw new Error(`Eval ${item.id}: unsupported oracle`);
     }
-    if (item.oracle === "pangu" && pangu.spacingText(item.input) !== item.expected_output) {
+    if (item.oracle === "pangu" && pangu.spaceText(item.input) !== item.expected_output) {
       throw new Error(`Eval ${item.id}: plain-text expectation drifted from pangu ${pangu.version}`);
     }
   }

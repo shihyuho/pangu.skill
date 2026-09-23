@@ -48,15 +48,22 @@ For spacing, leave runs without CJK and already-correct whitespace unchanged.
 
 ### Extended characters
 
-Apply CJK-boundary spacing to these exact Unicode code-point ranges:
+Apply CJK-boundary spacing to these exact Unicode code-point ranges, except
+for the attached suffixes below:
 
 - Latin-1 Supplement after NBSP: U+00A1–U+00FF.
 - Greek and Coptic: U+0370–U+03FF.
+- Letterlike Symbols: U+2100–U+214F.
 - Number Forms: U+2150–U+218F.
 - Dingbats: U+2700–U+27BF.
 
 Space only direct CJK contact, keeping adjacent non-CJK characters together
-(such as `±5`). Other non-ASCII characters keep their existing spacing unless
+(such as `±5`). The suffixes `® ⁰ ¹ ² ³ ⁴ ⁵ ⁶ ⁷ ⁸ ⁹ ⁱ ⁿ ⁺ ⁻ ⁼ ⁾ ℠ ™`
+stay attached to preceding text; insert a space when CJK follows them. The
+opening superscript parenthesis `⁽` is outside that set. On text containing
+CJK, also separate `©` from a following digit.
+
+Other non-ASCII characters keep their existing spacing unless
 another text rule applies: `★` is outside these ranges. The middle-dot rule below
 still handles `·`. Preserve combining marks and variation selectors as written;
 a mark between an eligible character and CJK interrupts that direct boundary.
@@ -68,22 +75,52 @@ a mark between an eligible character and CJK interrupts that direct boundary.
 章節Ⅻ內容 → 章節 Ⅻ 內容
 符號★測試 → 符號★測試
 結果é完成 → 結果 é 完成
+溫度℃變化 → 溫度 ℃ 變化
+編號№123項 → 編號 №123 項
+符號⅏測試 → 符號 ⅏ 測試
+面積m²大小 → 面積 m² 大小
+中文⁺註記 → 中文⁺ 註記
+商標™產品 → 商標™ 產品
+品牌®商品 → 品牌® 商品
+©2026版權 → © 2026 版權
 ```
 
 ### Operators and separators
 
-- `+ - * = ^ < > \`: space CJK boundaries, keeping half-width words whole.
+- `- * = ^ < > \`: space CJK boundaries, keeping half-width words whole.
   Before CJK, also separate `- * = &` from a preceding `) ] }`. A hyphen
   directly between CJK and digits is a separator; an already-spaced negative
   number stays attached to its sign.
 - `_`: keep attached in every context.
 - `|`: if one pipe touches CJK, space every pipe on that line; otherwise
   preserve half-width `A|B`.
-- Single `/` and `&`: keep half-width joiners (`A/B`, `R&D`) whole; space
-  them when CJK is adjacent. Two or more slashes keep their path structure.
+- `/`: keep joined text such as `中文/English` and `A/B` intact, preserving
+  existing spaces. Recognized file paths still get spaces at their outer
+  CJK boundaries, as shown under Whole tokens.
+- `&`: keep half-width joiners (`R&D`) whole; space CJK boundaries.
+- `+`: keep signs and suffixes attached in `+886`, `100+`, and `A+`,
+  spacing their outer CJK boundaries first. A plus still touching CJK then
+  makes the remaining tight single pluses on that line separators, including
+  those between half-width words. Doubled pluses (`C++`) and name suffixes
+  such as `Disney+`, `Apple TV+`, `公視+`, `AA+`, and `AB+` stay attached but
+  still activate the line's other separators. Preserve `A+B` when no plus
+  touches CJK. Existing space-adjacent pluses keep their spacing except at a
+  direct CJK boundary. Common full-width punctuation
+  stays tight on its side of a plus; after `) ] }` and before `（「『【《`,
+  insert a space only before the plus.
 
 ```
 前面+後面 → 前面 + 後面
+Switch+健身環 → Switch + 健身環
+前+A+B → 前 + A + B
+前 A+B 後 → 前 A+B 後
+前+A+「方案」 → 前 + A+「方案」
+(中文)+「方案」 → (中文) +「方案」
+有100+的選擇 → 有 100+ 的選擇
+Disney+的節目 → Disney+ 的節目
+Disney+的節目 A+B → Disney+ 的節目 A + B
+C++的程式 A+B → C++ 的程式 A + B
+A+的等級 A+B → A+ 的等級 A+B
 得到一個A-B的結果 → 得到一個 A-B 的結果
 得到一個A*B的結果 → 得到一個 A*B 的結果
 比較A<B和A>B的結果 → 比較 A<B 和 A>B 的結果
@@ -101,7 +138,8 @@ Mollie_陳上進 → Mollie_陳上進
 前|A|B → 前 | A | B
 前 A|B 後 → 前 A|B 後
 得到一個A/B的結果 → 得到一個 A/B 的結果
-前面/後面 → 前面 / 後面
+前面/後面 → 前面/後面
+前面 / 後面 → 前面 / 後面
 陳上進/貓咪/Mollie → 陳上進/貓咪/Mollie
 得到一個R&D的部門 → 得到一個 R&D 的部門
 陳上進&Mollie → 陳上進 & Mollie
@@ -140,6 +178,9 @@ function(123) → function(123)
 ### Whole tokens
 
 Space between a token and surrounding prose, preserving its interior.
+An uninterrupted `http://` or `https://` URL includes CJK at its right edge;
+keep that entire URL intact and space CJK before its scheme. An explicit
+space or full-width punctuation separates following prose from the URL.
 
 ```
 OpenAI的gpt-4o模型 → OpenAI 的 gpt-4o 模型
@@ -152,8 +193,10 @@ pangu.js v1.2.3橫空出世 → pangu.js v1.2.3 橫空出世
 檢查src/main.py文件 → 檢查 src/main.py 文件
 在/home目錄 → 在 /home 目錄
 檔案在C:\Users\name\ → 檔案在 C:\Users\name\
-請看https://example.com/path頁面 → 請看 https://example.com/path 頁面
+請看https://example.com/path頁面 → 請看 https://example.com/path頁面
+請看https://example.com/path 頁面 → 請看 https://example.com/path 頁面
+參考https://example.com/中文API?q=中文#用法，謝謝 → 參考 https://example.com/中文API?q=中文#用法，謝謝
 ```
 
-_Text-rule examples verified against pangu **9.1.1**; prose scope requires the
+_Text-rule examples verified against pangu **10.1.1**; prose scope requires the
 judgment described above._

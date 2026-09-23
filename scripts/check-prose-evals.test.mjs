@@ -23,10 +23,18 @@ test("invalid fixture identities and protected-text changes fail validation", ()
   assert.throws(() => validateSuite(broken), /protected literal/);
 });
 
-test("grading catches raw library damage to a Markdown link destination", () => {
+test("grading catches damage to a protected Markdown link destination", () => {
   const item = suite.evals.find((e) => e.id === 2);
   assert.equal(gradeOutput(item, item.expected_output).passed, true);
-  const result = gradeOutput(item, pangu.spacingText(item.input));
+  const damaged = item.expected_output.replace("中文API?q", "中文 API?q");
+  const result = gradeOutput(item, damaged);
+  assert.equal(result.passed, false);
+  assert.deepEqual(result.changedLiterals, item.preserve);
+});
+
+test("grading catches raw library changes to a verbatim log", () => {
+  const item = suite.evals.find((e) => e.id === 5);
+  const result = gradeOutput(item, pangu.spaceText(item.input));
   assert.equal(result.passed, false);
   assert.deepEqual(result.changedLiterals, item.preserve);
 });
