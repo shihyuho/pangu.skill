@@ -89,6 +89,10 @@ agy plugin install https://github.com/shihyuho/pangu.skill.git
 - [pangu.rs](https://github.com/airt/pangu.rs)（Rust）
 - [pangu.swift](https://github.com/X140Yu/pangu.Swift)（Swift）
 
+## Support
+
+如果 pangu.skill 對你有幫助，可以透過 [Buy Me a Coffee](https://buymeacoffee.com/methodho) 支持這個 skill 的維護。
+
 ## License
 
 [MIT](LICENSE) © Shihyu Ho

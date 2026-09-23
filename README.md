@@ -89,6 +89,10 @@ Paranoid text spacing has a whole family of ports.
 - [pangu.rs](https://github.com/airt/pangu.rs) (Rust)
 - [pangu.swift](https://github.com/X140Yu/pangu.Swift) (Swift)
 
+## Support
+
+If pangu.skill helps you, you can support its maintenance through [Buy Me a Coffee](https://buymeacoffee.com/methodho).
+
 ## License
 
 [MIT](LICENSE) © Shihyu Ho

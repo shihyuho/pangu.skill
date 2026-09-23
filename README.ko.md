@@ -89,6 +89,10 @@ paranoid text spacing은 여러 언어로 이식되어 하나의 프로젝트 �
 - [pangu.rs](https://github.com/airt/pangu.rs) (Rust)
 - [pangu.swift](https://github.com/X140Yu/pangu.Swift) (Swift)
 
+## Support
+
+pangu.skill이 도움이 되었다면 [Buy Me a Coffee](https://buymeacoffee.com/methodho)를 통해 유지 관리를 후원할 수 있습니다.
+
 ## License
 
 [MIT](LICENSE) © Shihyu Ho
