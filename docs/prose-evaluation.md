@@ -45,6 +45,27 @@ add held-out ordinary writing tasks that do not ask for spacing, and assess
 invocation behavior and unnecessary edits as well as spacing correctness.
 Until measured, the same skill remains applicable at both effort levels.
 
+## Extended Unicode regression
+
+Cases 17–21 cover the Issue #24 list conversion, characters absent from the
+skill's examples, and Unicode inside inline code, fenced code, and an exact
+quotation. The list tasks ask only for Markdown conversion, exercising the
+skill alongside an ordinary formatting task. Their expected list contents match pangu 9.1.1;
+the literal-preservation cases follow the prose contract.
+
+For this change, run the previous and revised skills with `gpt-6-sol` at
+`high` effort. Use a fresh context for every case, skill version, and trial,
+with three trials per case. Give each context only its selected skill and
+the case's prompt/input, plus identical instructions for saving raw output.
+Keep expected answers, the grader, other cases, and formatter execution out
+of the executor's context. Require all three revised-skill outputs per case
+to match exactly, including protected text. Use the exported `gradeOutput`
+function for this focused subset; the CLI still requires the full suite.
+
+[Recorded results](../evals/results/issue-24.json) retain the unedited outputs,
+model/effort, skill and fixture hashes, and per-run verdicts. These are loaded-skill
+regression trials, not evidence about automatic skill selection or other models.
+
 ## During an upstream upgrade
 
 Follow [Upgrading pangu](upgrading-pangu.md) first. Inspect failures in fixtures

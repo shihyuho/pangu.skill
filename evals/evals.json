@@ -175,6 +175,64 @@
       "preserve": [],
       "oracle": "pangu",
       "files": []
+    },
+    {
+      "id": 17,
+      "category": "unicode-issue-24",
+      "prompt": "請將下列句子轉成 Markdown 項目清單，保留原本資訊。只輸出清單，不要補充說明。",
+      "input": "狀態✓完成\n版本β測試\n溫度±5度\n章節Ⅻ內容\n符號★測試\n結果é完成",
+      "expected_output": "- 狀態 ✓ 完成\n- 版本 β 測試\n- 溫度 ±5 度\n- 章節 Ⅻ 內容\n- 符號★測試\n- 結果 é 完成",
+      "preserve": [
+        "符號★測試"
+      ],
+      "files": []
+    },
+    {
+      "id": 18,
+      "category": "unicode-unseen",
+      "prompt": "請將下列句子轉成 Markdown 項目清單，保留原本資訊。只輸出清單，不要補充說明。",
+      "input": "版本Ω完成\n結果ñ完成\n章節Ⅷ內容\n狀態✗失敗\n符號☆測試\n字母Ā測試",
+      "expected_output": "- 版本 Ω 完成\n- 結果 ñ 完成\n- 章節 Ⅷ 內容\n- 狀態 ✗ 失敗\n- 符號☆測試\n- 字母Ā測試",
+      "preserve": [
+        "符號☆測試",
+        "字母Ā測試"
+      ],
+      "files": []
+    },
+    {
+      "id": 19,
+      "category": "unicode-inline-code",
+      "prompt": "整理下列說明的混排空白，inline code 內容逐字保留。只輸出整理後的內容。",
+      "input": "確認狀態✓完成，保留`狀態✓完成`與`版本β測試`，結果é完成。",
+      "expected_output": "確認狀態 ✓ 完成，保留 `狀態✓完成` 與 `版本β測試`，結果 é 完成。",
+      "preserve": [
+        "`狀態✓完成`",
+        "`版本β測試`"
+      ],
+      "files": []
+    },
+    {
+      "id": 20,
+      "category": "unicode-fenced-code",
+      "prompt": "整理下列 Markdown 說明的混排空白，程式區塊的內容與換行逐字保留。只輸出整理後的內容。",
+      "input": "狀態✓完成，版本β測試。\n\n```js\nconst status = \"狀態✓完成\";\n// 結果é完成\n```\n\n溫度±5度，章節Ⅻ內容。",
+      "expected_output": "狀態 ✓ 完成，版本 β 測試。\n\n```js\nconst status = \"狀態✓完成\";\n// 結果é完成\n```\n\n溫度 ±5 度，章節 Ⅻ 內容。",
+      "preserve": [
+        "```js\nconst status = \"狀態✓完成\";\n// 結果é完成\n```"
+      ],
+      "files": []
+    },
+    {
+      "id": 21,
+      "category": "unicode-exact-quote",
+      "prompt": "整理下列說明的混排空白。「精確引文」那一整行請逐字保留；維持三行格式，只輸出整理後的內容。",
+      "input": "說明：狀態✓完成。\n精確引文：版本β測試與結果é完成\n補充：章節Ⅻ內容，符號★測試。",
+      "expected_output": "說明：狀態 ✓ 完成。\n精確引文：版本β測試與結果é完成\n補充：章節 Ⅻ 內容，符號★測試。",
+      "preserve": [
+        "精確引文：版本β測試與結果é完成",
+        "符號★測試"
+      ],
+      "files": []
     }
   ]
 }

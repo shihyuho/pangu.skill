@@ -1,0 +1,376 @@
+{
+  "model": "gpt-6-sol",
+  "reasoning_effort": "high",
+  "base_commit": "ffdfba31b058de0991c3addf889a3f6a95a9c6e9",
+  "previous_skill_sha256": "0b3096d4cd1a225e4e9ed235fdf443d51afecf7f4921760ef26b93a395cd0efe",
+  "revised_skill_sha256": "52437b69eec7e44c852cc71eda05dc2892f19a90dc8b4b6bed47fe64ccf219b8",
+  "cases_sha256": "0c8ed75cfff59993aca3a6a3e555d0aafdb75e1525ef12e579d0d273b803d4b5",
+  "runs_per_case": 3,
+  "protocol": {
+    "context": "Fresh subagent per case, configuration and trial; fork_turns=none",
+    "inputs": "Only selected SKILL.md, case prompt/input, and identical output-saving instructions; no expected outputs or grader",
+    "tools": "Read named inputs and write literal output only; no formatter or repository inspection",
+    "grading": "gradeOutput exact string comparison and protected-substring counts; raw outputs unmodified",
+    "baseline": "Previous skill from base_commit, tested with the same model and effort",
+    "metrics": "Per-run token usage and latency unavailable from collaboration results; not inferred",
+    "host_configuration": "Same Codex collaboration host and default instructions; fork_turns=none excludes parent conversation. Task-specific file reads restricted to selected skill, task, and saving instructions."
+  },
+  "runs": [
+    {
+      "eval_id": 17,
+      "category": "unicode-issue-24",
+      "configuration": "with_skill",
+      "trial": 1,
+      "output": "- 狀態 ✓ 完成\n- 版本 β 測試\n- 溫度 ±5 度\n- 章節 Ⅻ 內容\n- 符號★測試\n- 結果 é 完成",
+      "passed": true,
+      "changed_literals": []
+    },
+    {
+      "eval_id": 17,
+      "category": "unicode-issue-24",
+      "configuration": "with_skill",
+      "trial": 2,
+      "output": "- 狀態 ✓ 完成\n- 版本 β 測試\n- 溫度 ±5 度\n- 章節 Ⅻ 內容\n- 符號★測試\n- 結果 é 完成",
+      "passed": true,
+      "changed_literals": []
+    },
+    {
+      "eval_id": 17,
+      "category": "unicode-issue-24",
+      "configuration": "with_skill",
+      "trial": 3,
+      "output": "- 狀態 ✓ 完成\n- 版本 β 測試\n- 溫度 ±5 度\n- 章節 Ⅻ 內容\n- 符號★測試\n- 結果 é 完成",
+      "passed": true,
+      "changed_literals": []
+    },
+    {
+      "eval_id": 17,
+      "category": "unicode-issue-24",
+      "configuration": "old_skill",
+      "trial": 1,
+      "output": "- 狀態✓完成\n- 版本β測試\n- 溫度±5度\n- 章節Ⅻ內容\n- 符號★測試\n- 結果é完成",
+      "passed": false,
+      "changed_literals": []
+    },
+    {
+      "eval_id": 17,
+      "category": "unicode-issue-24",
+      "configuration": "old_skill",
+      "trial": 2,
+      "output": "- 狀態✓完成\n- 版本 β 測試\n- 溫度±5度\n- 章節 Ⅻ 內容\n- 符號★測試\n- 結果 é 完成",
+      "passed": false,
+      "changed_literals": []
+    },
+    {
+      "eval_id": 17,
+      "category": "unicode-issue-24",
+      "configuration": "old_skill",
+      "trial": 3,
+      "output": "- 狀態✓完成\n- 版本 β 測試\n- 溫度±5 度\n- 章節 Ⅻ 內容\n- 符號★測試\n- 結果 é 完成",
+      "passed": false,
+      "changed_literals": []
+    },
+    {
+      "eval_id": 18,
+      "category": "unicode-unseen",
+      "configuration": "with_skill",
+      "trial": 1,
+      "output": "- 版本 Ω 完成\n- 結果 ñ 完成\n- 章節 Ⅷ 內容\n- 狀態 ✗ 失敗\n- 符號☆測試\n- 字母Ā測試",
+      "passed": true,
+      "changed_literals": []
+    },
+    {
+      "eval_id": 18,
+      "category": "unicode-unseen",
+      "configuration": "with_skill",
+      "trial": 2,
+      "output": "- 版本 Ω 完成\n- 結果 ñ 完成\n- 章節 Ⅷ 內容\n- 狀態 ✗ 失敗\n- 符號☆測試\n- 字母Ā測試",
+      "passed": true,
+      "changed_literals": []
+    },
+    {
+      "eval_id": 18,
+      "category": "unicode-unseen",
+      "configuration": "with_skill",
+      "trial": 3,
+      "output": "- 版本 Ω 完成\n- 結果 ñ 完成\n- 章節 Ⅷ 內容\n- 狀態 ✗ 失敗\n- 符號☆測試\n- 字母Ā測試",
+      "passed": true,
+      "changed_literals": []
+    },
+    {
+      "eval_id": 18,
+      "category": "unicode-unseen",
+      "configuration": "old_skill",
+      "trial": 1,
+      "output": "- 版本 Ω 完成\n- 結果 ñ 完成\n- 章節 Ⅷ 內容\n- 狀態✗失敗\n- 符號☆測試\n- 字母 Ā 測試",
+      "passed": false,
+      "changed_literals": [
+        "字母Ā測試"
+      ]
+    },
+    {
+      "eval_id": 18,
+      "category": "unicode-unseen",
+      "configuration": "old_skill",
+      "trial": 2,
+      "output": "- 版本 Ω 完成\n- 結果 ñ 完成\n- 章節 Ⅷ 內容\n- 狀態✗失敗\n- 符號☆測試\n- 字母 Ā 測試",
+      "passed": false,
+      "changed_literals": [
+        "字母Ā測試"
+      ]
+    },
+    {
+      "eval_id": 18,
+      "category": "unicode-unseen",
+      "configuration": "old_skill",
+      "trial": 3,
+      "output": "- 版本Ω完成\n- 結果ñ完成\n- 章節Ⅷ內容\n- 狀態✗失敗\n- 符號☆測試\n- 字母Ā測試",
+      "passed": false,
+      "changed_literals": []
+    },
+    {
+      "eval_id": 19,
+      "category": "unicode-inline-code",
+      "configuration": "with_skill",
+      "trial": 1,
+      "output": "確認狀態 ✓ 完成，保留 `狀態✓完成` 與 `版本β測試`，結果 é 完成。",
+      "passed": true,
+      "changed_literals": []
+    },
+    {
+      "eval_id": 19,
+      "category": "unicode-inline-code",
+      "configuration": "with_skill",
+      "trial": 2,
+      "output": "確認狀態 ✓ 完成，保留 `狀態✓完成` 與 `版本β測試`，結果 é 完成。",
+      "passed": true,
+      "changed_literals": []
+    },
+    {
+      "eval_id": 19,
+      "category": "unicode-inline-code",
+      "configuration": "with_skill",
+      "trial": 3,
+      "output": "確認狀態 ✓ 完成，保留 `狀態✓完成` 與 `版本β測試`，結果 é 完成。",
+      "passed": true,
+      "changed_literals": []
+    },
+    {
+      "eval_id": 19,
+      "category": "unicode-inline-code",
+      "configuration": "old_skill",
+      "trial": 1,
+      "output": "確認狀態✓完成，保留 `狀態✓完成` 與 `版本β測試`，結果 é 完成。",
+      "passed": false,
+      "changed_literals": []
+    },
+    {
+      "eval_id": 19,
+      "category": "unicode-inline-code",
+      "configuration": "old_skill",
+      "trial": 2,
+      "output": "確認狀態✓完成，保留 `狀態✓完成` 與 `版本β測試`，結果 é 完成。",
+      "passed": false,
+      "changed_literals": []
+    },
+    {
+      "eval_id": 19,
+      "category": "unicode-inline-code",
+      "configuration": "old_skill",
+      "trial": 3,
+      "output": "確認狀態✓完成，保留 `狀態✓完成` 與 `版本β測試`，結果 é 完成。",
+      "passed": false,
+      "changed_literals": []
+    },
+    {
+      "eval_id": 20,
+      "category": "unicode-fenced-code",
+      "configuration": "with_skill",
+      "trial": 1,
+      "output": "狀態 ✓ 完成，版本 β 測試。\n\n```js\nconst status = \"狀態✓完成\";\n// 結果é完成\n```\n\n溫度 ±5 度，章節 Ⅻ 內容。",
+      "passed": true,
+      "changed_literals": []
+    },
+    {
+      "eval_id": 20,
+      "category": "unicode-fenced-code",
+      "configuration": "with_skill",
+      "trial": 2,
+      "output": "狀態 ✓ 完成，版本 β 測試。\n\n```js\nconst status = \"狀態✓完成\";\n// 結果é完成\n```\n\n溫度 ±5 度，章節 Ⅻ 內容。",
+      "passed": true,
+      "changed_literals": []
+    },
+    {
+      "eval_id": 20,
+      "category": "unicode-fenced-code",
+      "configuration": "with_skill",
+      "trial": 3,
+      "output": "狀態 ✓ 完成，版本 β 測試。\n\n```js\nconst status = \"狀態✓完成\";\n// 結果é完成\n```\n\n溫度 ±5 度，章節 Ⅻ 內容。",
+      "passed": true,
+      "changed_literals": []
+    },
+    {
+      "eval_id": 20,
+      "category": "unicode-fenced-code",
+      "configuration": "old_skill",
+      "trial": 1,
+      "output": "狀態✓完成，版本β測試。\n\n```js\nconst status = \"狀態✓完成\";\n// 結果é完成\n```\n\n溫度±5 度，章節Ⅻ內容。",
+      "passed": false,
+      "changed_literals": []
+    },
+    {
+      "eval_id": 20,
+      "category": "unicode-fenced-code",
+      "configuration": "old_skill",
+      "trial": 2,
+      "output": "狀態✓完成，版本β測試。\n\n```js\nconst status = \"狀態✓完成\";\n// 結果é完成\n```\n\n溫度±5 度，章節Ⅻ內容。",
+      "passed": false,
+      "changed_literals": []
+    },
+    {
+      "eval_id": 20,
+      "category": "unicode-fenced-code",
+      "configuration": "old_skill",
+      "trial": 3,
+      "output": "狀態✓完成，版本 β 測試。\n\n```js\nconst status = \"狀態✓完成\";\n// 結果é完成\n```\n\n溫度±5 度，章節 Ⅻ 內容。",
+      "passed": false,
+      "changed_literals": []
+    },
+    {
+      "eval_id": 21,
+      "category": "unicode-exact-quote",
+      "configuration": "with_skill",
+      "trial": 1,
+      "output": "說明：狀態 ✓ 完成。\n精確引文：版本β測試與結果é完成\n補充：章節 Ⅻ 內容，符號★測試。",
+      "passed": true,
+      "changed_literals": []
+    },
+    {
+      "eval_id": 21,
+      "category": "unicode-exact-quote",
+      "configuration": "with_skill",
+      "trial": 2,
+      "output": "說明：狀態 ✓ 完成。\n精確引文：版本β測試與結果é完成\n補充：章節 Ⅻ 內容，符號★測試。",
+      "passed": true,
+      "changed_literals": []
+    },
+    {
+      "eval_id": 21,
+      "category": "unicode-exact-quote",
+      "configuration": "with_skill",
+      "trial": 3,
+      "output": "說明：狀態 ✓ 完成。\n精確引文：版本β測試與結果é完成\n補充：章節 Ⅻ 內容，符號★測試。",
+      "passed": true,
+      "changed_literals": []
+    },
+    {
+      "eval_id": 21,
+      "category": "unicode-exact-quote",
+      "configuration": "old_skill",
+      "trial": 1,
+      "output": "說明：狀態✓完成。\n精確引文：版本β測試與結果é完成\n補充：章節Ⅻ內容，符號★測試。",
+      "passed": false,
+      "changed_literals": []
+    },
+    {
+      "eval_id": 21,
+      "category": "unicode-exact-quote",
+      "configuration": "old_skill",
+      "trial": 2,
+      "output": "說明：狀態✓完成。\n精確引文：版本β測試與結果é完成\n補充：章節Ⅻ內容，符號★測試。",
+      "passed": false,
+      "changed_literals": []
+    },
+    {
+      "eval_id": 21,
+      "category": "unicode-exact-quote",
+      "configuration": "old_skill",
+      "trial": 3,
+      "output": "說明：狀態✓完成。\n精確引文：版本β測試與結果é完成\n補充：章節Ⅻ內容，符號★測試。",
+      "passed": false,
+      "changed_literals": []
+    }
+  ],
+  "completed_at": "2026-09-23T09:30:30.657782+00:00",
+  "iterations": {
+    "initial_revision": {
+      "skill_sha256": "cdf9f87b580c48f23d16e7cceb3684b72f1f0d2aa59e655b2dcf3d33fe97309d",
+      "completed_runs": 8,
+      "passed": 8,
+      "disposition": "Superseded after review clarified that the fallback sentence applies to other non-ASCII characters; final revision rerun in all 15 required contexts"
+    },
+    "final_revision": {
+      "completed_runs": 15,
+      "passed": 15
+    }
+  },
+  "summary": {
+    "with_skill": {
+      "passed": 15,
+      "total": 15
+    },
+    "old_skill": {
+      "passed": 0,
+      "total": 15
+    }
+  },
+  "review": {
+    "criteria": [
+      "writing-for-agents",
+      "skill-creator"
+    ],
+    "applied_fix": "Limit the fallback spacing sentence to other non-ASCII characters so it does not conflict with the preceding ASCII rule.",
+    "unresolved_findings": []
+  },
+  "cases": {
+    "17": {
+      "category": "unicode-issue-24",
+      "prompt": "請將下列句子轉成 Markdown 項目清單，保留原本資訊。只輸出清單，不要補充說明。",
+      "input": "狀態✓完成\n版本β測試\n溫度±5度\n章節Ⅻ內容\n符號★測試\n結果é完成",
+      "expected_output": "- 狀態 ✓ 完成\n- 版本 β 測試\n- 溫度 ±5 度\n- 章節 Ⅻ 內容\n- 符號★測試\n- 結果 é 完成",
+      "preserve": [
+        "符號★測試"
+      ]
+    },
+    "18": {
+      "category": "unicode-unseen",
+      "prompt": "請將下列句子轉成 Markdown 項目清單，保留原本資訊。只輸出清單，不要補充說明。",
+      "input": "版本Ω完成\n結果ñ完成\n章節Ⅷ內容\n狀態✗失敗\n符號☆測試\n字母Ā測試",
+      "expected_output": "- 版本 Ω 完成\n- 結果 ñ 完成\n- 章節 Ⅷ 內容\n- 狀態 ✗ 失敗\n- 符號☆測試\n- 字母Ā測試",
+      "preserve": [
+        "符號☆測試",
+        "字母Ā測試"
+      ]
+    },
+    "19": {
+      "category": "unicode-inline-code",
+      "prompt": "整理下列說明的混排空白，inline code 內容逐字保留。只輸出整理後的內容。",
+      "input": "確認狀態✓完成，保留`狀態✓完成`與`版本β測試`，結果é完成。",
+      "expected_output": "確認狀態 ✓ 完成，保留 `狀態✓完成` 與 `版本β測試`，結果 é 完成。",
+      "preserve": [
+        "`狀態✓完成`",
+        "`版本β測試`"
+      ]
+    },
+    "20": {
+      "category": "unicode-fenced-code",
+      "prompt": "整理下列 Markdown 說明的混排空白，程式區塊的內容與換行逐字保留。只輸出整理後的內容。",
+      "input": "狀態✓完成，版本β測試。\n\n```js\nconst status = \"狀態✓完成\";\n// 結果é完成\n```\n\n溫度±5度，章節Ⅻ內容。",
+      "expected_output": "狀態 ✓ 完成，版本 β 測試。\n\n```js\nconst status = \"狀態✓完成\";\n// 結果é完成\n```\n\n溫度 ±5 度，章節 Ⅻ 內容。",
+      "preserve": [
+        "```js\nconst status = \"狀態✓完成\";\n// 結果é完成\n```"
+      ]
+    },
+    "21": {
+      "category": "unicode-exact-quote",
+      "prompt": "整理下列說明的混排空白。「精確引文」那一整行請逐字保留；維持三行格式，只輸出整理後的內容。",
+      "input": "說明：狀態✓完成。\n精確引文：版本β測試與結果é完成\n補充：章節Ⅻ內容，符號★測試。",
+      "expected_output": "說明：狀態 ✓ 完成。\n精確引文：版本β測試與結果é完成\n補充：章節 Ⅻ 內容，符號★測試。",
+      "preserve": [
+        "精確引文：版本β測試與結果é完成",
+        "符號★測試"
+      ]
+    }
+  },
+  "harness_instructions": "Run the task with the exact supplied SKILL.md. Produce the transformed content yourself. Read only these instructions, that skill, and the named task input. Do not run a formatter or inspect other skills, repository files, expected answers, tests, or other outputs. Save the transformed content as UTF-8 to the named output, creating parent directories, without explanatory wrapping or an added terminal newline. Tools may only read the three named inputs and write this output; writing a literal string is allowed, programmatic formatting is not. You share the filesystem: preserve all other work and do not delegate. Return only the saved output path.\n"
+}
