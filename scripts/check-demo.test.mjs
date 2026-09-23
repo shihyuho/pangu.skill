@@ -57,6 +57,7 @@ test("the demo uses the pinned UMD library on initial render and input", () => {
   for (const [input, expected] of [
     ["前面/後面", "前面/後面"],
     ["前+A+B", "前 + A + B"],
+    ["mo店+免運無限次", "mo 店+ 免運無限次"],
     ["商標™產品，溫度℃變化", "商標™ 產品，溫度 ℃ 變化"],
     ["參考https://example.com/中文API?q=中文&lang=zh，謝謝", "參考 https://example.com/中文API?q=中文&lang=zh，謝謝"],
     ["喬治·R·R·馬丁", "喬治・R・R・馬丁"],

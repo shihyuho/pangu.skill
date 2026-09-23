@@ -76,6 +76,9 @@ exact quotation. Plain-text cases use the pinned library as their oracle;
 the Markdown case retains the agent's prose boundaries. These fixtures are
 separate from the historical Issue #24 model results above.
 
+Case 27 covers pangu 10.2's `mo 店+` name suffix, both spellings with and
+without a space after `mo`, and its interaction with other pluses on the line.
+
 Follow [Upgrading pangu](upgrading-pangu.md) first. Inspect failures in fixtures
 with a pangu oracle alongside the examples and snapshot. Review other fixtures
 against the prose contract rather than regenerating them with the library.

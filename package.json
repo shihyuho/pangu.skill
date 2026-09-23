@@ -17,6 +17,6 @@
     "grade:prose": "node scripts/check-prose-evals.mjs"
   },
   "devDependencies": {
-    "pangu": "10.1.1"
+    "pangu": "10.2.0"
   }
 }

@@ -130,6 +130,11 @@ const CURATED = [
   "公視+的節目",
   "AA+的等級",
   "AB+的血型",
+  // pangu 10.2: mo 店+ keeps its suffix, including an already-spaced name.
+  "mo店+免運無限次",
+  "mo 店+ 免運無限次",
+  "mo 店+的優惠 A+B",
+  "momo店+會員",
   "面積m²大小",
   "中文⁺註記",
   "商標™產品",
