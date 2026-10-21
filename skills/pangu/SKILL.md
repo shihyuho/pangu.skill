@@ -64,8 +64,9 @@ opening superscript parenthesis `⁽` is outside that set. On text containing
 CJK, also separate `©` from a following digit.
 
 Other non-ASCII characters keep their existing spacing unless
-another text rule applies: `★` is outside these ranges. The middle-dot rule below
-still handles `·`. Preserve combining marks and variation selectors as written;
+another text rule applies: `★` is outside these ranges. `·` (U+00B7) is in
+the Latin-1 range, but the middle-dot rule below first converts a lone tight
+`·` to `・`. Preserve combining marks and variation selectors as written;
 a mark between an eligible character and CJK interrupts that direct boundary.
 
 ```
@@ -88,9 +89,12 @@ a mark between an eligible character and CJK interrupts that direct boundary.
 ### Operators and separators
 
 - `- * = ^ < > \`: space CJK boundaries, keeping half-width words whole.
-  Before CJK, also separate `- * = &` from a preceding `) ] }`. A hyphen
-  directly between CJK and digits is a separator; an already-spaced negative
-  number stays attached to its sign.
+  Directly before CJK, also separate `- * = &` from a preceding `) ] }`;
+  directly after CJK, from a following `( [ {`, except `*[`, which opens a
+  glob such as `*[0-9].log`. On a line where a hyphen touches CJK, a hyphen
+  directly between `) ] }` and `( [ {` is also a separator. A hyphen directly
+  between CJK and digits is a separator; an already-spaced negative number
+  stays attached to its sign.
 - `_`: keep attached in every context.
 - `|`: if one pipe touches CJK, space every pipe on that line; otherwise
   preserve half-width `A|B`.
@@ -133,6 +137,11 @@ A+的等級 A+B → A+ 的等級 A+B
 [中文]*下一步 → [中文] * 下一步
 {中文}=下一步 → {中文} = 下一步
 (中文)&下一步 → (中文) & 下一步
+中文=(東西) → 中文 = (東西)
+中文-[東西] → 中文 - [東西]
+刪除*[0-9].log檔 → 刪除 *[0-9].log 檔
+中文-中文[A]-(中文) → 中文 - 中文 [A] - (中文)
+中文[A]-(中文) → 中文 [A]-(中文)
 中文-123度 → 中文 - 123 度
 氣溫 -5°C → 氣溫 -5°C
 前_後 → 前_後
@@ -156,7 +165,9 @@ Mollie_陳上進 → Mollie_陳上進
 - `"`, `'`, backticks, and `( ) [ ] { } < >`: space outside against CJK,
   keeping the inside edges tight. Possessive `'s` stays attached.
 - Keep `@user`, `#tag`, `C#`, `$100`, and `95%` together.
-- Middle dots `· • ‧` between names become `・` with no surrounding spaces.
+- A lone middle dot `· • ‧` with no space, NBSP, or other middle dot on
+  either side becomes `・`. Keep spaced dots and runs of dots as written;
+  being Latin-1, `·` still gets spaced where it directly touches CJK.
 
 ```
 前面,後面 → 前面, 後面
@@ -175,6 +186,10 @@ function(123) → function(123)
 前面$100後面 → 前面 $100 後面
 新八的構造成分有95%是眼鏡 → 新八的構造成分有 95% 是眼鏡
 喬治·R·R·馬丁 → 喬治・R・R・馬丁
+喬治 · 馬丁 → 喬治 · 馬丁
+喬治 ·馬丁 → 喬治 · 馬丁
+卡號••••1234 → 卡號••••1234
+卡號····1234 → 卡號 ····1234
 ```
 
 ### Whole tokens
@@ -200,5 +215,5 @@ pangu.js v1.2.3橫空出世 → pangu.js v1.2.3 橫空出世
 參考https://example.com/中文API?q=中文#用法，謝謝 → 參考 https://example.com/中文API?q=中文#用法，謝謝
 ```
 
-_Text-rule examples verified against pangu **10.2.0**; prose scope requires the
+_Text-rule examples verified against pangu **10.4.1**; prose scope requires the
 judgment described above._
