@@ -147,6 +147,42 @@ const CURATED = [
   "版權©2026",
   "©2026",
   "版權© 2026",
+  // pangu 10.3: CJK + operator + opening bracket (except the *[ glob), and
+  // bracket-hyphen-bracket separators on lines where a hyphen touches CJK.
+  "中文-(東西)",
+  "中文-[東西]",
+  "中文-{東西}",
+  "中文*(東西)",
+  "中文*[東西]",
+  "中文*{東西}",
+  "中文=(東西)",
+  "中文=[東西]",
+  "中文={東西}",
+  "中文&(東西)",
+  "中文&[東西]",
+  "中文&{東西}",
+  "中文 =(東西)",
+  "A=(中文)",
+  "中文=<東西>",
+  "刪除*[0-9].log檔",
+  "中文-中文[A]-(中文)",
+  "中文[A]-(中文)",
+  "中文[A]-(中文)-中文",
+  "前面-後面 (A)-[B]",
+  "中文-中文\n(A)-(B)",
+  // pangu 10.4.1: only a lone tight middle dot converts; spaced dots
+  // (including NBSP) and dot runs stay as written.
+  "喬治 · 馬丁",
+  "喬治 · 馬丁",
+  "喬治 ·馬丁",
+  "喬治 •馬丁",
+  "前面 ·後面",
+  "前面 •後面",
+  "前面 ‧ 後面",
+  "卡號••••1234",
+  "卡號····1234",
+  "卡號‧‧‧‧1234",
+  "卡號 •••• 1234",
 ];
 
 // Keep these ranges explicit so an upstream boundary change cannot silently
