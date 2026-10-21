@@ -200,5 +200,5 @@ pangu.js v1.2.3橫空出世 → pangu.js v1.2.3 橫空出世
 參考https://example.com/中文API?q=中文#用法，謝謝 → 參考 https://example.com/中文API?q=中文#用法，謝謝
 ```
 
-_Text-rule examples verified against pangu **10.2.0**; prose scope requires the
+_Text-rule examples verified against pangu **10.4.1**; prose scope requires the
 judgment described above._
