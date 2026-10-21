@@ -292,6 +292,16 @@
       "preserve": [],
       "oracle": "pangu",
       "files": []
+    },
+    {
+      "id": 28,
+      "category": "v10-4-brackets-and-middle-dots",
+      "prompt": "依 pangu 的文字規則整理混排，維持三行格式。",
+      "input": "中文=(東西)，刪除*[0-9].log檔。\n中文-中文[A]-(中文)\n喬治·馬丁，喬治 · 馬丁，卡號••••1234。",
+      "expected_output": "中文 = (東西)，刪除 *[0-9].log 檔。\n中文 - 中文 [A] - (中文)\n喬治・馬丁，喬治 · 馬丁，卡號••••1234。",
+      "preserve": [],
+      "oracle": "pangu",
+      "files": []
     }
   ]
 }
