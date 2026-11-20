@@ -16,7 +16,9 @@ enforces this contract.
 `skills/pangu/SKILL.md` documents the spacing rules as `before → after`
 examples, pinned to pangu's real behavior: `npm run check` asserts every
 example — and a generated behavior snapshot — against the pinned `pangu`
-devDependency (the scripts under `scripts/` document their own mechanics).
+devDependency, and requires every upstream rule to be mapped in
+`scripts/upstream-rules.json` and taught by an example in its section (the
+scripts under `scripts/` document their own mechanics).
 
 - Run `npm run check` after editing any example or rule in SKILL.md.
 - CI runs it on every push / PR; Dependabot bumps `pangu`, so an upstream

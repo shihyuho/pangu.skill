@@ -1,7 +1,10 @@
 name: check-skill
 
 # Guard the skill against drifting from pangu.js: every `before → after`
-# example in skills/pangu/SKILL.md must match the pinned pangu's output.
+# example in skills/pangu/SKILL.md must match the pinned pangu's output, and
+# every upstream rule must be mapped, pinned, and taught by an example.
+# `npm run check` runs every checker before failing, so a bump PR shows all
+# of its stale stamps and rule changes in one run.
 on:
   push:
     branches: [main]
