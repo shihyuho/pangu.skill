@@ -1,0 +1,451 @@
+{
+  "engine": "ad6494bef592",
+  "constants": {
+    "A": {
+      "section": "Letters and digits",
+      "fingerprint": "7d24359f9599"
+    },
+    "AN": {
+      "section": "Letters and digits",
+      "fingerprint": "e66621a95d0c"
+    },
+    "AN_COLON_CJK": {
+      "section": "Punctuation",
+      "fingerprint": "390c9b73e160"
+    },
+    "AN_LEFT_BRACKET": {
+      "section": "Brackets",
+      "fingerprint": "2f80eeee3c76"
+    },
+    "AN_PERIOD_CJK": {
+      "section": "Punctuation",
+      "fingerprint": "f88b644f8e06"
+    },
+    "ANS_BEFORE_CJK": {
+      "section": "Letters and digits",
+      "fingerprint": "963b2336e5ed"
+    },
+    "ANS_CJK": {
+      "section": "Letters and digits",
+      "fingerprint": "c4b02d7bf592"
+    },
+    "ANS_CJK_AFTER": {
+      "section": "Letters and digits",
+      "fingerprint": "e07e28385b05"
+    },
+    "ANS_CJK_LEFT_BRACKET_ANY_RIGHT_BRACKET": {
+      "section": "Quotes",
+      "fingerprint": "e0e2916b3eff"
+    },
+    "ANS_CJK_RIGHT_QUOTE_ANY_RIGHT_QUOTE": {
+      "section": "Quotes",
+      "fingerprint": "6f2ee48189eb"
+    },
+    "ANS_OPERATOR_CJK": {
+      "section": "Operators",
+      "fingerprint": "d07503a601ec"
+    },
+    "ANY_CJK": {
+      "internal": "Gate: text without CJK is returned unchanged. Taught as the line rule under Boundaries.",
+      "fingerprint": "5815d3706ee3"
+    },
+    "BARE_HTML_TAG": {
+      "internal": "Lookup that tells a bare tag from markup with attributes. Taught under Whole tokens.",
+      "fingerprint": "4937da525c39"
+    },
+    "BOPOMOFO": {
+      "section": "Boundaries",
+      "fingerprint": "bf8fde0e91f5"
+    },
+    "BRACKET_PATTERNS": {
+      "section": "Brackets",
+      "fingerprint": "689c2c4cbe94"
+    },
+    "CJK": {
+      "section": "Boundaries",
+      "fingerprint": "4d343948a632"
+    },
+    "CJK_ANS": {
+      "section": "Letters and digits",
+      "fingerprint": "b4454ccb5ad4"
+    },
+    "CJK_COMPATIBILITY_IDEOGRAPHS": {
+      "section": "Boundaries",
+      "fingerprint": "2dd94d9330ad"
+    },
+    "CJK_GREATER_THAN": {
+      "section": "Operators",
+      "fingerprint": "0e445e6932be"
+    },
+    "CJK_HASH": {
+      "section": "Whole tokens",
+      "fingerprint": "af76e38e784b"
+    },
+    "CJK_HTML_TAG_MENTION": {
+      "section": "Whole tokens",
+      "fingerprint": "2e14ea99205f"
+    },
+    "CJK_HTTP_URL": {
+      "section": "Whole tokens",
+      "fingerprint": "4ad4413ebfd8"
+    },
+    "CJK_HYPHEN_FLAG": {
+      "section": "Operators",
+      "fingerprint": "acc7bd795b47"
+    },
+    "CJK_LEFT_BRACKET": {
+      "section": "Brackets",
+      "fingerprint": "479e483223e4"
+    },
+    "CJK_LESS_THAN": {
+      "section": "Operators",
+      "fingerprint": "f495feb437f6"
+    },
+    "CJK_OPERATOR_ANS": {
+      "section": "Operators",
+      "fingerprint": "d4b34a4e8de1"
+    },
+    "CJK_PERIOD": {
+      "section": "Punctuation",
+      "fingerprint": "fdedc80f8b4c"
+    },
+    "CJK_PUNCTUATION": {
+      "section": "Punctuation",
+      "fingerprint": "039ae3a8fa57"
+    },
+    "CJK_QUOTE": {
+      "section": "Quotes",
+      "fingerprint": "a7bbfa5cd04b"
+    },
+    "CJK_QUOTE_AN": {
+      "section": "Quotes",
+      "fingerprint": "077f63deb9ec"
+    },
+    "CJK_RADICALS_SUPPLEMENT": {
+      "section": "Boundaries",
+      "fingerprint": "f95b7eb6a8e4"
+    },
+    "CJK_SIGN_DIGIT": {
+      "section": "Plus",
+      "fingerprint": "49c1325634f9"
+    },
+    "CJK_SINGLE_QUOTE_BUT_POSSESSIVE": {
+      "section": "Quotes",
+      "fingerprint": "04df4186f557"
+    },
+    "CJK_TILDE": {
+      "section": "Punctuation",
+      "fingerprint": "3d50d1673e5b"
+    },
+    "CJK_TILDE_EQUALS": {
+      "section": "Punctuation",
+      "fingerprint": "229aef8f4661"
+    },
+    "CJK_UNIFIED_IDEOGRAPHS": {
+      "section": "Boundaries",
+      "fingerprint": "bbd7e9a554ea"
+    },
+    "CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A": {
+      "section": "Boundaries",
+      "fingerprint": "443106e8aa9d"
+    },
+    "CJK_UNIX_ABSOLUTE_FILE_PATH": {
+      "section": "Whole tokens",
+      "fingerprint": "55ce047e3dd3"
+    },
+    "CJK_UNIX_RELATIVE_FILE_PATH": {
+      "section": "Whole tokens",
+      "fingerprint": "500d35b44b47"
+    },
+    "CJK_WINDOWS_PATH": {
+      "section": "Whole tokens",
+      "fingerprint": "ec7de394e2a9"
+    },
+    "CLOSING_AFTER_SUFFIX": {
+      "internal": "Lookup inside PLUS_SEPARATOR that keeps a closing mark tight after a name. The mark list is taught under Plus.",
+      "fingerprint": "c1b7e3579ad5"
+    },
+    "CLOSING_HTML_TAG": {
+      "internal": "Lookup that collects closed tag names, so paired tags stay markup. Taught under Whole tokens.",
+      "fingerprint": "94d0f2c5e3d4"
+    },
+    "COPYRIGHT_DIGIT": {
+      "section": "Extended characters",
+      "fingerprint": "9fb310a9e5e7"
+    },
+    "CREDIT_RATING": {
+      "section": "Plus",
+      "fingerprint": "9a37f2c1a2ba"
+    },
+    "DIGIT_PLUS_CJK": {
+      "section": "Plus",
+      "fingerprint": "0f1c13580ffd"
+    },
+    "DINGBATS": {
+      "section": "Extended characters",
+      "fingerprint": "a69710feac53"
+    },
+    "DOTS_CJK": {
+      "section": "Punctuation",
+      "fingerprint": "0503feff4072"
+    },
+    "ENCLOSED_CJK_LETTERS_AND_MONTHS": {
+      "section": "Boundaries",
+      "fingerprint": "4f8f2c18b123"
+    },
+    "FILE_PATH_CHARS": {
+      "section": "Whole tokens",
+      "fingerprint": "57612be003a2"
+    },
+    "FILE_PATH_DIRS": {
+      "section": "Whole tokens",
+      "fingerprint": "eeead5f58e13"
+    },
+    "FIX_CJK_COLON_ANS": {
+      "section": "Punctuation",
+      "fingerprint": "7e0d194d7b77"
+    },
+    "FIX_POSSESSIVE_SINGLE_QUOTE": {
+      "section": "Quotes",
+      "fingerprint": "745fb389cbf4"
+    },
+    "FIX_QUOTE_ANY_QUOTE": {
+      "section": "Quotes",
+      "fingerprint": "5579c6972374"
+    },
+    "GRADE_OPERATORS": {
+      "section": "Plus",
+      "fingerprint": "8b6de79d839a"
+    },
+    "GREATER_THAN_CJK": {
+      "section": "Operators",
+      "fingerprint": "f1d80512cdc4"
+    },
+    "GREEK_AND_COPTIC": {
+      "section": "Extended characters",
+      "fingerprint": "b36882141299"
+    },
+    "HASH_ANS_CJK_HASH": {
+      "section": "Whole tokens",
+      "fingerprint": "9b74654f068e"
+    },
+    "HASH_CJK": {
+      "section": "Whole tokens",
+      "fingerprint": "b26482852e77"
+    },
+    "HIRAGANA": {
+      "section": "Boundaries",
+      "fingerprint": "42ed8fa2bfe7"
+    },
+    "HTML_TAG_MENTION_CJK": {
+      "section": "Whole tokens",
+      "fingerprint": "d8efd73ba13a"
+    },
+    "HTTP_URL": {
+      "section": "Whole tokens",
+      "fingerprint": "b7c6c117be7c"
+    },
+    "HTTP_URL_TRAILING_PUNCTUATION": {
+      "section": "Whole tokens",
+      "fingerprint": "60edc9b44a57"
+    },
+    "HYPHEN_CJK_CONTACT": {
+      "internal": "Gate for HYPHEN_SEPARATOR: the line must have a hyphen touching CJK. Taught under Operators.",
+      "fingerprint": "45aa3f3c2ce0"
+    },
+    "HYPHEN_SEPARATOR": {
+      "section": "Operators",
+      "fingerprint": "935a9be2745b"
+    },
+    "KANGXI_RADICALS": {
+      "section": "Boundaries",
+      "fingerprint": "6785b61f674f"
+    },
+    "KATAKANA_NO_MIDDLE_DOT": {
+      "section": "Boundaries",
+      "fingerprint": "66a59e0cf2b1"
+    },
+    "LATIN_1_SUPPLEMENT_AFTER_NBSP": {
+      "section": "Extended characters",
+      "fingerprint": "fc3b7da002af"
+    },
+    "LEFT_BRACKET_ANY_RIGHT_BRACKET_ANS_CJK": {
+      "section": "Quotes",
+      "fingerprint": "683b2efb07ba"
+    },
+    "LEFT_BRACKETS_BASIC": {
+      "section": "Brackets",
+      "fingerprint": "7e3218f90177"
+    },
+    "LEFT_BRACKETS_EXTENDED": {
+      "section": "Brackets",
+      "fingerprint": "4e7181012bd9"
+    },
+    "LESS_THAN_CJK": {
+      "section": "Operators",
+      "fingerprint": "5fd306b97eff"
+    },
+    "LETTERLIKE_SYMBOLS": {
+      "section": "Extended characters",
+      "fingerprint": "3fe6ad98f395"
+    },
+    "MIDDLE_DOT": {
+      "section": "Punctuation",
+      "fingerprint": "413bb14fe682"
+    },
+    "MULTI_LETTER_BLOOD_TYPE": {
+      "section": "Plus",
+      "fingerprint": "4bcd62e1397a"
+    },
+    "NAME_SUFFIX": {
+      "section": "Plus",
+      "fingerprint": "221d923f4da2"
+    },
+    "NAME_SUFFIX_AT_END": {
+      "internal": "Lookup inside PLUS_SEPARATOR that recognizes the name list. Taught under Plus.",
+      "fingerprint": "93440c7f8f89"
+    },
+    "NUMBER_FORMS": {
+      "section": "Extended characters",
+      "fingerprint": "9559280f113f"
+    },
+    "OPERATORS": {
+      "section": "Operators",
+      "fingerprint": "335474595642"
+    },
+    "PIPE_CJK_CONTACT": {
+      "internal": "Gate for PIPE_SEPARATOR: the line must have a pipe touching CJK. Taught under Operators.",
+      "fingerprint": "daca92d854e9"
+    },
+    "PIPE_SEPARATOR": {
+      "section": "Operators",
+      "fingerprint": "7bfb3e6d5d3a"
+    },
+    "PLUS_CJK_CONTACT": {
+      "internal": "Gate for PLUS_SEPARATOR: a plus must still touch CJK on the line. Taught under Plus.",
+      "fingerprint": "fea6f2f5fd9e"
+    },
+    "PLUS_SEPARATOR": {
+      "section": "Plus",
+      "fingerprint": "694eea62fb9a"
+    },
+    "PRODUCT_NAME": {
+      "section": "Plus",
+      "fingerprint": "06e09077a31b"
+    },
+    "PRODUCT_NAME_IN_CJK": {
+      "section": "Plus",
+      "fingerprint": "4c0330bd1df1"
+    },
+    "PRODUCT_TIER": {
+      "section": "Plus",
+      "fingerprint": "3b6067b74650"
+    },
+    "PUNCTUATION_CJK": {
+      "section": "Punctuation",
+      "fingerprint": "0336ec1e06fd"
+    },
+    "QUOTE_AN": {
+      "section": "Quotes",
+      "fingerprint": "26ab7902b562"
+    },
+    "QUOTE_CJK": {
+      "section": "Quotes",
+      "fingerprint": "89d0e5c90faa"
+    },
+    "QUOTES": {
+      "section": "Quotes",
+      "fingerprint": "e96ec5886052"
+    },
+    "RIGHT_BRACKET_AN": {
+      "section": "Brackets",
+      "fingerprint": "05f3394c2617"
+    },
+    "RIGHT_BRACKET_CJK": {
+      "section": "Brackets",
+      "fingerprint": "10d8763acbbb"
+    },
+    "RIGHT_BRACKET_PLUS_FULL_WIDTH_LEFT_BRACKET": {
+      "section": "Plus",
+      "fingerprint": "92afecdedc92"
+    },
+    "RIGHT_BRACKETS_BASIC": {
+      "section": "Brackets",
+      "fingerprint": "719aaf6e7218"
+    },
+    "RIGHT_BRACKETS_EXTENDED": {
+      "section": "Brackets",
+      "fingerprint": "2bb3d142db98"
+    },
+    "S_A": {
+      "section": "Whole tokens",
+      "fingerprint": "604daa40bd54"
+    },
+    "SINGLE_LETTER_GRADE_CJK": {
+      "section": "Plus",
+      "fingerprint": "8b7bb61db841"
+    },
+    "SINGLE_QUOTE_CJK": {
+      "section": "Quotes",
+      "fingerprint": "39a659b568a9"
+    },
+    "SINGLE_QUOTE_PURE_CJK": {
+      "section": "Quotes",
+      "fingerprint": "c75597766d24"
+    },
+    "SUPERSCRIPT_SUFFIXES": {
+      "section": "Extended characters",
+      "fingerprint": "5ff9b863dc75"
+    },
+    "UNIX_ABSOLUTE_FILE_PATH": {
+      "internal": "Component of CJK_UNIX_ABSOLUTE_FILE_PATH and UNIX_ABSOLUTE_FILE_PATH_SLASH_CJK.",
+      "fingerprint": "bcbfde3dcdfa"
+    },
+    "UNIX_ABSOLUTE_FILE_PATH_SLASH_CJK": {
+      "section": "Whole tokens",
+      "fingerprint": "135ccfacc301"
+    },
+    "UNIX_RELATIVE_FILE_PATH": {
+      "internal": "Component of CJK_UNIX_RELATIVE_FILE_PATH and UNIX_RELATIVE_FILE_PATH_SLASH_CJK.",
+      "fingerprint": "acd5f0526f17"
+    },
+    "UNIX_RELATIVE_FILE_PATH_SLASH_CJK": {
+      "section": "Whole tokens",
+      "fingerprint": "9eaf5c330d3f"
+    },
+    "UPPER_AN": {
+      "section": "Punctuation",
+      "fingerprint": "63a9f730a177"
+    },
+    "VOID_HTML_TAGS": {
+      "section": "Whole tokens",
+      "fingerprint": "4f8914661773"
+    },
+    "WINDOWS_FILE_PATH": {
+      "internal": "Component of CJK_WINDOWS_PATH.",
+      "fingerprint": "09a71f32d0e2"
+    }
+  },
+  "inline": {
+    "BACKTICK_CONTENT": {
+      "source": "`([^`]+)`",
+      "section": "Quotes"
+    },
+    "BRACKET_INNER_SPACES": {
+      "source": "^ +| +$",
+      "section": "Brackets"
+    },
+    "COMPOUND_WORD": {
+      "source": "\\b(?:[A-Za-z0-9]*[a-z][A-Za-z0-9]*-[A-Za-z0-9]+|[A-Za-z0-9]+-[A-Za-z0-9]*[a-z][A-Za-z0-9]*|[A-Za-z]+-[0-9]+|[A-Za-z]+[0-9]+-[A-Za-z0-9]+)(?:-[A-Za-z0-9]+)*\\b",
+      "section": "Whole tokens"
+    },
+    "HTML_ATTRIBUTE_VALUE": {
+      "source": "(\\w+)=\"([^\"]*)\"",
+      "section": "Whole tokens"
+    },
+    "HTML_TAG": {
+      "source": "<\\/?[a-zA-Z][a-zA-Z0-9]*(?:\\s+[^>]*)?>",
+      "section": "Whole tokens"
+    }
+  }
+}

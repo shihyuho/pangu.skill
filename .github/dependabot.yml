@@ -1,7 +1,5 @@
 version: 2
 updates:
-  # Bump pangu so an upstream spacing-behavior change surfaces as a failing
-  # check-skill run on the PR — then reconcile SKILL.md to match.
   - package-ecosystem: npm
     directory: /
     schedule:

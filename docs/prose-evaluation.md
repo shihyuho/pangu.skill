@@ -67,6 +67,26 @@ function for this focused subset; the CLI still requires the full suite.
 model/effort, skill and fixture hashes, and per-run verdicts. These are loaded-skill
 regression trials, not evidence about automatic skill selection or other models.
 
+## Upstream rule coverage rewrite
+
+The Issue #34 rewrite maps every upstream rule to a SKILL.md section. Its
+comparison ran the previous and revised skills with Claude Sonnet
+(`claude-sonnet-5-5`) at medium effort, three trials per case, each in a
+fresh headless Claude Code session (`claude -p`) started outside the
+repository, with no skills, MCP servers, or setting sources loaded and only
+the Read and Write tools. Each session received only its selected skill, the
+case's prompt and input files, and identical instructions for saving raw
+output.
+
+[Recorded results](../evals/results/issue-34.json): both skills passed 83 of
+84 runs, and neither changed protected text through spacing. The revised
+skill's one failure, in case 7, spaced correctly but dropped the input's
+trailing newline when saving; five extra case-7 trials per arm, recorded
+separately, show the previous skill dropping it too (2 of 5 passed, against
+5 of 5). The record keeps the first rewrite's iteration (81 of 84) and what
+changed after it. Sessions averaged 31,404 total tokens with the previous
+skill and 33,827 with the revised one, which teaches more upstream rules.
+
 ## During an upstream upgrade
 
 Cases 22–26 cover pangu v10 slash/path boundaries, uninterrupted HTTP URLs,

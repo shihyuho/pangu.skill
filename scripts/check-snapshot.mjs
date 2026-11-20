@@ -183,6 +183,22 @@ const CURATED = [
   "卡號····1234",
   "卡號‧‧‧‧1234",
   "卡號 •••• 1234",
+  "English“中文”後面",
+  "“中文”   後面",
+  "“中文”English",
+  "前”中文”後",
+  '前面"中文"English',
+  "前面'中文'後面",
+  "林依諾 's 貓",
+  "前面`code`後面",
+  "前面( 中文 )後面",
+  "加上-m參數",
+  "前面#話題#後面",
+  "放在src/utils/目錄",
+  "請看https://example.com/path.",
+  "前<div>後",
+  "前<br>後",
+  '<a title="中文API">連結</a>',
 ];
 
 // Keep these ranges explicit so an upstream boundary change cannot silently

@@ -1,7 +1,5 @@
 name: check-skill
 
-# Guard the skill against drifting from pangu.js: every `before → after`
-# example in skills/pangu/SKILL.md must match the pinned pangu's output.
 on:
   push:
     branches: [main]
