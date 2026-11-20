@@ -10,8 +10,7 @@ const checker = fileURLToPath(new URL("./check-coverage.mjs", import.meta.url));
 const repo = fileURLToPath(new URL("..", import.meta.url));
 const FILES = ["skills/pangu/SKILL.md", "scripts/pangu-snapshot.jsonl", "scripts/upstream-rules.json"];
 
-// A private copy of the three inputs the checker reads, with an edit hook.
-function workspace(t) {
+function isolatedChecker(t) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "pangu-check-coverage-"));
   t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
   for (const f of FILES) {
@@ -29,14 +28,14 @@ const editMap = (fn) => (text) => {
 };
 
 test("the committed skill, snapshot, and map pass", (t) => {
-  const { run } = workspace(t);
+  const { run } = isolatedChecker(t);
   const result = run();
   assert.equal(result.status, 0, result.stderr);
   assert.match(result.stdout, /every upstream rule is mapped, pinned, and taught/);
 });
 
 test("removing the only example of a rule names that rule", (t) => {
-  const { edit, run } = workspace(t);
+  const { edit, run } = isolatedChecker(t);
   edit("skills/pangu/SKILL.md", (s) => s.replace("記住:(東西) → 記住：(東西)\n", ""));
   const result = run();
   assert.equal(result.status, 1);
@@ -44,7 +43,7 @@ test("removing the only example of a rule names that rule", (t) => {
 });
 
 test("an example only counts in the section the rule is mapped to", (t) => {
-  const { edit, run } = workspace(t);
+  const { edit, run } = isolatedChecker(t);
   edit("skills/pangu/SKILL.md", (s) =>
     s.replace("記住:(東西) → 記住：(東西)\n", "").replace("前面`code`後面 → 前面 `code` 後面\n", "$&記住:(東西) → 記住：(東西)\n"),
   );
@@ -54,7 +53,7 @@ test("an example only counts in the section the rule is mapped to", (t) => {
 });
 
 test("an upstream constant missing from the map fails", (t) => {
-  const { edit, run } = workspace(t);
+  const { edit, run } = isolatedChecker(t);
   edit("scripts/upstream-rules.json", editMap((m) => delete m.constants.S_A));
   const result = run();
   assert.equal(result.status, 1);
@@ -62,7 +61,7 @@ test("an upstream constant missing from the map fails", (t) => {
 });
 
 test("an inline rule missing from the map fails with the input that fired it", (t) => {
-  const { edit, run } = workspace(t);
+  const { edit, run } = isolatedChecker(t);
   edit("scripts/upstream-rules.json", editMap((m) => delete m.inline.COMPOUND_WORD));
   const result = run();
   assert.equal(result.status, 1);
@@ -70,7 +69,7 @@ test("an inline rule missing from the map fails with the input that fired it", (
 });
 
 test("a rule no snapshot probe fires fails", (t) => {
-  const { edit, run } = workspace(t);
+  const { edit, run } = isolatedChecker(t);
   edit("scripts/pangu-snapshot.jsonl", (s) => s.split("\n").filter((l) => !l.startsWith('["前面#話題#後面"')).join("\n"));
   const result = run();
   assert.equal(result.status, 1);
@@ -78,7 +77,7 @@ test("a rule no snapshot probe fires fails", (t) => {
 });
 
 test("a changed upstream value opens a review, and --update re-pins it", (t) => {
-  const { edit, run } = workspace(t);
+  const { edit, run } = isolatedChecker(t);
   edit("scripts/upstream-rules.json", editMap((m) => (m.constants.PRODUCT_NAME.fingerprint = "000000000000")));
   const stale = run();
   assert.equal(stale.status, 1);
@@ -89,7 +88,7 @@ test("a changed upstream value opens a review, and --update re-pins it", (t) => 
 });
 
 test("--update refuses to re-pin while a rule is untaught", (t) => {
-  const { dir, edit, run } = workspace(t);
+  const { dir, edit, run } = isolatedChecker(t);
   edit("skills/pangu/SKILL.md", (s) => s.replace("記住:(東西) → 記住：(東西)\n", ""));
   edit("scripts/upstream-rules.json", editMap((m) => (m.constants.PRODUCT_NAME.fingerprint = "000000000000")));
   const before = fs.readFileSync(path.join(dir, "scripts/upstream-rules.json"), "utf8");

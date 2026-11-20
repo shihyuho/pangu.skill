@@ -183,9 +183,6 @@ const CURATED = [
   "卡號····1234",
   "卡號‧‧‧‧1234",
   "卡號 •••• 1234",
-  // Upstream rules no probe above changed text through, found by
-  // check-coverage.mjs: curly quotes, quote closings, possessives, flags,
-  // hashtag pairs, URL trailing punctuation, tag mentions, and inline rules.
   "English“中文”後面",
   "“中文”   後面",
   "“中文”English",

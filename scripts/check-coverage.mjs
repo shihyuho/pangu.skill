@@ -26,6 +26,7 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import pangu from "pangu";
 import * as shared from "pangu/shared";
+import { readSkillExamples } from "./skill-examples.mjs";
 
 const { Pangu, PlaceholderReplacer } = shared;
 
@@ -48,112 +49,103 @@ const engineFingerprint = () =>
       .join("\n"),
   );
 
-// Upstream inventory: exported constants (rule regexes and the character data
-// they are built from), keyed by name. Classes are covered by the engine hash.
-const exported = Object.entries(shared).filter(([, v]) => typeof v !== "function" && !(v instanceof Pangu));
-const ruleName = new Map(); // RegExp object -> rule name
-for (const [name, value] of exported) {
-  if (value instanceof RegExp) ruleName.set(value, name);
-  if (Array.isArray(value)) value.forEach((v) => v?.pattern instanceof RegExp && ruleName.set(v.pattern, name));
+const upstreamConstants = Object.entries(shared).filter(([, v]) => typeof v !== "function" && !(v instanceof Pangu));
+const ruleNameByRegex = new Map();
+for (const [name, value] of upstreamConstants) {
+  if (value instanceof RegExp) ruleNameByRegex.set(value, name);
+  if (Array.isArray(value)) value.forEach((v) => v?.pattern instanceof RegExp && ruleNameByRegex.set(v.pattern, name));
 }
+
+const map = JSON.parse(fs.readFileSync(MAP, "utf8"));
+const inlineRuleBySource = new Map(Object.entries(map.inline ?? {}).map(([name, e]) => [e.source, name]));
+const mappedRules = { ...map.constants, ...map.inline };
+const isRegexRule = (name) => (map.inline && name in map.inline) || shared[name] instanceof RegExp || Array.isArray(shared[name]);
 
 // Placeholder restores are plumbing: the matching store step is a rule of its
 // own, attributed when it fires.
-const PLACEHOLDER_RESTORE = /^[-]\w+_\(\\d\+\)[-]$/;
+const PRIVATE_USE = `${String.fromCharCode(0xe000)}-${String.fromCharCode(0xf8ff)}`;
+const PLACEHOLDER_RESTORE = new RegExp(`^[${PRIVATE_USE}]\\w+_\\(\\\\d\\+\\)[${PRIVATE_USE}]$`);
 
-const map = JSON.parse(fs.readFileSync(MAP, "utf8"));
-const inlineBySource = new Map(Object.entries(map.inline ?? {}).map(([name, e]) => [e.source, name]));
-
-// Attribute each text-changing replace() during spaceText() to its rule.
-let fired = null;
-const unknownInline = new Map(); // source -> sample input
-const origReplace = String.prototype.replace;
-String.prototype.replace = function (pattern, replacement) {
-  const before = String(this);
-  const after = origReplace.call(this, pattern, replacement);
-  if (fired && pattern instanceof RegExp && after !== before) {
-    const name = ruleName.get(pattern) ?? inlineBySource.get(pattern.source);
-    if (name) fired.rules.add(name);
-    else if (!PLACEHOLDER_RESTORE.test(pattern.source) && !unknownInline.has(pattern.source)) unknownInline.set(pattern.source, fired.input);
-  }
-  return after;
-};
+const sampleInputByUnmappedSource = new Map();
 function rulesFiredBy(input) {
-  fired = { input, rules: new Set() };
-  pangu.spaceText(input);
-  const { rules } = fired;
-  fired = null;
+  const rules = new Set();
+  const replace = String.prototype.replace;
+  String.prototype.replace = function (pattern, replacement) {
+    const before = String(this);
+    const after = replace.call(this, pattern, replacement);
+    if (pattern instanceof RegExp && after !== before) {
+      const name = ruleNameByRegex.get(pattern) ?? inlineRuleBySource.get(pattern.source);
+      if (name) rules.add(name);
+      else if (!PLACEHOLDER_RESTORE.test(pattern.source) && !sampleInputByUnmappedSource.has(pattern.source)) {
+        sampleInputByUnmappedSource.set(pattern.source, input);
+      }
+    }
+    return after;
+  };
+  try {
+    pangu.spaceText(input);
+  } finally {
+    String.prototype.replace = replace;
+  }
   return rules;
 }
 
-// SKILL.md examples with the section heading each sits under (same example
-// shapes as check-skill.mjs: fenced `before → after` lines and table rows).
-const sections = new Set();
-const examples = []; // { section, before }
-let section = null;
-let inFence = false;
-for (const raw of fs.readFileSync(SKILL, "utf8").split("\n")) {
-  if (/^\s*(```|~~~)/.test(raw)) { inFence = !inFence; continue; }
-  if (!inFence && /^#{2,6} /.test(raw)) { section = raw.replace(/^#+ /, "").trim(); sections.add(section); continue; }
-  if (inFence) {
-    const i = raw.indexOf("→");
-    if (i !== -1) examples.push({ section, before: raw.slice(0, i).trim() });
-  } else if (raw.trim().startsWith("|") && raw.includes("`")) {
-    const beforeCell = raw.split("|").map((c) => c.trim()).at(-3);
-    if (beforeCell && /^`[^`]*`$/.test(beforeCell)) examples.push({ section, before: beforeCell.slice(1, -1) });
-  }
-}
-
-const taughtIn = new Map(); // rule -> Set of sections whose examples fire it
-for (const { section: s, before } of examples) {
+const { sections, examples } = readSkillExamples(SKILL);
+const sectionsTeachingRule = new Map();
+for (const { section, before } of examples) {
   for (const rule of rulesFiredBy(before)) {
-    if (!taughtIn.has(rule)) taughtIn.set(rule, new Set());
-    taughtIn.get(rule).add(s);
+    if (!sectionsTeachingRule.has(rule)) sectionsTeachingRule.set(rule, new Set());
+    sectionsTeachingRule.get(rule).add(section);
   }
 }
-const probed = new Set();
+const rulesFiredByProbes = new Set();
 for (const line of fs.readFileSync(SNAPSHOT, "utf8").split("\n").filter(Boolean)) {
-  for (const rule of rulesFiredBy(JSON.parse(line)[0])) probed.add(rule);
-}
-String.prototype.replace = origReplace;
-
-const problems = [];
-const entries = { ...map.constants, ...map.inline };
-const isRegexRule = (name) => (map.inline && name in map.inline) || shared[name] instanceof RegExp || Array.isArray(shared[name]);
-
-// 1. Mapping: both directions, with a section or a reason.
-for (const [name] of exported) {
-  if (!map.constants?.[name]) problems.push(`unmapped upstream constant ${name} — map it in ${MAP} to the SKILL.md section that teaches it, or mark it internal with a reason`);
-}
-for (const name of Object.keys(map.constants ?? {})) {
-  if (!(name in shared)) problems.push(`${MAP} maps ${name}, which pangu ${pangu.version} no longer exports — reconcile SKILL.md, then remove the entry`);
-}
-for (const [source, input] of unknownInline) {
-  problems.push(`unmapped inline rule /${source}/ (first changed ${JSON.stringify(input)}) — name it under "inline" in ${MAP}`);
-}
-for (const [name, e] of Object.entries(entries)) {
-  const target = e.section ?? e.internal;
-  if (!target) problems.push(`${name}: give it a "section" or an "internal" reason`);
-  else if (e.section && !sections.has(e.section)) problems.push(`${name}: section "${e.section}" is not a SKILL.md heading`);
+  for (const rule of rulesFiredBy(JSON.parse(line)[0])) rulesFiredByProbes.add(rule);
 }
 
-// 2. Fingerprints: any change to a mapped value or to the engine is a review.
-const stale = [];
-if (map.engine !== engineFingerprint()) stale.push("the spaceText() rule engine (review its steps for new or reordered rules)");
-for (const [name, e] of Object.entries(map.constants ?? {})) {
-  if (name in shared && e.fingerprint !== fingerprint(shared[name])) stale.push(`${name} = ${String(shared[name]).slice(0, 120)}`);
-}
-
-// 3. Coverage: every taught rule fires on an example in its section and on a probe.
-for (const [name, e] of Object.entries(entries)) {
-  if (!e.section || !isRegexRule(name)) continue;
-  if (!taughtIn.get(name)?.has(e.section)) {
-    problems.push(`${name}: no example under "${e.section}" changes text through it — add a before → after example there`);
+function checkMapping() {
+  const problems = [];
+  for (const [name] of upstreamConstants) {
+    if (!map.constants?.[name]) problems.push(`unmapped upstream constant ${name} — map it in ${MAP} to the SKILL.md section that teaches it, or mark it internal with a reason`);
   }
-  if (!probed.has(name) && !e.unprobed) {
-    problems.push(`${name}: no snapshot probe changes text through it — add a probe to CURATED in scripts/check-snapshot.mjs`);
+  for (const name of Object.keys(map.constants ?? {})) {
+    if (!(name in shared)) problems.push(`${MAP} maps ${name}, which pangu ${pangu.version} no longer exports — reconcile SKILL.md, then remove the entry`);
   }
+  for (const [source, input] of sampleInputByUnmappedSource) {
+    problems.push(`unmapped inline rule /${source}/ (first changed ${JSON.stringify(input)}) — name it under "inline" in ${MAP}`);
+  }
+  for (const [name, e] of Object.entries(mappedRules)) {
+    if (!e.section && !e.internal) problems.push(`${name}: give it a "section" or an "internal" reason`);
+    else if (e.section && !sections.has(e.section)) problems.push(`${name}: section "${e.section}" is not a SKILL.md heading`);
+  }
+  return problems;
 }
+
+function checkFingerprints() {
+  const stale = [];
+  if (map.engine !== engineFingerprint()) stale.push("the spaceText() rule engine (review its steps for new or reordered rules)");
+  for (const [name, e] of Object.entries(map.constants ?? {})) {
+    if (name in shared && e.fingerprint !== fingerprint(shared[name])) stale.push(`${name} = ${String(shared[name]).slice(0, 120)}`);
+  }
+  return stale;
+}
+
+function checkCoverage() {
+  const problems = [];
+  for (const [name, e] of Object.entries(mappedRules)) {
+    if (!e.section || !isRegexRule(name)) continue;
+    if (!sectionsTeachingRule.get(name)?.has(e.section)) {
+      problems.push(`${name}: no example under "${e.section}" changes text through it — add a before → after example there`);
+    }
+    if (!rulesFiredByProbes.has(name) && !e.unprobed) {
+      problems.push(`${name}: no snapshot probe changes text through it — add a probe to CURATED in scripts/check-snapshot.mjs`);
+    }
+  }
+  return problems;
+}
+
+const problems = [...checkMapping(), ...checkCoverage()];
+const stale = checkFingerprints();
 
 if (UPDATE) {
   if (problems.length) {
@@ -168,8 +160,8 @@ if (UPDATE) {
   process.exit(0);
 }
 
-const taught = Object.entries(entries).filter(([n, e]) => e.section && isRegexRule(n)).length;
-console.log(`mapped ${Object.keys(entries).length} upstream rules and constants (${taught} regex rules taught by example) against pangu ${pangu.version}`);
+const taught = Object.entries(mappedRules).filter(([n, e]) => e.section && isRegexRule(n)).length;
+console.log(`mapped ${Object.keys(mappedRules).length} upstream rules and constants (${taught} regex rules taught by example) against pangu ${pangu.version}`);
 if (stale.length) {
   console.error(`\n✗ upstream changed ${stale.length} pinned rule(s):`);
   stale.forEach((s) => console.error(`  ${s}`));
